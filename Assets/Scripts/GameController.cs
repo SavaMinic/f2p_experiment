@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour
 	#region Static
 
 	private static GameController instance;
-	public static GameController Instance
+	public static GameController I
 	{
 		get
 		{
@@ -40,9 +40,22 @@ public class GameController : MonoBehaviour
 
 	#region Mono methods
 
-	private void Awake()
+	private void Start()
+	{
+		CurrentState = GameState.MainMenu;
+		
+		// just start it immediately
+		NewGame(10);
+	}
+
+	#endregion
+
+	#region Public
+
+	public void NewGame(int numOfElements = 6, List<TileElement.ElementType> possibleElements = null)
 	{
 		CurrentState = GameState.Playing;
+		TileController.I.GenerateNewMap(numOfElements, possibleElements);
 	}
 
 	#endregion

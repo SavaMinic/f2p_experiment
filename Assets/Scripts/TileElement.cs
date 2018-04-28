@@ -6,6 +6,21 @@ using UnityEngine.UI;
 public class TileElement : MonoBehaviour
 {
 
+    #region Types
+    
+    public enum ElementType
+    {
+		None,
+        Cat,
+        Chicken,
+        Cow,
+        Dog,
+        Pig,
+        Sheep
+    }
+    
+    #endregion
+
     #region Fields
 
     [SerializeField]
@@ -17,6 +32,18 @@ public class TileElement : MonoBehaviour
     [SerializeField]
     private Image backgroundImage;
 
+    [SerializeField]
+    private Image elementImage;
+
+    [SerializeField]
+    private List<Sprite> elementSprites;
+
+    #endregion
+
+    #region Properties
+
+    public ElementType Type { get; private set; }
+
     #endregion
     
     #region Mono
@@ -24,11 +51,30 @@ public class TileElement : MonoBehaviour
     private void Awake()
     {
         GetComponent<Button>().onClick.AddListener(OnClick);
+        SetType(ElementType.None);
     }
 
     private void Start()
     {
-        TileController.Instance.OnSelectionTileChanged += OnSelectionTileChanged;
+        TileController.I.OnSelectionTileChanged += OnSelectionTileChanged;
+    }
+
+    #endregion
+
+    #region Public api
+
+    public void SetType(ElementType type)
+    {
+        Type = type;
+        if (type == ElementType.None)
+        {
+            elementImage.enabled = false;
+        }
+        else
+        {
+            elementImage.sprite = elementSprites[(int) type - 1];
+            elementImage.enabled = true;
+        }
     }
 
     #endregion
@@ -37,7 +83,7 @@ public class TileElement : MonoBehaviour
 
     private void OnClick()
     {
-        TileController.Instance.OnTileElementClick(this);
+        TileController.I.OnTileElementClick(this);
     }
 
     private void OnSelectionTileChanged(TileElement oldTile, TileElement newTile)
