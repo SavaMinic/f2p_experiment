@@ -38,6 +38,8 @@ public class TileElement : MonoBehaviour
     [SerializeField]
     private List<Sprite> elementSprites;
 
+    private IEnumerator crossFadeCoroutine;
+
     #endregion
 
     #region Properties
@@ -48,6 +50,15 @@ public class TileElement : MonoBehaviour
     {
         get { return Type == ElementType.None; }
     }
+    
+    public Location Location { get; private set; }
+    
+    public Sprite Sprite
+    {
+        get { return elementSprites[(int) Type - 1]; }
+    }
+    
+    public Button Button { get; private set; }
 
     #endregion
     
@@ -55,13 +66,21 @@ public class TileElement : MonoBehaviour
 
     private void Awake()
     {
-        GetComponent<Button>().onClick.AddListener(OnClick);
+        Button = GetComponent<Button>();
+        Button.onClick.AddListener(OnClick);
         SetType(ElementType.None);
+        Unselect();
     }
 
     #endregion
 
     #region Public api
+
+    public void Initialize(int x, int y)
+    {
+        Location = new Location(x, y);
+        SetType(ElementType.None);
+    }
 
     public void SetType(ElementType type)
     {
@@ -87,6 +106,16 @@ public class TileElement : MonoBehaviour
         backgroundImage.color = normalColor;
     }
 
+    public void CrossFade(float duration)
+    {
+        if (crossFadeCoroutine != null)
+        {
+            StopCoroutine(crossFadeCoroutine);
+        }
+        crossFadeCoroutine = DoCrossFade(duration);
+        StartCoroutine(crossFadeCoroutine);
+    }
+
     #endregion
 
     #region Events handlers
@@ -94,6 +123,19 @@ public class TileElement : MonoBehaviour
     private void OnClick()
     {
         TileController.I.OnTileElementClick(this);
+    }
+
+    #endregion
+
+    #region Private
+
+    private IEnumerator DoCrossFade(float duration)
+    {
+        Go.to(backgroundImage, duration / 5f * 2f, new GoTweenConfig().colorProp("color", selectedColor));
+        
+        yield return new WaitForSecondsRealtime(duration / 5f * 3f);
+        
+        Go.to(backgroundImage, duration / 5f * 2f, new GoTweenConfig().colorProp("color", normalColor));
     }
 
     #endregion
