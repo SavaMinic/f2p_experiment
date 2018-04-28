@@ -41,6 +41,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced0ca0ff36654654acf33abe59ae9ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalColor: {r: 0.6107059, g: 1, b: 0.4575472, a: 1}
+  selectedColor: {r: 0.18929453, g: 0.6698113, b: 0, a: 1}
+  backgroundImage: {fileID: 114649132394512028}
 --- !u!114 &114649132394512028
 MonoBehaviour:
   m_ObjectHideFlags: 1

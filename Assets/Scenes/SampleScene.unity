@@ -8512,7 +8512,6 @@ MonoBehaviour:
   - {fileID: 522593135}
   - {fileID: 567125168}
   elementCountX: 7
-  elementCountY: 10
 --- !u!1001 &2058278379
 Prefab:
   m_ObjectHideFlags: 0

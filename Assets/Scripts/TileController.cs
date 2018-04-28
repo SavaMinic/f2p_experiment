@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +20,12 @@ public class TileController : MonoBehaviour
 	}
 
 	#endregion
+
+	#region Actions
+
+	public Action<TileElement,TileElement> OnSelectionTileChanged;
+
+	#endregion
 	
 	#region Fields
 
@@ -30,6 +37,12 @@ public class TileController : MonoBehaviour
 
 	#endregion
 
+	#region Properties
+
+	public TileElement SelectedTile { get; private set; }
+
+	#endregion
+
 	#region Public API
 
 	public void OnTileElementClick(TileElement element)
@@ -38,6 +51,17 @@ public class TileController : MonoBehaviour
 		var y = index / elementCountX;
 		var x = index - y * elementCountX;
 		Debug.LogError("CLICKED " + x + " " + y);
+
+		if (SelectedTile == null || SelectedTile != element)
+		{
+			OnSelectionTileChanged(SelectedTile, element);
+			SelectedTile = element;
+		}
+		else if (SelectedTile == element)
+		{
+			OnSelectionTileChanged(SelectedTile, null);
+			SelectedTile = null;
+		}
 	}
 
 	#endregion
