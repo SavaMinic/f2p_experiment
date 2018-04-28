@@ -21,12 +21,6 @@ public class TileController : MonoBehaviour
 	}
 
 	#endregion
-
-	#region Actions
-
-	public Action<TileElement,TileElement> OnSelectionTileChanged;
-
-	#endregion
 	
 	#region Fields
 
@@ -58,21 +52,33 @@ public class TileController : MonoBehaviour
 		return tileElements[i];
 	}
 
-	public void OnTileElementClick(TileElement element)
+	public void OnTileElementClick(TileElement newTile)
 	{
-		var index = tileElements.IndexOf(element);
+		var index = tileElements.IndexOf(newTile);
 		var y = index / elementCountX;
 		var x = index - y * elementCountX;
-		Debug.LogError("CLICKED " + x + " " + y);
 
-		if (SelectedTile == null || SelectedTile != element)
+		if (SelectedTile == null && !newTile.IsEmpty)
 		{
-			OnSelectionTileChanged(SelectedTile, element);
-			SelectedTile = element;
+			SelectedTile = newTile;
+			newTile.Select();
 		}
-		else if (SelectedTile == element)
+		else if (SelectedTile == newTile)
 		{
-			OnSelectionTileChanged(SelectedTile, null);
+			SelectedTile = null;
+			newTile.Unselect();
+		}
+		else if (!newTile.IsEmpty)
+		{
+			Debug.LogError("TAKEN");
+		}
+		else if (SelectedTile != null)
+		{
+			var movingType = SelectedTile.Type;
+			SelectedTile.Unselect();
+			SelectedTile.SetType(TileElement.ElementType.None);
+			
+			newTile.SetType(movingType);
 			SelectedTile = null;
 		}
 	}

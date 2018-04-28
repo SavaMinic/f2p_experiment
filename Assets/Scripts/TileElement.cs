@@ -44,6 +44,11 @@ public class TileElement : MonoBehaviour
 
     public ElementType Type { get; private set; }
 
+    public bool IsEmpty
+    {
+        get { return Type == ElementType.None; }
+    }
+
     #endregion
     
     #region Mono
@@ -52,11 +57,6 @@ public class TileElement : MonoBehaviour
     {
         GetComponent<Button>().onClick.AddListener(OnClick);
         SetType(ElementType.None);
-    }
-
-    private void Start()
-    {
-        TileController.I.OnSelectionTileChanged += OnSelectionTileChanged;
     }
 
     #endregion
@@ -77,6 +77,16 @@ public class TileElement : MonoBehaviour
         }
     }
 
+    public void Select()
+    {
+        backgroundImage.color = selectedColor;
+    }
+
+    public void Unselect()
+    {
+        backgroundImage.color = normalColor;
+    }
+
     #endregion
 
     #region Events handlers
@@ -84,19 +94,6 @@ public class TileElement : MonoBehaviour
     private void OnClick()
     {
         TileController.I.OnTileElementClick(this);
-    }
-
-    private void OnSelectionTileChanged(TileElement oldTile, TileElement newTile)
-    {
-        if (oldTile == this)
-        {
-            backgroundImage.color = normalColor;
-        }
-
-        if (newTile == this)
-        {
-            backgroundImage.color = selectedColor;
-        }
     }
 
     #endregion
