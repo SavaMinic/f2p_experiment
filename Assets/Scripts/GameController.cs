@@ -102,5 +102,21 @@ public class GameController : MonoBehaviour
 		OnNewTurn.CallIfNotNull();
 	}
 
+	public void PauseGame()
+	{
+		CurrentState = GameState.Paused;
+	}
+
+	public void UnpauseGame()
+	{
+		CurrentState = GameState.Playing;
+	}
+
+	public void ExitGame()
+	{
+		CurrentState = GameState.MainMenu;
+		MainMenuController.I.ShowMainMenu(true);
+	}
+
 	#endregion
 }
