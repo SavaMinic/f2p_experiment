@@ -74,7 +74,7 @@ public class MainMenuController : MonoBehaviour
 	private void OnPlayButtonClick()
 	{
 		// just start it immediately
-		GameController.I.NewGame(10, new List<TileElement.ElementType>
+		GameController.I.NewGame(GameSettings.I.DefaultStartingCount, new List<TileElement.ElementType>
 		{
 			TileElement.ElementType.Cat,
 			TileElement.ElementType.Chicken,

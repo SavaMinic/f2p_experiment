@@ -51,6 +51,7 @@ public class ElementGenerator : MonoBehaviour
 	public void SetPossibleTypes(List<TileElement.ElementType> possible)
 	{
 		possibleTypes = possible;
+		GetCurrentSequenceAndGenerateNew();
 	}
 
 	public List<SpawnLocation> GetCurrentSequenceAndGenerateNew()

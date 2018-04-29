@@ -203,11 +203,18 @@ public class TileController : MonoBehaviour
 				var emptyLocation = FindEmptyLocation();
 				if (emptyLocation.Equals(InvalidLocation))
 				{
-					Debug.LogError("No empty locations");
+					Debug.LogWarning("No empty locations");
 					break;
 				}
 				ElementAt(emptyLocation).Spawn(spawnLocations[i].element);
 			}
+		}
+
+		var emptyTiles = tileElements.CountAll(t => t.IsEmpty);
+		if (emptyTiles == 0)
+		{
+			GameController.I.EndGame();
+			return;
 		}
 
 		StartCoroutine(CheckForExplosions(true));

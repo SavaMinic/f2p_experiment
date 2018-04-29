@@ -98,6 +98,7 @@ public class TileElement : MonoBehaviour
 
     public void Initialize(int x, int y)
     {
+        backgroundImage.color = normalColor;
         Location = new Location(x, y);
         SetType(ElementType.None);
     }

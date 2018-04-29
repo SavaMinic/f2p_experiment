@@ -88,7 +88,7 @@ public class GameController : MonoBehaviour
 		TileController.I.GenerateNewMap(numOfElements, possibleElements);
 		ElementGenerator.I.SetPossibleTypes(possibleElements);
 		
-		NewTurn(true);
+		NewTurn(false);
 		CurrentState = GameState.Playing;
 	}
 
@@ -110,6 +110,12 @@ public class GameController : MonoBehaviour
 	public void UnpauseGame()
 	{
 		CurrentState = GameState.Playing;
+	}
+
+	public void EndGame()
+	{
+		CurrentState = GameState.EndScreen;
+		EndMenuController.I.ShowEndMenu();
 	}
 
 	public void ExitGame()

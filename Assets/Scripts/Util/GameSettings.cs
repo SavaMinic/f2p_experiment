@@ -10,4 +10,6 @@ public class GameSettings : SingletonScriptableObject<GameSettings>
 	{
 		return elementSprites[(int) type - 1];
 	}
+
+	public int DefaultStartingCount = 10;
 }
