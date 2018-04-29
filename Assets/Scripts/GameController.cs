@@ -97,8 +97,8 @@ public class GameController : MonoBehaviour
 		Score = 0;
 		TileController.I.GenerateNewMap(numOfElements, possibleElements);
 		ElementGenerator.I.SetPossibleTypes(possibleElements);
-		ElementGenerator.I.GetCurrentSequenceAndGenerateNew();
 		
+		NewTurn(true);
 		CurrentState = GameState.Playing;
 	}
 
