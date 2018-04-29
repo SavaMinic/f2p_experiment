@@ -75,17 +75,7 @@ public class GameController : MonoBehaviour
 	private void Start()
 	{
 		CurrentState = GameState.MainMenu;
-		
-		// just start it immediately
-		NewGame(10, new List<TileElement.ElementType>
-		{
-			TileElement.ElementType.Cat,
-			TileElement.ElementType.Chicken,
-			TileElement.ElementType.Cow,
-			TileElement.ElementType.Dog,
-			TileElement.ElementType.Pig,
-			TileElement.ElementType.Sheep,
-		});
+		MainMenuController.I.ShowMainMenu(true);
 	}
 
 	#endregion
