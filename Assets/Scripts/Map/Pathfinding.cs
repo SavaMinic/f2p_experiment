@@ -124,7 +124,6 @@ public class Pathfinding
         {
             if (!cameFrom.ContainsKey(currentLocation))
             {
-                Debug.LogError("there is no path.");
                 return new List<Location>();
             }
             path.Add(currentLocation);

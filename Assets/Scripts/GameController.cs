@@ -49,7 +49,7 @@ public class GameController : MonoBehaviour
 		get { return CurrentState == GameState.Playing; }
 	}
 
-	private int score;
+	private int score = -1;
 	public int Score
 	{
 		get { return score; }

@@ -23,20 +23,16 @@ public class TileController : MonoBehaviour
 	
 	private static readonly Location[] MovementDirections = new [] {
 		new Location(1, 0), // to right of tile
-		new Location(0, -1), // below tile
+		new Location(0, -1), // above tile
 		new Location(-1, 0), // to left of tile
-		new Location(0, 1), // above tile
+		new Location(0, 1), // below tile
 	};
 	
 	private static readonly Location[] ExplosionDirection = new [] {
 		new Location(1, 0), // to right of tile
-		new Location(0, -1), // below tile
-		//new Location(-1, 0), // to left of tile
-		//new Location(0, 1), // above tile
-		new Location(1, 1), // diagonal top right
-		new Location(-1, 1), // diagonal top left
-		//new Location(1, -1), // diagonal bottom right
-		//new Location(-1, -1) // diagonal bottom left
+		new Location(0, 1), // below tile
+		new Location(1, 1), // diagonal bottom right
+		new Location(-1, 1), // diagonal bottom left
 	};
 
 	public static Location InvalidLocation = new Location(-1, -1);

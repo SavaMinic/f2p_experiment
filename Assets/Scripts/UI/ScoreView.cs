@@ -20,6 +20,12 @@ public class ScoreView : MonoBehaviour
 	[SerializeField]
 	private GoEaseType increaEaseType;
 
+	[SerializeField]
+	private Text scoreIncreaseText;
+
+	[SerializeField]
+	private CanvasGroup scoreIncreaseCanvasGroup;
+
 	private IEnumerator scoreIncreaseCoroutine;
 	private int fontSize;
 
@@ -30,6 +36,7 @@ public class ScoreView : MonoBehaviour
 	private void Start()
 	{
 		fontSize = scoreText.fontSize;
+		scoreIncreaseCanvasGroup.alpha = 0f;
 		GameController.I.OnScoreChanged += OnScoreChanged;
 	}
 
@@ -56,8 +63,12 @@ public class ScoreView : MonoBehaviour
 
 	private IEnumerator DoScoreChangedAnimation(int newScore)
 	{
+		scoreIncreaseText.text = "+" + (newScore - GameController.I.Score);
 		Go.to(scoreText, increaseDuration / 4f, new GoTweenConfig()
 			.intProp("fontSize", Mathf.RoundToInt(scaleIncrease * fontSize)).setEaseType(increaEaseType)
+		);
+		Go.to(scoreIncreaseCanvasGroup, increaseDuration / 6f, new GoTweenConfig()
+			.floatProp("alpha", 1f).setEaseType(increaEaseType)
 		);
 		scoreText.fontStyle = FontStyle.Bold;
 		yield return new WaitForSecondsRealtime(increaseDuration / 4f);
@@ -68,6 +79,9 @@ public class ScoreView : MonoBehaviour
 		scoreText.fontStyle = FontStyle.Normal;
 		Go.to(scoreText, increaseDuration / 4f, new GoTweenConfig()
 			.intProp("fontSize", fontSize).setEaseType(increaEaseType)
+		);
+		Go.to(scoreIncreaseCanvasGroup, increaseDuration / 2f, new GoTweenConfig()
+			.floatProp("alpha", 0).setEaseType(increaEaseType)
 		);
 	}
 
