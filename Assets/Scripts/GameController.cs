@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using Nordeus.Util.CSharpLib;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -32,9 +34,31 @@ public class GameController : MonoBehaviour
 	
 	#endregion
 
+	#region Actions
+
+	public Action OnNewTurn;
+	public Action<int> OnScoreChanged;
+
+	#endregion
+
 	#region Fields/Properties
 
 	public GameState CurrentState { get; private set; }
+	public bool IsPlaying
+	{
+		get { return CurrentState == GameState.Playing; }
+	}
+
+	private int score;
+	public int Score
+	{
+		get { return score; }
+		set
+		{
+			OnScoreChanged.CallIfNotNull(value);
+			score = value;
+		}
+	}
 
 	#endregion
 
@@ -67,16 +91,20 @@ public class GameController : MonoBehaviour
 
 	public void NewGame(int numOfElements, List<TileElement.ElementType> possibleElements)
 	{
-		CurrentState = GameState.Playing;
+		Score = 0;
 		TileController.I.GenerateNewMap(numOfElements, possibleElements);
 		ElementGenerator.I.SetPossibleTypes(possibleElements);
 		ElementGenerator.I.GetCurrentSequenceAndGenerateNew();
+		
+		CurrentState = GameState.Playing;
 	}
 
 	public void NewTurn()
 	{
+		Score += 10;
 		var sequence = ElementGenerator.I.GetCurrentSequenceAndGenerateNew();
 		TileController.I.AddNewElements(sequence);
+		OnNewTurn.CallIfNotNull();
 	}
 
 	#endregion

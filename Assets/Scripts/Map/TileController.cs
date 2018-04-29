@@ -264,9 +264,17 @@ public class TileController : MonoBehaviour
 		SetButtonsInteractive(true);
 		movingImage.gameObject.SetActive(false);
 		isMovingElement = false;
+
+		yield return CheckForExplosions();
 		
 		// start new turn
 		GameController.I.NewTurn();
+	}
+
+	private IEnumerator CheckForExplosions()
+	{
+		// TODO:
+		yield break;
 	}
 
 	private void SetButtonsInteractive(bool interactable)

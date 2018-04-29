@@ -215,5 +215,61 @@ namespace Nordeus.Util.CSharpLib
 		{
 			return UnityEngine.Random.Range(minValue, maxValue + 1);
 		}
+		
+		/// <summary>
+		/// Calls the action if it's not null.
+		/// </summary>
+		public static void CallIfNotNull(this Action action)
+		{
+			if (action != null)
+			{
+				action();
+			}
+		}
+		
+		/// <summary>
+		/// Calls the action if it's not null.
+		/// </summary>
+		public static void CallIfNotNull<T>(this Action<T> action, T arg)
+		{
+			if (action != null)
+			{
+				action(arg);
+			}
+		}
+
+		/// <summary>
+		/// Calls the action if it's not null.
+		/// </summary>
+		public static void CallIfNotNull<T1, T2>(this Action<T1, T2> action, T1 arg1, T2 arg2)
+		{
+			if (action != null)
+			{
+				action(arg1, arg2);
+			}
+		}
+	
+		/// <summary>
+		/// Calls the action if it's not null.
+		/// </summary>
+		public static void CallIfNotNull<T1, T2, T3>(this Action<T1, T2, T3> action, T1 arg1, T2 arg2, T3 arg3)
+		{
+			if (action != null)
+			{
+				action(arg1, arg2, arg3);
+			}
+		}
+	
+		public static bool IsNullOrWhiteSpace(this string value)
+		{
+			if (value == null) return true;
+
+			for (int index = 0; index < value.Length; ++index)
+			{
+				if (!char.IsWhiteSpace(value[index])) return false;
+			}
+
+			return true;
+		}
 	}
 }

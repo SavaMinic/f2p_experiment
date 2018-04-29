@@ -498,6 +498,7 @@ GameObject:
   - component: {fileID: 179228466}
   - component: {fileID: 179228468}
   - component: {fileID: 179228467}
+  - component: {fileID: 179228469}
   m_Layer: 5
   m_Name: TopPanel
   m_TagString: Untagged
@@ -560,6 +561,21 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 179228465}
   m_CullTransparentMesh: 0
+--- !u!114 &179228469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 179228465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a82459fce713a4d6fb8601fd17525fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 1469572497}
+  scaleIncrease: 1.5
+  increaseDuration: 0.8
+  increaEaseType: 2
 --- !u!1001 &196663895
 Prefab:
   m_ObjectHideFlags: 0
@@ -5288,8 +5304,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -78.1, y: -58.400024}
-  m_SizeDelta: {x: -544.2, y: -58.4}
+  m_AnchoredPosition: {x: -263.51, y: -60}
+  m_SizeDelta: {x: -527, y: -60}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1469572497
 MonoBehaviour:
@@ -5314,10 +5330,10 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 48
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 4
-    m_MaxSize: 48
-    m_Alignment: 3
+    m_MaxSize: 64
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -6130,8 +6146,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -275.5, y: -58.400024}
-  m_SizeDelta: {x: -597.5, y: -58.4}
+  m_AnchoredPosition: {x: -263.5, y: 0}
+  m_SizeDelta: {x: -527, y: -90}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1756590594
 MonoBehaviour:
@@ -6154,12 +6170,12 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 48
+    m_FontSize: 36
     m_FontStyle: 0
-    m_BestFit: 1
-    m_MinSize: 4
+    m_BestFit: 0
+    m_MinSize: 3
     m_MaxSize: 48
-    m_Alignment: 3
+    m_Alignment: 7
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
