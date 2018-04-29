@@ -7819,6 +7819,7 @@ MonoBehaviour:
   movementEaseType: 31
   waitNoExplosions: 0.2
   waitAfterExplosions: 0.6
+  delayForExtraExplosionCheck: 0.4
 --- !u!1001 &2062824557
 Prefab:
   m_ObjectHideFlags: 0

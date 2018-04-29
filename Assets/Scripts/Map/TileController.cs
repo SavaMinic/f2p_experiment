@@ -81,6 +81,9 @@ public class TileController : MonoBehaviour
 	[SerializeField]
 	private float waitAfterExplosions;
 
+	[SerializeField]
+	private float delayForExtraExplosionCheck = 0.5f;
+
 	private bool isMovingElement;
 
 	#endregion
@@ -204,6 +207,8 @@ public class TileController : MonoBehaviour
 				ElementAt(emptyLocation).Spawn(spawnLocations[i].element);
 			}
 		}
+
+		StartCoroutine(CheckForExplosions(true));
 	}
 
 	public Location FindEmptyLocation()
@@ -289,8 +294,13 @@ public class TileController : MonoBehaviour
 		yield return CheckForExplosions();
 	}
 
-	private IEnumerator CheckForExplosions()
+	private IEnumerator CheckForExplosions(bool skipNewTurn = false)
 	{
+		if (skipNewTurn)
+		{
+			yield return new WaitForSecondsRealtime(delayForExtraExplosionCheck);
+		}
+		
 		var points = 0;
 		var haveExplosions = false;
 		// GO THROUGH EVERY ROW ...
@@ -344,7 +354,10 @@ public class TileController : MonoBehaviour
 		yield return new WaitForSecondsRealtime(haveExplosions ? waitAfterExplosions : waitNoExplosions);
 		
 		// start new turn
-		GameController.I.NewTurn(!haveExplosions);
+		if (!skipNewTurn)
+		{
+			GameController.I.NewTurn(!haveExplosions);
+		}
 	}
 
 	private void SetButtonsInteractive(bool interactable)
