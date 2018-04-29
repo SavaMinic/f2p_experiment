@@ -28,6 +28,8 @@ public class TileController : MonoBehaviour
 		new Location(0, 1), // above tile
 	};
 
+	public static Location InvalidLocation = new Location(-1, -1);
+
 	#endregion
 	
 	#region Fields
@@ -135,22 +137,9 @@ public class TileController : MonoBehaviour
 		}
 	}
 
-	public void GenerateNewMap(int numOfElements = 6, List<TileElement.ElementType> possibleElements = null)
+	public void GenerateNewMap(int numOfElements, List<TileElement.ElementType> possibleElements)
 	{
 		movingImage.gameObject.SetActive(false);
-		
-		if (possibleElements == null || possibleElements.Count == 0)
-		{
-			possibleElements = new List<TileElement.ElementType>
-			{
-				TileElement.ElementType.Cat,
-				TileElement.ElementType.Chicken,
-				TileElement.ElementType.Cow,
-				TileElement.ElementType.Dog,
-				TileElement.ElementType.Pig,
-				TileElement.ElementType.Sheep,
-			};
-		}
 		
 		for (int y = 0; y < elementCountY; y++)
 		{
@@ -160,16 +149,69 @@ public class TileController : MonoBehaviour
 			}
 		}
 
-		while (numOfElements > 0)
+		while (numOfElements-- > 0)
+		{
+			var emptyLocation = FindEmptyLocation();
+			if (emptyLocation.Equals(InvalidLocation))
+			{
+				Debug.LogError("No empty locations");
+				break;
+			}
+			ElementAt(emptyLocation).SetType(possibleElements.GetRandom());
+		}
+	}
+
+	public void AddNewElements(List<ElementGenerator.SpawnLocation> spawnLocations)
+	{
+		for (int i = 0; i < spawnLocations.Count; i++)
+		{
+			// if it has location for it, and it's not empty
+			if (ElementAt(spawnLocations[i].location).IsEmpty)
+			{
+				// spawn it directly
+				ElementAt(spawnLocations[i].location).Spawn(spawnLocations[i].element);
+			}
+			else
+			{
+				// find an random empty place to spawn it
+				var emptyLocation = FindEmptyLocation();
+				if (emptyLocation.Equals(InvalidLocation))
+				{
+					Debug.LogError("No empty locations");
+					break;
+				}
+				ElementAt(emptyLocation).Spawn(spawnLocations[i].element);
+			}
+		}
+	}
+
+	public Location FindEmptyLocation()
+	{
+		int counter = 1000;
+		while (counter-- > 0)
 		{
 			var randX = UnityEngine.Random.Range(0, elementCountX);
 			var randY = UnityEngine.Random.Range(0, elementCountY);
-			if (ElementAt(randX, randY).Type == TileElement.ElementType.None)
+			if (ElementAt(randX, randY).IsEmpty)
 			{
-				ElementAt(randX, randY).SetType(possibleElements.GetRandom());
-				numOfElements--;
+				return new Location(randX, randY);
 			}
 		}
+		
+		// can't find it randomly, go linear
+		for (int x = 0; x < elementCountX; x++)
+		{
+			for (int y = 0; y < elementCountY; y++)
+			{
+				if (ElementAt(x, y).IsEmpty)
+				{
+					return new Location(x, y);
+				}
+			}
+		}
+
+		// no empty space
+		return InvalidLocation;
 	}
 
 	#endregion
@@ -222,6 +264,9 @@ public class TileController : MonoBehaviour
 		SetButtonsInteractive(true);
 		movingImage.gameObject.SetActive(false);
 		isMovingElement = false;
+		
+		// start new turn
+		GameController.I.NewTurn();
 	}
 
 	private void SetButtonsInteractive(bool interactable)

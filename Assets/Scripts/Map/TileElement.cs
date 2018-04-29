@@ -35,15 +35,18 @@ public class TileElement : MonoBehaviour
     [SerializeField]
     private Image elementImage;
 
-    [SerializeField]
-    private List<Sprite> elementSprites;
-
     [Header("Animations")]
     [SerializeField]
     private float jumpAnimationTime = 0.1f;
     
     [SerializeField]
     private float twitchAnimationTime = 0.1f;
+    
+    [SerializeField]
+    private float spawnAnimationTime = 0.1f;
+
+    [SerializeField]
+    private GoEaseType spawnEaseType;
 
     private IEnumerator crossFadeCoroutine;
 
@@ -62,7 +65,7 @@ public class TileElement : MonoBehaviour
     
     public Sprite Sprite
     {
-        get { return elementSprites[(int) Type - 1]; }
+        get { return GameSettings.I.elementSprites[(int) Type - 1]; }
     }
     
     public Button Button { get; private set; }
@@ -98,9 +101,15 @@ public class TileElement : MonoBehaviour
         }
         else
         {
-            elementImage.sprite = elementSprites[(int) type - 1];
+            elementImage.sprite =  GameSettings.I.elementSprites[(int) type - 1];
             elementImage.enabled = true;
         }
+    }
+
+    public void Spawn(ElementType type)
+    {
+        SetType(type);
+        DoSpawnAnimation();
     }
 
     public void Select()
@@ -154,6 +163,14 @@ public class TileElement : MonoBehaviour
     #endregion
 
     #region Animations
+
+    private void DoSpawnAnimation()
+    {
+        elementImage.rectTransform.localScale = Vector3.zero;
+        Go.to(elementImage.rectTransform, spawnAnimationTime, 
+            new GoTweenConfig().vector3Prop("localScale", Vector3.one).setEaseType(spawnEaseType)
+        );
+    }
 
     private IEnumerator DoJumpAnimation()
     {

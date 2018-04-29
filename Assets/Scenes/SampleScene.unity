@@ -226,6 +226,16 @@ Prefab:
       propertyPath: m_Name
       value: TileElement (30)
       objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
   m_IsPrefabAsset: 0
@@ -334,6 +344,16 @@ Prefab:
     - target: {fileID: 1556270656268854, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
       propertyPath: m_Name
       value: TileElement (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
@@ -444,6 +464,16 @@ Prefab:
       propertyPath: m_Name
       value: TileElement (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
   m_IsPrefabAsset: 0
@@ -486,6 +516,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1756590593}
+  - {fileID: 1469572496}
+  - {fileID: 606296312}
   m_Father: {fileID: 2030126481}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -500,21 +532,21 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 179228465}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 0.9960749, b: 0.7311321, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 199a8b3981dae45abb61bf96f217e123, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -629,6 +661,16 @@ Prefab:
       propertyPath: m_Name
       value: TileElement (52)
       objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
   m_IsPrefabAsset: 0
@@ -737,6 +779,16 @@ Prefab:
     - target: {fileID: 1556270656268854, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
       propertyPath: m_Name
       value: TileElement (47)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
@@ -865,6 +917,16 @@ Prefab:
       propertyPath: m_Name
       value: TileElement (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
   m_IsPrefabAsset: 0
@@ -980,6 +1042,16 @@ Prefab:
       propertyPath: m_Name
       value: TileElement (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
   m_IsPrefabAsset: 0
@@ -1088,6 +1160,16 @@ Prefab:
     - target: {fileID: 1556270656268854, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
       propertyPath: m_Name
       value: TileElement (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
@@ -1204,6 +1286,16 @@ Prefab:
       propertyPath: m_Name
       value: TileElement (27)
       objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
   m_IsPrefabAsset: 0
@@ -1312,6 +1404,16 @@ Prefab:
     - target: {fileID: 1556270656268854, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
       propertyPath: m_Name
       value: TileElement (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
@@ -1434,6 +1536,16 @@ Prefab:
       propertyPath: m_Name
       value: TileElement (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
   m_IsPrefabAsset: 0
@@ -1548,6 +1660,16 @@ Prefab:
     - target: {fileID: 1556270656268854, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
       propertyPath: m_Name
       value: TileElement (39)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
@@ -1670,6 +1792,16 @@ Prefab:
       propertyPath: m_Name
       value: TileElement (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
   m_IsPrefabAsset: 0
@@ -1704,7 +1836,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1726120180}
   m_Father: {fileID: 2030126481}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1925,6 +2058,16 @@ Prefab:
       propertyPath: m_Name
       value: TileElement (37)
       objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
   m_IsPrefabAsset: 0
@@ -1933,6 +2076,118 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 224208188996576016, guid: 3bb19518729de4e0f90cb72eff76ea36,
     type: 2}
   m_PrefabInternal: {fileID: 588206657}
+--- !u!1 &606296311
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 606296312}
+  - component: {fileID: 606296315}
+  - component: {fileID: 606296314}
+  - component: {fileID: 606296313}
+  - component: {fileID: 606296316}
+  m_Layer: 5
+  m_Name: NextElementsPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &606296312
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 606296311}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1129942385}
+  - {fileID: 1610244875}
+  - {fileID: 1973572820}
+  m_Father: {fileID: 179228466}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 199.90002, y: 0}
+  m_SizeDelta: {x: -399.8, y: 90}
+  m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &606296313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 606296311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -2095666955, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 1
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 80, y: 80}
+  m_Spacing: {x: 20, y: 0}
+  m_Constraint: 0
+  m_ConstraintCount: 2
+--- !u!114 &606296314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 606296311}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &606296315
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 606296311}
+  m_CullTransparentMesh: 0
+--- !u!114 &606296316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 606296311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3723ecad56da4781a37202c156d015f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextElementImages:
+  - {fileID: 1129942386}
+  - {fileID: 1610244876}
+  - {fileID: 1973572821}
 --- !u!1001 &608312082
 Prefab:
   m_ObjectHideFlags: 0
@@ -2033,6 +2288,16 @@ Prefab:
     - target: {fileID: 1556270656268854, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
       propertyPath: m_Name
       value: TileElement (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
@@ -2143,6 +2408,16 @@ Prefab:
       propertyPath: m_Name
       value: TileElement (46)
       objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
   m_IsPrefabAsset: 0
@@ -2251,6 +2526,16 @@ Prefab:
     - target: {fileID: 1556270656268854, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
       propertyPath: m_Name
       value: TileElement (36)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
@@ -2435,6 +2720,16 @@ Prefab:
       propertyPath: m_Name
       value: TileElement (34)
       objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
   m_IsPrefabAsset: 0
@@ -2543,6 +2838,16 @@ Prefab:
     - target: {fileID: 1556270656268854, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
       propertyPath: m_Name
       value: TileElement (38)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
@@ -2692,6 +2997,16 @@ Prefab:
     - target: {fileID: 1556270656268854, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
       propertyPath: m_Name
       value: TileElement (42)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
@@ -2879,6 +3194,16 @@ Prefab:
       propertyPath: m_Name
       value: TileElement (29)
       objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
   m_IsPrefabAsset: 0
@@ -2994,6 +3319,16 @@ Prefab:
       propertyPath: m_Name
       value: TileElement (35)
       objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
   m_IsPrefabAsset: 0
@@ -3103,6 +3438,16 @@ Prefab:
       propertyPath: m_Name
       value: TileElement (48)
       objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
   m_IsPrefabAsset: 0
@@ -3207,6 +3552,16 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
@@ -3329,6 +3684,16 @@ Prefab:
     - target: {fileID: 1556270656268854, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
       propertyPath: m_Name
       value: TileElement (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
@@ -3475,6 +3840,16 @@ Prefab:
       propertyPath: m_Name
       value: TileElement (25)
       objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
   m_IsPrefabAsset: 0
@@ -3590,6 +3965,16 @@ Prefab:
       propertyPath: m_Name
       value: TileElement (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
   m_IsPrefabAsset: 0
@@ -3604,6 +3989,79 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 919984985}
   m_Script: {fileID: 11500000, guid: ced0ca0ff36654654acf33abe59ae9ec, type: 3}
+--- !u!1 &1129942384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1380315591436162, guid: 3bb19518729de4e0f90cb72eff76ea36,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1129942385}
+  - component: {fileID: 1129942387}
+  - component: {fileID: 1129942386}
+  m_Layer: 5
+  m_Name: NextTileImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1129942385
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 224390397131764380, guid: 3bb19518729de4e0f90cb72eff76ea36,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1129942384}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 606296312}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 75.100006, y: -40}
+  m_SizeDelta: {x: 80, y: 80}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1129942386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 114240032900405290, guid: 3bb19518729de4e0f90cb72eff76ea36,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1129942384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 10a5bbd57a86a42139243229821b8fe7, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1129942387
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 222485911965880318, guid: 3bb19518729de4e0f90cb72eff76ea36,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1129942384}
+  m_CullTransparentMesh: 0
 --- !u!114 &1131466352 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
@@ -3716,6 +4174,16 @@ Prefab:
     - target: {fileID: 1556270656268854, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
       propertyPath: m_Name
       value: TileElement (40)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
@@ -3831,6 +4299,16 @@ Prefab:
     - target: {fileID: 1556270656268854, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
       propertyPath: m_Name
       value: TileElement (53)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
@@ -4026,6 +4504,16 @@ Prefab:
       propertyPath: m_Name
       value: TileElement (31)
       objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
   m_IsPrefabAsset: 0
@@ -4140,6 +4628,16 @@ Prefab:
     - target: {fileID: 1556270656268854, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
       propertyPath: m_Name
       value: TileElement (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
@@ -4256,6 +4754,16 @@ Prefab:
       propertyPath: m_Name
       value: TileElement (44)
       objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
   m_IsPrefabAsset: 0
@@ -4370,6 +4878,16 @@ Prefab:
     - target: {fileID: 1556270656268854, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
       propertyPath: m_Name
       value: TileElement (51)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
@@ -4492,6 +5010,16 @@ Prefab:
       propertyPath: m_Name
       value: TileElement (32)
       objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
   m_IsPrefabAsset: 0
@@ -4600,6 +5128,16 @@ Prefab:
     - target: {fileID: 1556270656268854, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
       propertyPath: m_Name
       value: TileElement (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
@@ -4718,6 +5256,81 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 224208188996576016, guid: 3bb19518729de4e0f90cb72eff76ea36,
     type: 2}
   m_PrefabInternal: {fileID: 1445034124}
+--- !u!1 &1469572495
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1469572496}
+  - component: {fileID: 1469572498}
+  - component: {fileID: 1469572497}
+  m_Layer: 5
+  m_Name: PointsText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1469572496
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1469572495}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 179228466}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -78.1, y: -58.400024}
+  m_SizeDelta: {x: -544.2, y: -58.4}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &1469572497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1469572495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 48
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 4
+    m_MaxSize: 48
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 1200
+--- !u!222 &1469572498
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1469572495}
+  m_CullTransparentMesh: 0
 --- !u!1001 &1507389665
 Prefab:
   m_ObjectHideFlags: 0
@@ -4818,6 +5431,16 @@ Prefab:
     - target: {fileID: 1556270656268854, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
       propertyPath: m_Name
       value: TileElement (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
@@ -4952,6 +5575,16 @@ Prefab:
       propertyPath: m_Name
       value: TileElement (43)
       objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
   m_IsPrefabAsset: 0
@@ -4960,6 +5593,79 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 224208188996576016, guid: 3bb19518729de4e0f90cb72eff76ea36,
     type: 2}
   m_PrefabInternal: {fileID: 1601196694}
+--- !u!1 &1610244874
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1380315591436162, guid: 3bb19518729de4e0f90cb72eff76ea36,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1610244875}
+  - component: {fileID: 1610244877}
+  - component: {fileID: 1610244876}
+  m_Layer: 5
+  m_Name: NextTileImage (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1610244875
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 224390397131764380, guid: 3bb19518729de4e0f90cb72eff76ea36,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1610244874}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 606296312}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 175.1, y: -40}
+  m_SizeDelta: {x: 80, y: 80}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1610244876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 114240032900405290, guid: 3bb19518729de4e0f90cb72eff76ea36,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1610244874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 10a5bbd57a86a42139243229821b8fe7, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1610244877
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 222485911965880318, guid: 3bb19518729de4e0f90cb72eff76ea36,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1610244874}
+  m_CullTransparentMesh: 0
 --- !u!1001 &1631985327
 Prefab:
   m_ObjectHideFlags: 0
@@ -5061,6 +5767,16 @@ Prefab:
       propertyPath: m_Name
       value: TileElement (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
   m_IsPrefabAsset: 0
@@ -5069,6 +5785,75 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 224208188996576016, guid: 3bb19518729de4e0f90cb72eff76ea36,
     type: 2}
   m_PrefabInternal: {fileID: 1631985327}
+--- !u!1 &1726120179
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1726120180}
+  - component: {fileID: 1726120182}
+  - component: {fileID: 1726120181}
+  m_Layer: 5
+  m_Name: PowersPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1726120180
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1726120179}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 514555854}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1726120181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1726120179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.9960749, b: 0.7311321, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 199a8b3981dae45abb61bf96f217e123, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1726120182
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1726120179}
+  m_CullTransparentMesh: 0
 --- !u!114 &1730269714 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
@@ -5175,6 +5960,16 @@ Prefab:
     - target: {fileID: 1556270656268854, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
       propertyPath: m_Name
       value: TileElement (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
@@ -5285,6 +6080,16 @@ Prefab:
       propertyPath: m_Name
       value: TileElement (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
   m_IsPrefabAsset: 0
@@ -5304,7 +6109,7 @@ GameObject:
   - component: {fileID: 1756590595}
   - component: {fileID: 1756590594}
   m_Layer: 5
-  m_Name: Text
+  m_Name: PointsTitleText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5325,8 +6130,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -275.5, y: -58.400024}
+  m_SizeDelta: {x: -597.5, y: -58.4}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1756590594
 MonoBehaviour:
@@ -5354,13 +6159,13 @@ MonoBehaviour:
     m_BestFit: 1
     m_MinSize: 4
     m_MaxSize: 48
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Work in progress
+  m_Text: 'Points:'
 --- !u!222 &1756590595
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5474,6 +6279,16 @@ Prefab:
     - target: {fileID: 1556270656268854, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
       propertyPath: m_Name
       value: TileElement (41)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
@@ -5596,6 +6411,16 @@ Prefab:
       propertyPath: m_Name
       value: TileElement (24)
       objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
   m_IsPrefabAsset: 0
@@ -5717,6 +6542,16 @@ Prefab:
       propertyPath: m_Name
       value: TileElement (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
   m_IsPrefabAsset: 0
@@ -5831,6 +6666,16 @@ Prefab:
     - target: {fileID: 1556270656268854, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
       propertyPath: m_Name
       value: TileElement (33)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
@@ -5947,6 +6792,16 @@ Prefab:
       propertyPath: m_Name
       value: TileElement (28)
       objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
   m_IsPrefabAsset: 0
@@ -6062,6 +6917,16 @@ Prefab:
       propertyPath: m_Name
       value: TileElement (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
   m_IsPrefabAsset: 0
@@ -6070,6 +6935,79 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 224208188996576016, guid: 3bb19518729de4e0f90cb72eff76ea36,
     type: 2}
   m_PrefabInternal: {fileID: 1973469295}
+--- !u!1 &1973572819
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1380315591436162, guid: 3bb19518729de4e0f90cb72eff76ea36,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1973572820}
+  - component: {fileID: 1973572822}
+  - component: {fileID: 1973572821}
+  m_Layer: 5
+  m_Name: NextTileImage (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1973572820
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 224390397131764380, guid: 3bb19518729de4e0f90cb72eff76ea36,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1973572819}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 606296312}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 275.1, y: -40}
+  m_SizeDelta: {x: 80, y: 80}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1973572821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 114240032900405290, guid: 3bb19518729de4e0f90cb72eff76ea36,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1973572819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 10a5bbd57a86a42139243229821b8fe7, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1973572822
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 222485911965880318, guid: 3bb19518729de4e0f90cb72eff76ea36,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1973572819}
+  m_CullTransparentMesh: 0
 --- !u!1001 &1973765366
 Prefab:
   m_ObjectHideFlags: 0
@@ -6170,6 +7108,16 @@ Prefab:
     - target: {fileID: 1556270656268854, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
       propertyPath: m_Name
       value: TileElement (49)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
@@ -6279,6 +7227,16 @@ Prefab:
     - target: {fileID: 1556270656268854, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
       propertyPath: m_Name
       value: TileElement (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
@@ -6491,6 +7449,16 @@ Prefab:
       propertyPath: m_Name
       value: TileElement (50)
       objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
   m_IsPrefabAsset: 0
@@ -6599,6 +7567,16 @@ Prefab:
     - target: {fileID: 1556270656268854, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
       propertyPath: m_Name
       value: TileElement (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
@@ -6931,6 +7909,16 @@ Prefab:
       propertyPath: m_Name
       value: TileElement (45)
       objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
   m_IsPrefabAsset: 0
@@ -7039,6 +8027,16 @@ Prefab:
     - target: {fileID: 1556270656268854, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
       propertyPath: m_Name
       value: TileElement (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
@@ -7165,6 +8163,16 @@ Prefab:
     - target: {fileID: 1556270656268854, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
       propertyPath: m_Name
       value: TileElement (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnEaseType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
+        type: 2}
+      propertyPath: spawnAnimationTime
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}

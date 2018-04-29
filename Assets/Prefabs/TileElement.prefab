@@ -89,15 +89,10 @@ MonoBehaviour:
   selectedColor: {r: 0.6107059, g: 1, b: 0.4575472, a: 1}
   backgroundImage: {fileID: 114649132394512028}
   elementImage: {fileID: 114240032900405290}
-  elementSprites:
-  - {fileID: 21300000, guid: 372018ace59974afb85d2629574e2c71, type: 3}
-  - {fileID: 21300000, guid: f5edec40620df4b00b961c036a457b2f, type: 3}
-  - {fileID: 21300000, guid: 00acff3f06d06499b8990b6a43bbd1d1, type: 3}
-  - {fileID: 21300000, guid: 42a6992ef4e764dbbaa401fd830a6afa, type: 3}
-  - {fileID: 21300000, guid: 10a5bbd57a86a42139243229821b8fe7, type: 3}
-  - {fileID: 21300000, guid: 233d6c5d8f59d49cab1e1010ac49491c, type: 3}
   jumpAnimationTime: 0.1
   twitchAnimationTime: 0.1
+  spawnAnimationTime: 0.25
+  spawnEaseType: 3
 --- !u!114 &114649132394512028
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -186,7 +181,7 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1556270656268854}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -196,7 +191,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 75, y: -70}
+  m_AnchoredPosition: {x: 305, y: -400}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224390397131764380
