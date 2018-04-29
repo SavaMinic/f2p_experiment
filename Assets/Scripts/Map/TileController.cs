@@ -213,7 +213,7 @@ public class TileController : MonoBehaviour
 		var emptyTiles = tileElements.CountAll(t => t.IsEmpty);
 		if (emptyTiles == 0)
 		{
-			GameController.I.EndGame();
+			GameController.I.EndGame(GameController.EndGameType.NoEmptySpace);
 			return;
 		}
 

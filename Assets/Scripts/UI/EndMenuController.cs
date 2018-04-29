@@ -58,10 +58,30 @@ public class EndMenuController : MonoBehaviour
 	
 	#region Public
 
-	public void ShowEndMenu(bool instant = false)
+	public void ShowEndMenu(GameController.EndGameType endType, bool instant = false)
 	{
 		scoreText.text = GameController.I.Score + "pts";
+		switch (endType)
+		{
+			case GameController.EndGameType.Manual:
+				statusText.text = "Just relax and play!";
+				break;
+			case GameController.EndGameType.NoEmptySpace:
+				statusText.text = "No more spaces left!";
+				break;
+			case GameController.EndGameType.TimeLimit:
+				statusText.text = "No more turns!";
+				break;
+			case GameController.EndGameType.TurnLimit:
+				statusText.text = "No more time!";
+				break;
+			case GameController.EndGameType.Win:
+				statusText.text = "Congratulations!";
+				break;
+		}
 		StartCoroutine(DoStarsAnimation(2));
+		
+		// fade in
 		mainCanvasGroup.interactable = mainCanvasGroup.blocksRaycasts = true;
 		if (instant)
 		{
@@ -89,7 +109,7 @@ public class EndMenuController : MonoBehaviour
 	private void OnContinueButtonClick()
 	{
 		HideEndMenu();
-		GameController.I.ExitGame();
+		GameController.I.ExitToMainMenu();
 	}
 
 	#endregion

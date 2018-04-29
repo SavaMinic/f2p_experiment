@@ -31,6 +31,15 @@ public class GameController : MonoBehaviour
 		Paused,
 		EndScreen
 	}
+
+	public enum EndGameType
+	{
+		NoEmptySpace,
+		Manual,
+		TurnLimit,
+		TimeLimit,
+		Win
+	}
 	
 	#endregion
 
@@ -112,13 +121,13 @@ public class GameController : MonoBehaviour
 		CurrentState = GameState.Playing;
 	}
 
-	public void EndGame()
+	public void EndGame(EndGameType endType)
 	{
 		CurrentState = GameState.EndScreen;
-		EndMenuController.I.ShowEndMenu();
+		EndMenuController.I.ShowEndMenu(endType);
 	}
 
-	public void ExitGame()
+	public void ExitToMainMenu()
 	{
 		CurrentState = GameState.MainMenu;
 		MainMenuController.I.ShowMainMenu(true);

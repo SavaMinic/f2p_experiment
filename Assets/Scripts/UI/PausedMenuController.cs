@@ -97,7 +97,7 @@ public class PausedMenuController : MonoBehaviour
 	private void OnExitButtonClick()
 	{
 		HidePauseMenu();
-		GameController.I.ExitGame();
+		GameController.I.EndGame(GameController.EndGameType.Manual);
 	}
 
 	#endregion
