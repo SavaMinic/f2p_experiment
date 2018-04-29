@@ -7901,7 +7901,7 @@ MonoBehaviour:
   - {fileID: 1770361850}
   elementCountX: 6
   elementCountY: 9
-  requiredCountForExplosion: 3
+  requiredCountForExplosion: 4
   movingImage: {fileID: 1279638776}
   tileSize: {x: 100, y: 100}
   startOffset: {x: 100, y: -90}
