@@ -34,6 +34,12 @@ public class ElementGenerator : MonoBehaviour
 	[SerializeField]
 	private List<Image> nextElementImages;
 
+	[SerializeField]
+	private float swapAnimationTime;
+
+	[SerializeField]
+	private GoEaseType swapEaseType;
+
 	private List<SpawnLocation> currentSequence = new List<SpawnLocation>();
 	
 	private List<TileElement.ElementType> possibleTypes = new List<TileElement.ElementType>();
@@ -68,10 +74,28 @@ public class ElementGenerator : MonoBehaviour
 				element = newElement,
 				location = emptyLocation
 			});
-			nextElementImages[i].sprite = GameSettings.I.GetSpriteForElement(newElement);
+			StartCoroutine(DoSwapSpriteAnimation(nextElementImages[i], newElement));
 		}
 
 		return ret;
+	}
+
+	#endregion
+
+	#region Private
+
+	private IEnumerator DoSwapSpriteAnimation(Image elementImage, TileElement.ElementType newElement)
+	{
+		Go.to(elementImage.rectTransform, swapAnimationTime / 2f, 
+			new GoTweenConfig().vector3Prop("localScale", Vector3.zero).setEaseType(swapEaseType)
+		);
+		
+		yield return new WaitForSecondsRealtime(swapAnimationTime / 2f);
+		elementImage.sprite = GameSettings.I.GetSpriteForElement(newElement);
+		
+		Go.to(elementImage.rectTransform, swapAnimationTime / 2f, 
+			new GoTweenConfig().vector3Prop("localScale", Vector3.one).setEaseType(swapEaseType)
+		);
 	}
 
 	#endregion

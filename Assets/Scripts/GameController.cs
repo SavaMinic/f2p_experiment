@@ -55,6 +55,9 @@ public class GameController : MonoBehaviour
 		get { return score; }
 		set
 		{
+			if (score == value)
+				return;
+			
 			OnScoreChanged.CallIfNotNull(value);
 			score = value;
 		}
@@ -99,11 +102,13 @@ public class GameController : MonoBehaviour
 		CurrentState = GameState.Playing;
 	}
 
-	public void NewTurn()
+	public void NewTurn(bool generateNewSequence)
 	{
-		Score += 10;
-		var sequence = ElementGenerator.I.GetCurrentSequenceAndGenerateNew();
-		TileController.I.AddNewElements(sequence);
+		if (generateNewSequence)
+		{
+			var sequence = ElementGenerator.I.GetCurrentSequenceAndGenerateNew();
+			TileController.I.AddNewElements(sequence);
+		}
 		OnNewTurn.CallIfNotNull();
 	}
 

@@ -21,11 +21,22 @@ public class TileController : MonoBehaviour
 		}
 	}
 	
-	private static readonly Location[] Directions = new [] {
+	private static readonly Location[] MovementDirections = new [] {
 		new Location(1, 0), // to right of tile
 		new Location(0, -1), // below tile
 		new Location(-1, 0), // to left of tile
 		new Location(0, 1), // above tile
+	};
+	
+	private static readonly Location[] ExplosionDirection = new [] {
+		new Location(1, 0), // to right of tile
+		new Location(0, -1), // below tile
+		//new Location(-1, 0), // to left of tile
+		//new Location(0, 1), // above tile
+		new Location(1, 1), // diagonal top right
+		new Location(-1, 1), // diagonal top left
+		//new Location(1, -1), // diagonal bottom right
+		//new Location(-1, -1) // diagonal bottom left
 	};
 
 	public static Location InvalidLocation = new Location(-1, -1);
@@ -44,6 +55,9 @@ public class TileController : MonoBehaviour
 	private int elementCountY = 10;
 
 	[SerializeField]
+	private int requiredCountForExplosion = 5;
+
+	[SerializeField]
 	private Image movingImage;
 
 	[SerializeField]
@@ -60,6 +74,12 @@ public class TileController : MonoBehaviour
 
 	[SerializeField]
 	private GoEaseType movementEaseType;
+
+	[SerializeField]
+	private float waitNoExplosions;
+
+	[SerializeField]
+	private float waitAfterExplosions;
 
 	private bool isMovingElement;
 
@@ -95,9 +115,9 @@ public class TileController : MonoBehaviour
 	public List<Location> Neighbors(Location id)
 	{
 		var ret = new List<Location>();
-		for (int i = 0; i < Directions.Length; i++)
+		for (int i = 0; i < MovementDirections.Length; i++)
 		{
-			var dir = Directions[i];
+			var dir = MovementDirections[i];
 			Location neighbour = new Location(id.x + dir.x, id.y + dir.y);
 			if (InBounds(neighbour) && ElementAt(neighbour).IsEmpty) {
 				ret.Add(neighbour);
@@ -130,6 +150,7 @@ public class TileController : MonoBehaviour
 			var path = Pathfinding.FindPath(SelectedTile.Location, newTile.Location);
 			if (path.Count == 0)
 			{
+				SelectedTile.CantBeSelected();
 				return;
 			}
 
@@ -266,15 +287,64 @@ public class TileController : MonoBehaviour
 		isMovingElement = false;
 
 		yield return CheckForExplosions();
-		
-		// start new turn
-		GameController.I.NewTurn();
 	}
 
 	private IEnumerator CheckForExplosions()
 	{
-		// TODO:
-		yield break;
+		var points = 0;
+		var haveExplosions = false;
+		// GO THROUGH EVERY ROW ...
+		for (int y = 0; y < elementCountY; y++)
+		{
+			// ... AND EVERY COLUMN!
+			for (int x = 0; x < elementCountX; x++)
+			{
+				// only non-empty elements
+				var e = ElementAt(x, y);
+				if (e.IsEmpty)
+					continue;
+				
+				// CHECK EVERY DIRECTION FROM EACH ELEMENT
+				for (int d = 0; d < ExplosionDirection.Length; d++)
+				{
+					var selectedElements = new List<TileElement>();
+					selectedElements.Add(e);
+					
+					// continue to go down the direction
+					var dir = ExplosionDirection[d];
+					var neighbour = ElementAt(e.Location.x + dir.x, e.Location.y + dir.y);
+					while (neighbour != null && neighbour.Type == e.Type)
+					{
+						selectedElements.Add(neighbour);
+						neighbour = ElementAt(neighbour.Location.x + dir.x, neighbour.Location.y + dir.y);
+					}
+					
+					// check how many we have in this direction
+					if (selectedElements.Count >= requiredCountForExplosion)
+					{
+						haveExplosions = true;
+						
+						// DO EXPLOSION
+						var pointsPerExplosion = 0;
+						for (int i = 0; i < selectedElements.Count; i++)
+						{
+							pointsPerExplosion += selectedElements[i].Explode(i);
+						}
+						// if there is more than required, increase points multiplier
+						var multiplier = selectedElements.Count - requiredCountForExplosion + 1;
+						// TODO: do some multiplier animation (x2, x3...)
+						points += multiplier * pointsPerExplosion;
+					}
+				}
+			}
+		}
+
+		GameController.I.Score += points;
+
+		yield return new WaitForSecondsRealtime(haveExplosions ? waitAfterExplosions : waitNoExplosions);
+		
+		// start new turn
+		GameController.I.NewTurn(!haveExplosions);
 	}
 
 	private void SetButtonsInteractive(bool interactable)

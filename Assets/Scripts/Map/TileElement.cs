@@ -43,12 +43,20 @@ public class TileElement : MonoBehaviour
     private float twitchAnimationTime = 0.1f;
     
     [SerializeField]
-    private float spawnAnimationTime = 0.1f;
+    private float spawnAnimationTime = 0.1f; 
 
     [SerializeField]
     private GoEaseType spawnEaseType;
+    
+    [SerializeField]
+    private float explosionAnimationTime = 0.1f;
+
+    [SerializeField]
+    private GoEaseType explodeEaseType;
 
     private IEnumerator crossFadeCoroutine;
+
+    private bool isExploding;
 
     #endregion
 
@@ -95,6 +103,7 @@ public class TileElement : MonoBehaviour
     public void SetType(ElementType type)
     {
         Type = type;
+        elementImage.rectTransform.localScale = Vector3.one;
         if (type == ElementType.None)
         {
             elementImage.enabled = false;
@@ -136,6 +145,18 @@ public class TileElement : MonoBehaviour
         }
         crossFadeCoroutine = DoCrossFade(duration);
         StartCoroutine(crossFadeCoroutine);
+    }
+
+    public int Explode(int index)
+    {
+        if (isExploding)
+            return 0;
+
+        isExploding = true;
+        StartCoroutine(DoExplodeAnimation(index));
+        
+        // TODO: return score depending on level of element
+        return 10;
     }
 
     #endregion
@@ -192,6 +213,20 @@ public class TileElement : MonoBehaviour
         
         Go.to(elementImage.rectTransform, twitchAnimationTime, new GoTweenConfig().vector2Prop("offsetMin", Vector3.zero));
         Go.to(elementImage.rectTransform, twitchAnimationTime, new GoTweenConfig().vector2Prop("offsetMax", Vector3.zero));
+    }
+
+    private IEnumerator DoExplodeAnimation(int index)
+    {
+        yield return new WaitForSecondsRealtime(index * explosionAnimationTime / 3f);
+        
+        Go.to(elementImage.rectTransform, explosionAnimationTime, 
+            new GoTweenConfig().vector3Prop("localScale", Vector3.zero).setEaseType(explodeEaseType)
+        );
+        
+        yield return new WaitForSecondsRealtime(explosionAnimationTime);
+        
+        SetType(ElementType.None);
+        isExploding = false;
     }
 
     #endregion

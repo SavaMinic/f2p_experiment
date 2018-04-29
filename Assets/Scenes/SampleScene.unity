@@ -2204,6 +2204,8 @@ MonoBehaviour:
   - {fileID: 1129942386}
   - {fileID: 1610244876}
   - {fileID: 1973572821}
+  swapAnimationTime: 0.35
+  swapEaseType: 3
 --- !u!1001 &608312082
 Prefab:
   m_ObjectHideFlags: 0
@@ -3568,16 +3570,6 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
-        type: 2}
-      propertyPath: spawnEaseType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114565789050264448, guid: 3bb19518729de4e0f90cb72eff76ea36,
-        type: 2}
-      propertyPath: spawnAnimationTime
-      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb19518729de4e0f90cb72eff76ea36, type: 2}
@@ -7818,12 +7810,15 @@ MonoBehaviour:
   - {fileID: 1770361850}
   elementCountX: 6
   elementCountY: 9
+  requiredCountForExplosion: 4
   movingImage: {fileID: 1279638776}
   tileSize: {x: 100, y: 100}
   startOffset: {x: 100, y: -90}
   tileSpacing: {x: 15, y: 10}
   movementDuration: 0.15
   movementEaseType: 31
+  waitNoExplosions: 0.2
+  waitAfterExplosions: 0.6
 --- !u!1001 &2062824557
 Prefab:
   m_ObjectHideFlags: 0
