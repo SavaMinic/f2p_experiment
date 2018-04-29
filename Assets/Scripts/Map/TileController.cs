@@ -53,6 +53,7 @@ public class TileController : MonoBehaviour
 	[SerializeField]
 	private int requiredCountForExplosion = 5;
 
+	[Header("Movement")]
 	[SerializeField]
 	private Image movingImage;
 
@@ -71,6 +72,7 @@ public class TileController : MonoBehaviour
 	[SerializeField]
 	private GoEaseType movementEaseType;
 
+	[Header("Explosions")]
 	[SerializeField]
 	private float waitNoExplosions;
 
@@ -79,6 +81,10 @@ public class TileController : MonoBehaviour
 
 	[SerializeField]
 	private float delayForExtraExplosionCheck = 0.5f;
+
+	[Header("Bonus")]
+	[SerializeField]
+	private GameObject bonusAnimationPrefab;
 
 	private bool isMovingElement;
 
@@ -289,6 +295,10 @@ public class TileController : MonoBehaviour
 
 		yield return CheckForExplosions();
 	}
+	
+	#endregion
+
+	#region Explosion animation
 
 	private IEnumerator CheckForExplosions(bool skipNewTurn = false)
 	{
@@ -338,8 +348,18 @@ public class TileController : MonoBehaviour
 						}
 						// if there is more than required, increase points multiplier
 						var multiplier = selectedElements.Count - requiredCountForExplosion + 1;
-						// TODO: do some multiplier animation (x2, x3...)
 						points += multiplier * pointsPerExplosion;
+						
+						// do some multiplier animation (x2, x3...)
+						if (multiplier > 1 && pointsPerExplosion > 0)
+						{
+							Vector3 pos = Vector3.zero;
+							for (int i = 0; i < selectedElements.Count; i++)
+							{
+								pos += selectedElements[i].RectTransform.position;
+							}
+							DoBonusAnimation(multiplier, pos / selectedElements.Count);
+						}
 					}
 				}
 			}
@@ -355,6 +375,16 @@ public class TileController : MonoBehaviour
 			GameController.I.NewTurn(!haveExplosions);
 		}
 	}
+
+	private void DoBonusAnimation(int multiplier, Vector3 position)
+	{
+		var bonusPanel = Instantiate(bonusAnimationPrefab, transform.parent).GetComponent<BonusPanel>();
+		bonusPanel.ShowAnimation(multiplier, position);
+	}
+	
+	#endregion
+
+	#region Private
 
 	private void SetButtonsInteractive(bool interactable)
 	{

@@ -26,6 +26,9 @@ public class ScoreView : MonoBehaviour
 	[SerializeField]
 	private CanvasGroup scoreIncreaseCanvasGroup;
 
+	[SerializeField]
+	private float scoreChangeDelay;
+
 	private IEnumerator scoreIncreaseCoroutine;
 	private int fontSize;
 
@@ -64,6 +67,8 @@ public class ScoreView : MonoBehaviour
 	private IEnumerator DoScoreChangedAnimation(int newScore)
 	{
 		scoreIncreaseText.text = "+" + (newScore - GameController.I.Score);
+		yield return new WaitForSecondsRealtime(scoreChangeDelay);
+		
 		Go.to(scoreText, increaseDuration / 4f, new GoTweenConfig()
 			.intProp("fontSize", Mathf.RoundToInt(scaleIncrease * fontSize)).setEaseType(increaEaseType)
 		);

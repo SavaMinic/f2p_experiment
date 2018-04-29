@@ -77,6 +77,7 @@ public class TileElement : MonoBehaviour
     }
     
     public Button Button { get; private set; }
+    public RectTransform RectTransform { get; private set; }
 
     #endregion
     
@@ -84,6 +85,7 @@ public class TileElement : MonoBehaviour
 
     private void Awake()
     {
+        RectTransform = GetComponent<RectTransform>();
         Button = GetComponent<Button>();
         Button.onClick.AddListener(OnClick);
         SetType(ElementType.None);
