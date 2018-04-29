@@ -38,6 +38,13 @@ public class TileElement : MonoBehaviour
     [SerializeField]
     private List<Sprite> elementSprites;
 
+    [Header("Animations")]
+    [SerializeField]
+    private float jumpAnimationTime = 0.1f;
+    
+    [SerializeField]
+    private float twitchAnimationTime = 0.1f;
+
     private IEnumerator crossFadeCoroutine;
 
     #endregion
@@ -99,11 +106,17 @@ public class TileElement : MonoBehaviour
     public void Select()
     {
         backgroundImage.color = selectedColor;
+        StartCoroutine(DoJumpAnimation());
     }
 
     public void Unselect()
     {
         backgroundImage.color = normalColor;
+    }
+
+    public void CantBeSelected()
+    {
+        StartCoroutine(DoTwitchAnimation());
     }
 
     public void CrossFade(float duration)
@@ -136,6 +149,32 @@ public class TileElement : MonoBehaviour
         yield return new WaitForSecondsRealtime(duration / 5f * 3f);
         
         Go.to(backgroundImage, duration / 5f * 2f, new GoTweenConfig().colorProp("color", normalColor));
+    }
+
+    #endregion
+
+    #region Animations
+
+    private IEnumerator DoJumpAnimation()
+    {
+        Go.to(elementImage.rectTransform, jumpAnimationTime, new GoTweenConfig().vector2Prop("offsetMin", new Vector2(0, 10)));
+        Go.to(elementImage.rectTransform, jumpAnimationTime, new GoTweenConfig().vector2Prop("offsetMax", new Vector2(0, 10)));
+        
+        yield return new WaitForSecondsRealtime(jumpAnimationTime);
+        
+        Go.to(elementImage.rectTransform, jumpAnimationTime, new GoTweenConfig().vector2Prop("offsetMin", Vector3.zero));
+        Go.to(elementImage.rectTransform, jumpAnimationTime, new GoTweenConfig().vector2Prop("offsetMax", Vector3.zero));
+    }
+
+    private IEnumerator DoTwitchAnimation()
+    {
+        Go.to(elementImage.rectTransform, twitchAnimationTime, new GoTweenConfig().vector2Prop("offsetMin", new Vector2(0, 10)));
+        Go.to(elementImage.rectTransform, twitchAnimationTime, new GoTweenConfig().vector2Prop("offsetMax", new Vector2(0, -10)));
+        
+        yield return new WaitForSecondsRealtime(twitchAnimationTime);
+        
+        Go.to(elementImage.rectTransform, twitchAnimationTime, new GoTweenConfig().vector2Prop("offsetMin", Vector3.zero));
+        Go.to(elementImage.rectTransform, twitchAnimationTime, new GoTweenConfig().vector2Prop("offsetMax", Vector3.zero));
     }
 
     #endregion

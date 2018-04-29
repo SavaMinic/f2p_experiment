@@ -121,7 +121,7 @@ public class TileController : MonoBehaviour
 		}
 		else if (!newTile.IsEmpty)
 		{
-			Debug.LogError("TAKEN");
+			newTile.CantBeSelected();
 		}
 		else if (SelectedTile != null)
 		{
@@ -220,6 +220,7 @@ public class TileController : MonoBehaviour
 		// last one
 		ElementAt(path[path.Count - 1]).SetType(movingType);
 		SetButtonsInteractive(true);
+		movingImage.gameObject.SetActive(false);
 		isMovingElement = false;
 	}
 
