@@ -75,6 +75,8 @@ public class GameController : MonoBehaviour
 	
 	public float TimeLimit { get; private set; }
 	public bool IsTimeLimitMode { get { return !TimeLimit.Approximately(-1f); } }
+	
+	public int CurrentLevel { get; private set; }
 
 	private int score = -1;
 	public int Score
@@ -134,20 +136,50 @@ public class GameController : MonoBehaviour
 
 	#region Public
 
-	public void NewGame(int numOfElements, List<TileElement.ElementType> possibleElements)
+	public void NewEndless(List<TileElement.ElementType> possibleElements)
 	{
 		Score = 0;
 		GameMode = GameModeType.Endless;
-		TargetScore = GameSettings.I.DefaultTargetScore;
-		TurnsLimit = GameSettings.I.DefaultTurnsLimit;
-		TimeLimit = GameSettings.I.DefaultTimeLimit;
+		TargetScore = -1;
+		TurnsLimit = -1;
+		TimeLimit = -1;
+
+		StartGame(GameSettings.I.DefaultStartingCount, possibleElements);
+	}
+
+	public void NewGame(int level, List<TileElement.ElementType> possibleElements)
+	{
+		CurrentLevel = level;
+		Score = 0;
 		
-		TileController.I.GenerateNewMap(numOfElements, possibleElements);
-		ElementGenerator.I.SetPossibleTypes(possibleElements);
-		GoalsView.I.Initialize();
+		// TODO: make this much smarter
+
+		var difficulty = level / 8;
 		
-		NewTurn(false);
-		CurrentState = GameState.Playing;
+		GameMode = GameModeType.TargetScore;
+		
+		var numOfElements = GameSettings.I.DefaultStartingCount + difficulty;
+		TargetScore = GameSettings.I.DefaultTargetScore + Mathf.FloorToInt(level / 4f) * 100;
+
+		if (level % 4 == 1)
+		{
+			TurnsLimit = GameSettings.I.DefaultTurnsLimit - difficulty * 2;
+			TimeLimit = -1;
+		}
+		else
+		{
+			TurnsLimit = -1;
+			if (level % 5 == 2)
+			{
+				TimeLimit = GameSettings.I.DefaultTimeLimit - difficulty * 15;
+			}
+			else
+			{
+				TimeLimit = -1;
+			}
+		}
+
+		StartGame(numOfElements, possibleElements);
 	}
 
 	public void JustCheckForWin()
@@ -195,6 +227,13 @@ public class GameController : MonoBehaviour
 
 	public void EndGame(EndGameType endType)
 	{
+		if (endType == EndGameType.Win)
+		{
+			if (GameMode != GameModeType.Endless)
+			{
+				PlayerData.FinishLevel(CurrentLevel);
+			}
+		}
 		CurrentState = GameState.EndScreen;
 		EndMenuController.I.ShowEndMenu(endType);
 	}
@@ -202,12 +241,29 @@ public class GameController : MonoBehaviour
 	public void ExitToMainMenu()
 	{
 		CurrentState = GameState.MainMenu;
-		MainMenuController.I.ShowMainMenu(true);
+		if (GameMode != GameModeType.Endless)
+		{
+			MenuSelectionController.I.ShowLevelSelectionMenu(true);
+		}
+		else
+		{
+			MainMenuController.I.ShowMainMenu(true);
+		}
 	}
 
 	#endregion
 
 	#region Private
+
+	private void StartGame(int numOfElements, List<TileElement.ElementType> possibleElements)
+	{
+		TileController.I.GenerateNewMap(numOfElements, possibleElements);
+		ElementGenerator.I.SetPossibleTypes(possibleElements);
+		GoalsView.I.Initialize();
+		
+		NewTurn(false);
+		CurrentState = GameState.Playing;
+	}
 
 	private bool CheckForWin()
 	{

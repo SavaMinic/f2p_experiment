@@ -32,6 +32,9 @@ public class MainMenuController : MonoBehaviour
 	[SerializeField]
 	private float fadeDuration = 0.3f;
 
+	[SerializeField]
+	private Button endlessButton;
+
 	#endregion
 
 	#region Mono
@@ -39,6 +42,7 @@ public class MainMenuController : MonoBehaviour
 	private void Awake()
 	{
 		playButton.onClick.AddListener(OnPlayButtonClick);
+		endlessButton.onClick.AddListener(OnEndlessButtonClick);
 	}
 
 	#endregion
@@ -73,8 +77,13 @@ public class MainMenuController : MonoBehaviour
 
 	private void OnPlayButtonClick()
 	{
-		// just start it immediately
-		GameController.I.NewGame(GameSettings.I.DefaultStartingCount, new List<TileElement.ElementType>
+		HideMainMenu();
+		MenuSelectionController.I.ShowLevelSelectionMenu();
+	}
+
+	private void OnEndlessButtonClick()
+	{
+		GameController.I.NewEndless(new List<TileElement.ElementType>
 		{
 			TileElement.ElementType.Cat,
 			TileElement.ElementType.Chicken,
