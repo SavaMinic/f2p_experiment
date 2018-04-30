@@ -145,6 +145,15 @@ public class GameController : MonoBehaviour
 		CurrentState = GameState.Playing;
 	}
 
+	public void JustCheckForWin()
+	{
+		if (CheckForWin())
+		{
+			EndGame(EndGameType.Win);
+		}
+
+	}
+
 	public void NewTurn(bool isNormalTurn)
 	{
 		if (CheckForWin())
@@ -197,7 +206,7 @@ public class GameController : MonoBehaviour
 
 	private bool CheckForWin()
 	{
-		if (GameMode == GameModeType.TargetScore)
+		if (GameMode == GameModeType.TargetScore && HasTargetScore)
 		{
 			return Score >= TargetScore;
 		}

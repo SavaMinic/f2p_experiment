@@ -381,6 +381,10 @@ public class TileController : MonoBehaviour
 		{
 			GameController.I.NewTurn(!haveExplosions);
 		}
+		else
+		{
+			GameController.I.JustCheckForWin();
+		}
 	}
 
 	private void DoBonusAnimation(int multiplier, Vector3 position)
