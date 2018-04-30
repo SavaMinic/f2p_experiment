@@ -69,10 +69,10 @@ public class EndMenuController : MonoBehaviour
 				statusText.text = "No more spaces left :(";
 				break;
 			case GameController.EndGameType.TimeLimit:
-				statusText.text = "No more turns :(";
+				statusText.text = "No more time :(";
 				break;
 			case GameController.EndGameType.TurnLimit:
-				statusText.text = "No more time :(";
+				statusText.text = "No more turns :(";
 				break;
 			case GameController.EndGameType.Win:
 				statusText.text = "GREAT JOB :)";

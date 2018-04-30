@@ -73,6 +73,18 @@ public class GoalsView : MonoBehaviour
 	private void Start()
 	{
 		GameController.I.OnScoreChanged += OnScoreChanged;
+		GameController.I.OnNewTurn += OnNewTurn;
+	}
+
+	private void Update()
+	{
+		if (!Application.isPlaying || !GameController.I.IsPlaying)
+			return;
+
+		if (GameController.I.IsTimeLimitMode)
+		{
+			RefreshTimeLeft();
+		}
 	}
 
 	#endregion
@@ -88,13 +100,21 @@ public class GoalsView : MonoBehaviour
 		
 		limitsPanel.gameObject.SetActive(GameController.I.IsTimeLimitMode || GameController.I.IsTurnsMode);
 		limitTitleText.text = GameController.I.IsTimeLimitMode ? "TIME" : "TURNS";
-		RefreshLimitValue();
 
 		// INITIAL STATE
 		if (mode == GameController.GameModeType.TargetScore)
 		{
 			targetScoreText.text = "TARGET: " + GameController.I.TargetScore;
 			targetScoreSlider.value = (float)GameController.I.Score / GameController.I.TargetScore;;
+		}
+		
+		if (GameController.I.IsTurnsMode)
+		{
+			limitValueText.text = GameController.I.TurnsLimit.ToString();
+		}
+		else if (GameController.I.IsTimeLimitMode)
+		{
+			RefreshTimeLeft();
 		}
 	}
 
@@ -127,20 +147,21 @@ public class GoalsView : MonoBehaviour
 		}
 	}
 
-	#endregion
-
-	#region Private
-	
-	private void RefreshLimitValue()
+	private void OnNewTurn()
 	{
-		if (GameController.I.IsTimeLimitMode)
-		{
-			limitValueText.text = GameController.I.TimeLimit.ToString("#.#") + "s";
-		}
-		else
+		if (GameController.I.IsTurnsMode)
 		{
 			limitValueText.text = GameController.I.TurnsLimit.ToString();
 		}
+	}
+
+	#endregion
+
+	#region Private
+
+	private void RefreshTimeLeft()
+	{
+		limitValueText.text = Mathf.Max(0f, GameController.I.TimeLimit).ToString("0") + "s";
 	}
 
 	#endregion

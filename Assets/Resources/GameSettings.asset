@@ -19,3 +19,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 10a5bbd57a86a42139243229821b8fe7, type: 3}
   - {fileID: 21300000, guid: 233d6c5d8f59d49cab1e1010ac49491c, type: 3}
   DefaultStartingCount: 12
+  DefaultTargetScore: 500
+  DefaultTurnsLimit: -1
+  DefaultTimeLimit: -1

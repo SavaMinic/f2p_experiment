@@ -12,4 +12,9 @@ public class GameSettings : SingletonScriptableObject<GameSettings>
 	}
 
 	public int DefaultStartingCount = 10;
+
+	public int DefaultTargetScore = 100;
+	public int DefaultTurnsLimit = -1;
+	public int DefaultTimeLimit = -1;
+
 }

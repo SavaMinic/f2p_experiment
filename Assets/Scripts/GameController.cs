@@ -84,6 +84,11 @@ public class GameController : MonoBehaviour
 		{
 			if (score == value)
 				return;
+
+			if (HasTargetScore)
+			{
+				value = Mathf.Min(value, TargetScore);
+			}
 			
 			OnScoreChanged.CallIfNotNull(value);
 			score = value;
@@ -105,6 +110,21 @@ public class GameController : MonoBehaviour
 		MainMenuController.I.ShowMainMenu(true);
 	}
 
+	private void Update()
+	{
+		if (!Application.isPlaying || !IsPlaying)
+			return;
+
+		if (IsTimeLimitMode)
+		{
+			TimeLimit -= Time.deltaTime / Time.timeScale;
+			if (TimeLimit <= 0f)
+			{
+				EndGame(EndGameType.TimeLimit);
+			}
+		}
+	}
+
 	#endregion
 
 	#region Public
@@ -113,9 +133,9 @@ public class GameController : MonoBehaviour
 	{
 		Score = 0;
 		GameMode = GameModeType.TargetScore;
-		TargetScore = 100;
-		TurnsLimit = -1;
-		TimeLimit = -1;
+		TargetScore = GameSettings.I.DefaultTargetScore;
+		TurnsLimit = GameSettings.I.DefaultTurnsLimit;
+		TimeLimit = GameSettings.I.DefaultTimeLimit;
 		
 		TileController.I.GenerateNewMap(numOfElements, possibleElements);
 		ElementGenerator.I.SetPossibleTypes(possibleElements);
@@ -125,7 +145,7 @@ public class GameController : MonoBehaviour
 		CurrentState = GameState.Playing;
 	}
 
-	public void NewTurn(bool generateNewSequence)
+	public void NewTurn(bool isNormalTurn)
 	{
 		if (CheckForWin())
 		{
@@ -133,8 +153,16 @@ public class GameController : MonoBehaviour
 			return;
 		}
 		
-		if (generateNewSequence)
+		if (isNormalTurn)
 		{
+			if (IsTurnsMode)
+			{
+				if (--TurnsLimit == 0)
+				{
+					EndGame(EndGameType.TurnLimit);
+					return;
+				}
+			}
 			var sequence = ElementGenerator.I.GetCurrentSequenceAndGenerateNew();
 			TileController.I.AddNewElements(sequence);
 		}
