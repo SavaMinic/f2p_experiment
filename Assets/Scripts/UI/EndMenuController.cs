@@ -60,26 +60,44 @@ public class EndMenuController : MonoBehaviour
 
 	public void ShowEndMenu(GameController.EndGameType endType, bool instant = false)
 	{
-		scoreText.text = GameController.I.Score + "pts";
 		switch (endType)
 		{
 			case GameController.EndGameType.Manual:
-				statusText.text = "Just relax and play!";
+				statusText.text = "Better luck next time!";
 				break;
 			case GameController.EndGameType.NoEmptySpace:
-				statusText.text = "No more spaces left!";
+				statusText.text = "No more spaces left :(";
 				break;
 			case GameController.EndGameType.TimeLimit:
-				statusText.text = "No more turns!";
+				statusText.text = "No more turns :(";
 				break;
 			case GameController.EndGameType.TurnLimit:
-				statusText.text = "No more time!";
+				statusText.text = "No more time :(";
 				break;
 			case GameController.EndGameType.Win:
-				statusText.text = "Congratulations!";
+				statusText.text = "GREAT JOB :)";
 				break;
 		}
-		StartCoroutine(DoStarsAnimation(2));
+
+		var starCount = 0;
+		if (GameController.I.GameMode == GameController.GameModeType.TargetScore)
+		{
+			scoreText.text = GameController.I.Score + " / " + GameController.I.TargetScore;
+			starCount = GameController.I.Score / GameController.I.TargetScore * 3;
+		}
+		else if (GameController.I.GameMode == GameController.GameModeType.Collections)
+		{
+			scoreText.text = GameController.I.Score + "pts";
+			// TODO: implement this depending on points
+			starCount = 2;
+		}
+		else if (GameController.I.GameMode == GameController.GameModeType.Endless)
+		{
+			scoreText.text = GameController.I.Score + "pts";
+			// TODO: implement this depending on points
+			starCount = 2;
+		}
+		StartCoroutine(DoStarsAnimation(starCount));
 		
 		// fade in
 		mainCanvasGroup.interactable = mainCanvasGroup.blocksRaycasts = true;

@@ -9,7 +9,7 @@ namespace Nordeus.Util.CSharpLib
 	/// <summary>
 	/// Static class containing extension methods for list.
 	/// </summary>
-	public static class ListExtensions
+	public static class UtilExtensions
 	{
 
 		/// <summary>
@@ -270,6 +270,16 @@ namespace Nordeus.Util.CSharpLib
 			}
 
 			return true;
+		}
+		
+		/// <summary>
+		/// Returns true if two numbers diff by less than 0.0001f. Much faster and simpler than Mathf.Approximately().
+		/// </summary>
+		public static bool Approximately(this float x, float y)
+		{
+			// ReSharper disable once CompareOfFloatsByEqualityOperator
+			if (x == y) return true; // This fixes if both floats are Infinity.
+			return (x > y ? (x - y) : (y - x)) < 0.0001f;
 		}
 	}
 }

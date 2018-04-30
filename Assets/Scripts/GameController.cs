@@ -40,6 +40,13 @@ public class GameController : MonoBehaviour
 		TimeLimit,
 		Win
 	}
+
+	public enum GameModeType
+	{
+		TargetScore,
+		Endless,
+		Collections
+	}
 	
 	#endregion
 
@@ -57,6 +64,17 @@ public class GameController : MonoBehaviour
 	{
 		get { return CurrentState == GameState.Playing; }
 	}
+	
+	public GameModeType GameMode { get; private set; }
+	
+	public int TargetScore { get; private set; }
+	public bool HasTargetScore { get { return TargetScore > 0; } }
+	
+	public int TurnsLimit { get; private set; }
+	public bool IsTurnsMode { get { return TurnsLimit != -1; } }
+	
+	public float TimeLimit { get; private set; }
+	public bool IsTimeLimitMode { get { return !TimeLimit.Approximately(-1f); } }
 
 	private int score = -1;
 	public int Score
@@ -94,8 +112,14 @@ public class GameController : MonoBehaviour
 	public void NewGame(int numOfElements, List<TileElement.ElementType> possibleElements)
 	{
 		Score = 0;
+		GameMode = GameModeType.TargetScore;
+		TargetScore = 100;
+		TurnsLimit = -1;
+		TimeLimit = -1;
+		
 		TileController.I.GenerateNewMap(numOfElements, possibleElements);
 		ElementGenerator.I.SetPossibleTypes(possibleElements);
+		GoalsView.I.Initialize();
 		
 		NewTurn(false);
 		CurrentState = GameState.Playing;
@@ -103,6 +127,12 @@ public class GameController : MonoBehaviour
 
 	public void NewTurn(bool generateNewSequence)
 	{
+		if (CheckForWin())
+		{
+			EndGame(EndGameType.Win);
+			return;
+		}
+		
 		if (generateNewSequence)
 		{
 			var sequence = ElementGenerator.I.GetCurrentSequenceAndGenerateNew();
@@ -131,6 +161,26 @@ public class GameController : MonoBehaviour
 	{
 		CurrentState = GameState.MainMenu;
 		MainMenuController.I.ShowMainMenu(true);
+	}
+
+	#endregion
+
+	#region Private
+
+	private bool CheckForWin()
+	{
+		if (GameMode == GameModeType.TargetScore)
+		{
+			return Score >= TargetScore;
+		}
+
+		if (GameMode == GameModeType.Collections)
+		{
+			// TODO: add collections
+		}
+		
+		// Endless doesn't have win condition
+		return false;
 	}
 
 	#endregion
