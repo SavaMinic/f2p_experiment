@@ -92,6 +92,11 @@ public class GameController : MonoBehaviour
 			
 			OnScoreChanged.CallIfNotNull(value);
 			score = value;
+			
+			if (GameMode == GameModeType.Endless && score > PlayerData.HighScore)
+			{
+				PlayerData.HighScore = score;
+			}
 		}
 	}
 
@@ -132,7 +137,7 @@ public class GameController : MonoBehaviour
 	public void NewGame(int numOfElements, List<TileElement.ElementType> possibleElements)
 	{
 		Score = 0;
-		GameMode = GameModeType.TargetScore;
+		GameMode = GameModeType.Endless;
 		TargetScore = GameSettings.I.DefaultTargetScore;
 		TurnsLimit = GameSettings.I.DefaultTurnsLimit;
 		TimeLimit = GameSettings.I.DefaultTimeLimit;

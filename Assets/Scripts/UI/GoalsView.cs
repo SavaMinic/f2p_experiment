@@ -48,6 +48,24 @@ public class GoalsView : MonoBehaviour
 
 	[SerializeField]
 	private Text endlessHighScoreText;
+
+	[SerializeField]
+	private Color defaultEndlessTextColor;
+
+	[SerializeField]
+	private Color newEndlessTextColor;
+
+	[SerializeField]
+	private float newHighscoreDelay = 0.4f;
+
+	[SerializeField]
+	private float newHishscoreDuration = 0.4f;
+
+	[SerializeField]
+	private GoEaseType newHishscoreEaseType;
+
+	[SerializeField]
+	private float newHishscoreScaleIncrease = 2f;
 	
 	[Header("Collections")]
 	[SerializeField]
@@ -63,8 +81,10 @@ public class GoalsView : MonoBehaviour
 	[SerializeField]
 	private Text limitValueText;
 	
-	
+
 	private GoTween scoreChangeTween;
+	
+	private int highScoreFontSize;
 
 	#endregion
 
@@ -72,6 +92,7 @@ public class GoalsView : MonoBehaviour
 
 	private void Start()
 	{
+		highScoreFontSize = endlessHighScoreText.fontSize;
 		GameController.I.OnScoreChanged += OnScoreChanged;
 		GameController.I.OnNewTurn += OnNewTurn;
 	}
@@ -100,6 +121,9 @@ public class GoalsView : MonoBehaviour
 		
 		limitsPanel.gameObject.SetActive(GameController.I.IsTimeLimitMode || GameController.I.IsTurnsMode);
 		limitTitleText.text = GameController.I.IsTimeLimitMode ? "TIME" : "TURNS";
+
+		endlessHighScoreText.text = PlayerData.HighScore.ToString();
+		endlessHighScoreText.color = defaultEndlessTextColor;
 
 		// INITIAL STATE
 		if (mode == GameController.GameModeType.TargetScore)
@@ -145,6 +169,14 @@ public class GoalsView : MonoBehaviour
 			// instant change
 			targetScoreSlider.value = progress;
 		}
+
+		if (GameController.I.GameMode == GameController.GameModeType.Endless)
+		{
+			if (newScore > PlayerData.HighScore)
+			{
+				StartCoroutine(ChangeNewHighScore(newScore));
+			}
+		}
 	}
 
 	private void OnNewTurn()
@@ -158,6 +190,26 @@ public class GoalsView : MonoBehaviour
 	#endregion
 
 	#region Private
+
+	private IEnumerator ChangeNewHighScore(int newScore)
+	{
+		yield return new WaitForSecondsRealtime(newHighscoreDelay);
+		
+		Go.to(endlessHighScoreText, newHishscoreDuration / 3f, new GoTweenConfig()
+			.intProp("fontSize", Mathf.RoundToInt(newHishscoreScaleIncrease * highScoreFontSize)).setEaseType(newHishscoreEaseType)
+		);
+		
+		yield return new WaitForSecondsRealtime(newHishscoreDuration / 3f);
+		
+		endlessHighScoreText.text = newScore.ToString();
+		endlessHighScoreText.color = newEndlessTextColor;
+		
+		yield return new WaitForSecondsRealtime(newHishscoreDuration / 3f);
+		
+		Go.to(endlessHighScoreText, newHishscoreDuration / 3f, new GoTweenConfig()
+			.intProp("fontSize", highScoreFontSize).setEaseType(newHishscoreEaseType)
+		);
+	}
 
 	private void RefreshTimeLeft()
 	{
