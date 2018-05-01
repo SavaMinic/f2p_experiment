@@ -120,7 +120,7 @@ public class EndMenuController : MonoBehaviour
 			mainCanvasGroup.alpha = 0f;
 			return;
 		}
-		AudioController.I.SetBackgroundMusicVolume(1f);
+		AudioController.I.SetBackgroundMusicVolume(1f, 1.5f);
 		Go.to(mainCanvasGroup, fadeDuration, new GoTweenConfig().floatProp("alpha", 0f));
 	}
 	

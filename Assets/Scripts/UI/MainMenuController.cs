@@ -51,6 +51,7 @@ public class MainMenuController : MonoBehaviour
 
 	public void ShowMainMenu(bool instant = false)
 	{
+		HeaderController.I.HideHeader();
 		mainCanvasGroup.interactable = mainCanvasGroup.blocksRaycasts = true;
 		if (instant)
 		{
@@ -78,21 +79,13 @@ public class MainMenuController : MonoBehaviour
 
 	private void OnPlayButtonClick()
 	{
+		LevelSelectionMenuController.I.ShowLevelSelectionMenu();
 		HideMainMenu();
-		MenuSelectionController.I.ShowLevelSelectionMenu();
 	}
 
 	private void OnEndlessButtonClick()
 	{
-		GameController.I.NewEndless(new List<TileElement.ElementType>
-		{
-			TileElement.ElementType.Cat,
-			TileElement.ElementType.Chicken,
-			TileElement.ElementType.Cow,
-			TileElement.ElementType.Dog,
-			TileElement.ElementType.Pig,
-			TileElement.ElementType.Sheep,
-		});
+		EndlessMenuController.I.ShowEndlessMenu();
 		HideMainMenu();
 	}
 

@@ -94,11 +94,6 @@ public class GameController : MonoBehaviour
 			
 			OnScoreChanged.CallIfNotNull(value);
 			score = value;
-			
-			if (GameMode == GameModeType.Endless && score > PlayerData.HighScore)
-			{
-				PlayerData.HighScore = score;
-			}
 		}
 	}
 
@@ -243,7 +238,7 @@ public class GameController : MonoBehaviour
 		CurrentState = GameState.MainMenu;
 		if (GameMode != GameModeType.Endless)
 		{
-			MenuSelectionController.I.ShowLevelSelectionMenu(true);
+			LevelSelectionMenuController.I.ShowLevelSelectionMenu(true);
 		}
 		else
 		{

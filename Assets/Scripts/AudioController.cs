@@ -44,6 +44,8 @@ public class AudioController : MonoBehaviour
 	private List<AudioClip> currentlyPlayingBackgroundMusic;
 	private int backgroundMusicIndex = -1;
 
+	private GoTween backgroundMusicTween;
+
 	#endregion
 
 	#region Mono
@@ -76,9 +78,20 @@ public class AudioController : MonoBehaviour
 		backgroundMusicIndex = 0;
 	}
 
-	public void SetBackgroundMusicVolume(float volume)
+	public void SetBackgroundMusicVolume(float volume, float incrementalDuration = -1)
 	{
-		backgroundMusicAudioSource.volume = volume;
+		if (backgroundMusicTween != null && backgroundMusicTween.state == GoTweenState.Running)
+		{
+			backgroundMusicTween.destroy();
+		}
+		if (incrementalDuration <= 0)
+		{
+			backgroundMusicAudioSource.volume = volume;
+		}
+		else
+		{
+			backgroundMusicTween = Go.to(backgroundMusicAudioSource, incrementalDuration, new GoTweenConfig().floatProp("volume", volume));
+		}
 	}
 
 	public void PlayPositiveSFX()

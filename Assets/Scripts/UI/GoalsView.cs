@@ -148,6 +148,15 @@ public class GoalsView : MonoBehaviour
 	
 	private void OnScoreChanged(int newScore)
 	{
+		if (GameController.I.GameMode == GameController.GameModeType.Endless)
+		{
+			if (newScore > PlayerData.HighScore)
+			{
+				PlayerData.HighScore = newScore;
+				StartCoroutine(ChangeNewHighScore(newScore));
+			}
+		}
+		
 		if (!GameController.I.HasTargetScore)
 			return;
 		
@@ -168,14 +177,6 @@ public class GoalsView : MonoBehaviour
 		{
 			// instant change
 			targetScoreSlider.value = progress;
-		}
-
-		if (GameController.I.GameMode == GameController.GameModeType.Endless)
-		{
-			if (newScore > PlayerData.HighScore)
-			{
-				StartCoroutine(ChangeNewHighScore(newScore));
-			}
 		}
 	}
 

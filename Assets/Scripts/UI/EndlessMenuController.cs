@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MenuSelectionController : MonoBehaviour
+public class EndlessMenuController : MonoBehaviour
 {
-
 	#region Static
 
-	private static MenuSelectionController instance;
-	public static MenuSelectionController I
+	private static EndlessMenuController instance;
+	public static EndlessMenuController I
 	{
 		get
 		{
 			if (instance == null)
-				instance = FindObjectOfType<MenuSelectionController>();
+				instance = FindObjectOfType<EndlessMenuController>();
 			return instance;
 		}
 	}
@@ -27,19 +26,13 @@ public class MenuSelectionController : MonoBehaviour
 	private Button backButton;
 
 	[SerializeField]
-	private List<Button> levelButtons;
+	private Button playButton;
 
 	[SerializeField]
 	private CanvasGroup mainCanvasGroup;
 
 	[SerializeField]
 	private float fadeDuration = 0.3f;
-
-	[SerializeField]
-	private Color normalLevelColor;
-
-	[SerializeField]
-	private Color finishedLevelColor;
 	
 	#endregion
 
@@ -47,27 +40,18 @@ public class MenuSelectionController : MonoBehaviour
 
 	private void Awake()
 	{
-		HideLevelSelectionMenu(true);
+		HideEndlessMenu(true);
 		backButton.onClick.AddListener(OnBackButtonClick);
-
-		for (int i = 0; i < levelButtons.Count; i++)
-		{
-			var ii = i;
-			levelButtons[i].onClick.AddListener(() =>
-			{
-				OnLevelButtonClick(ii);
-			});
-			levelButtons[i].GetComponentInChildren<Text>().text = (i + 1).ToString();
-		}
+		playButton.onClick.AddListener(OnPlayButtonClick);
 	}
 
 	#endregion
 	
 	#region Public
 
-	public void ShowLevelSelectionMenu(bool instant = false)
+	public void ShowEndlessMenu(bool instant = false)
 	{
-		RefreshLevelColors();
+		HeaderController.I.ShowHeader();
 		mainCanvasGroup.interactable = mainCanvasGroup.blocksRaycasts = true;
 		if (instant)
 		{
@@ -77,7 +61,7 @@ public class MenuSelectionController : MonoBehaviour
 		Go.to(mainCanvasGroup, fadeDuration, new GoTweenConfig().floatProp("alpha", 1f));
 	}
 
-	public void HideLevelSelectionMenu(bool instant = false)
+	public void HideEndlessMenu(bool instant = false)
 	{
 		mainCanvasGroup.interactable = mainCanvasGroup.blocksRaycasts = false;
 		if (instant)
@@ -92,9 +76,10 @@ public class MenuSelectionController : MonoBehaviour
 
 	#region Events
 
-	private void OnLevelButtonClick(int level)
+	private void OnPlayButtonClick()
 	{
-		GameController.I.NewGame(level, new List<TileElement.ElementType>
+		HeaderController.I.HideHeader();
+		GameController.I.NewEndless(new List<TileElement.ElementType>
 		{
 			TileElement.ElementType.Cat,
 			TileElement.ElementType.Chicken,
@@ -103,25 +88,13 @@ public class MenuSelectionController : MonoBehaviour
 			TileElement.ElementType.Pig,
 			TileElement.ElementType.Sheep,
 		});
-		HideLevelSelectionMenu();
+		HideEndlessMenu();
 	}
 
 	private void OnBackButtonClick()
 	{
-		HideLevelSelectionMenu();
+		HideEndlessMenu();
 		MainMenuController.I.ShowMainMenu();
-	}
-
-	#endregion
-
-	#region Private
-
-	private void RefreshLevelColors()
-	{
-		for (int i = 0; i < levelButtons.Count; i++)
-		{
-			levelButtons[i].GetComponent<Image>().color = PlayerData.HasFinishedLevel(i) ? finishedLevelColor : normalLevelColor;
-		}
 	}
 
 	#endregion

@@ -24,5 +24,16 @@ public class PlayerData
 		var key = LevelFinishedKey + level;
 		return PlayerPrefs.HasKey(key) && PlayerPrefs.GetInt(key) == 1;
 	}
+
+	public static void ResetPlayerLevelsFinished()
+	{
+		for (int level = 0; level < 1000; level++)
+		{
+			if (HasFinishedLevel(level))
+			{
+				PlayerPrefs.DeleteKey(LevelFinishedKey + level);
+			}
+		}
+	}
 	
 }
