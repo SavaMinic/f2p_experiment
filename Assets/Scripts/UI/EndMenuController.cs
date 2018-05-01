@@ -58,24 +58,31 @@ public class EndMenuController : MonoBehaviour
 	
 	#region Public
 
-	public void ShowEndMenu(GameController.EndGameType endType, bool instant = false)
+	public void ShowEndMenu(GameController.EndGameType endType)
 	{
+		AudioController.I.SetBackgroundMusicVolume(0.25f);
+		
 		switch (endType)
 		{
 			case GameController.EndGameType.Manual:
 				statusText.text = "Better luck next time!";
+				AudioController.I.PlayNeutralSFX();
 				break;
 			case GameController.EndGameType.NoEmptySpace:
 				statusText.text = "No more spaces left :(";
+				AudioController.I.PlayNegativeSFX();
 				break;
 			case GameController.EndGameType.TimeLimit:
 				statusText.text = "No more time :(";
+				AudioController.I.PlayNegativeSFX();
 				break;
 			case GameController.EndGameType.TurnLimit:
 				statusText.text = "No more turns :(";
+				AudioController.I.PlayNegativeSFX();
 				break;
 			case GameController.EndGameType.Win:
 				statusText.text = "GREAT JOB :)";
+				AudioController.I.PlayPositiveSFX();
 				break;
 		}
 
@@ -101,11 +108,7 @@ public class EndMenuController : MonoBehaviour
 		
 		// fade in
 		mainCanvasGroup.interactable = mainCanvasGroup.blocksRaycasts = true;
-		if (instant)
-		{
-			mainCanvasGroup.alpha = 1f;
-			return;
-		}
+		
 		Go.to(mainCanvasGroup, fadeDuration, new GoTweenConfig().floatProp("alpha", 1f));
 	}
 
@@ -117,6 +120,7 @@ public class EndMenuController : MonoBehaviour
 			mainCanvasGroup.alpha = 0f;
 			return;
 		}
+		AudioController.I.SetBackgroundMusicVolume(1f);
 		Go.to(mainCanvasGroup, fadeDuration, new GoTweenConfig().floatProp("alpha", 0f));
 	}
 	

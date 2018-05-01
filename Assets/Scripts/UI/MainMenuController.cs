@@ -54,6 +54,7 @@ public class MainMenuController : MonoBehaviour
 		mainCanvasGroup.interactable = mainCanvasGroup.blocksRaycasts = true;
 		if (instant)
 		{
+			AudioController.I.InitializeBackgroundMusic();
 			mainCanvasGroup.alpha = 1f;
 			return;
 		}
