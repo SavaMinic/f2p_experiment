@@ -67,6 +67,9 @@ public class GameController : MonoBehaviour
 	
 	public GameModeType GameMode { get; private set; }
 	
+	public int GameTurn { get; private set; }
+	public float GameTime { get; private set; }
+	
 	public int TargetScore { get; private set; }
 	public bool HasTargetScore { get { return TargetScore > 0; } }
 	
@@ -116,6 +119,11 @@ public class GameController : MonoBehaviour
 	{
 		if (!Application.isPlaying || !IsPlaying)
 			return;
+
+		if (IsPlaying)
+		{
+			GameTime += Time.deltaTime / Time.timeScale;
+		}
 
 		if (IsTimeLimitMode)
 		{
@@ -196,6 +204,7 @@ public class GameController : MonoBehaviour
 		
 		if (isNormalTurn)
 		{
+			GameTurn++;
 			if (IsTurnsMode)
 			{
 				if (--TurnsLimit == 0)
@@ -242,7 +251,7 @@ public class GameController : MonoBehaviour
 		}
 		else
 		{
-			MainMenuController.I.ShowMainMenu(true);
+			EndlessMenuController.I.ShowEndlessMenu(true);
 		}
 	}
 
@@ -252,6 +261,9 @@ public class GameController : MonoBehaviour
 
 	private void StartGame(int numOfElements, List<TileElement.ElementType> possibleElements)
 	{
+		GameTurn = 0;
+		GameTime = 0f;
+		
 		TileController.I.GenerateNewMap(numOfElements, possibleElements);
 		ElementGenerator.I.SetPossibleTypes(possibleElements);
 		GoalsView.I.Initialize();

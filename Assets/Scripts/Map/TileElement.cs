@@ -66,7 +66,7 @@ public class TileElement : MonoBehaviour
 
     public bool IsEmpty
     {
-        get { return Type == ElementType.None; }
+        get { return Type == ElementType.None || isExploding; }
     }
     
     public Location Location { get; private set; }

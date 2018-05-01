@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Nordeus.Util.CSharpLib;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,7 +40,19 @@ public class EndMenuController : MonoBehaviour
 	private Text scoreText;
 
 	[SerializeField]
+	private RectTransform starsPanel;
+
+	[SerializeField]
 	private List<CanvasGroup> starCanvasGroups;
+
+	[SerializeField]
+	private RectTransform endlessStatsPanel;
+	
+	[SerializeField]
+	private Text endlessTurnsText;
+
+	[SerializeField]
+	private Text endlessTimeText;
 
 	[SerializeField]
 	private float starShowDuration;
@@ -61,50 +74,63 @@ public class EndMenuController : MonoBehaviour
 	public void ShowEndMenu(GameController.EndGameType endType)
 	{
 		AudioController.I.SetBackgroundMusicVolume(0.25f);
-		
-		switch (endType)
-		{
-			case GameController.EndGameType.Manual:
-				statusText.text = "Better luck next time!";
-				AudioController.I.PlayNeutralSFX();
-				break;
-			case GameController.EndGameType.NoEmptySpace:
-				statusText.text = "No more spaces left :(";
-				AudioController.I.PlayNegativeSFX();
-				break;
-			case GameController.EndGameType.TimeLimit:
-				statusText.text = "No more time :(";
-				AudioController.I.PlayNegativeSFX();
-				break;
-			case GameController.EndGameType.TurnLimit:
-				statusText.text = "No more turns :(";
-				AudioController.I.PlayNegativeSFX();
-				break;
-			case GameController.EndGameType.Win:
-				statusText.text = "GREAT JOB :)";
-				AudioController.I.PlayPositiveSFX();
-				break;
-		}
 
-		var starCount = 0;
-		if (GameController.I.GameMode == GameController.GameModeType.TargetScore)
+
+		if (GameController.I.GameMode == GameController.GameModeType.Endless)
 		{
-			scoreText.text = GameController.I.Score + " / " + GameController.I.TargetScore;
-			starCount = GameController.I.Score / GameController.I.TargetScore * 3;
-		}
-		else if (GameController.I.GameMode == GameController.GameModeType.Collections)
-		{
+			starsPanel.gameObject.SetActive(false);
+			endlessStatsPanel.gameObject.SetActive(true);
+			
+			
+			statusText.text = "Level up animals to get better score!";
+			AudioController.I.PlayPositiveSFX();
+
 			scoreText.text = GameController.I.Score + "pts";
-			// TODO: implement this depending on points
-			starCount = 2;
+			endlessTurnsText.text = "Turns\n" + GameController.I.GameTurn;
+			endlessTimeText.text = "Time\n" + GameController.I.GameTime.FormatToTime();
 		}
-		else if (GameController.I.GameMode == GameController.GameModeType.Endless)
+		else
 		{
-			scoreText.text = GameController.I.Score + "pts";
-			// TODO: implement this depending on points
-			starCount = 2;
+			switch (endType)
+			{
+				case GameController.EndGameType.Manual:
+					statusText.text = "Better luck next time!";
+					AudioController.I.PlayNeutralSFX();
+					break;
+				case GameController.EndGameType.NoEmptySpace:
+					statusText.text = "No more spaces left :(";
+					AudioController.I.PlayNegativeSFX();
+					break;
+				case GameController.EndGameType.TimeLimit:
+					statusText.text = "No more time :(";
+					AudioController.I.PlayNegativeSFX();
+					break;
+				case GameController.EndGameType.TurnLimit:
+					statusText.text = "No more turns :(";
+					AudioController.I.PlayNegativeSFX();
+					break;
+				case GameController.EndGameType.Win:
+					statusText.text = "GREAT JOB :)";
+					AudioController.I.PlayPositiveSFX();
+					break;
+			}
+			
+			starsPanel.gameObject.SetActive(true);
+			endlessStatsPanel.gameObject.SetActive(false);
+			var starCount = 0;
+			if (GameController.I.GameMode == GameController.GameModeType.TargetScore)
+			{
+				scoreText.text = GameController.I.Score + " / " + GameController.I.TargetScore;
+				starCount = GameController.I.Score / GameController.I.TargetScore * 3;
+			}
+			else if (GameController.I.GameMode == GameController.GameModeType.Collections)
+			{
+				scoreText.text = GameController.I.Score + "pts";
+				// TODO: implement this depending on points
+				starCount = 2;
+			}
+			StartCoroutine(DoStarsAnimation(starCount));
 		}
-		StartCoroutine(DoStarsAnimation(starCount));
 		
 		// fade in
 		mainCanvasGroup.interactable = mainCanvasGroup.blocksRaycasts = true;

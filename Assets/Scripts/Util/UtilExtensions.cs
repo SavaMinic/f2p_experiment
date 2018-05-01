@@ -281,5 +281,27 @@ namespace Nordeus.Util.CSharpLib
 			if (x == y) return true; // This fixes if both floats are Infinity.
 			return (x > y ? (x - y) : (y - x)) < 0.0001f;
 		}
+		
+		public static string FormatToTime(this float timeSeconds)
+		{
+			int hours = (int) (timeSeconds / 3600);
+			int minutes = (int)(timeSeconds / 60) % 60;
+			int seconds = (int)timeSeconds % 60;
+			if (hours > 0)
+			{
+				if (minutes > 0)
+					return hours + "h " + minutes + "m";
+				return hours + "h";
+			}
+
+			if (minutes > 0)
+			{
+				if (seconds > 0)
+					return minutes + "m " + seconds + "s";
+				return minutes + "m";
+			}
+
+			return seconds + "s";
+		}
 	}
 }
