@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerData
 {
 
+	private const string PlayerIdKey = "PlayerId";
+	
 	private const string HighScoreKey = "HighScoreKey";
 	private const string LevelFinishedKey = "LevelFinished_";
 
@@ -15,6 +17,19 @@ public class PlayerData
 	{
 		get { return PlayerPrefs.GetInt(HighScoreKey); }
 		set { PlayerPrefs.SetInt(HighScoreKey, value);}
+	}
+
+	public static int PlayerId
+	{
+		get
+		{
+			// TODO: should get it somehow unique
+			if (!PlayerPrefs.HasKey(PlayerIdKey))
+			{
+				PlayerPrefs.SetInt(PlayerIdKey, 666);
+			}
+			return PlayerPrefs.GetInt(PlayerIdKey);
+		}
 	}
 	
 	public static int SoftCurrency
