@@ -129,7 +129,6 @@ public class EndlessMenuController : MonoBehaviour
 
 	private void OnPlayButtonClick()
 	{
-		HeaderController.I.HideHeader();
 		GameController.I.NewEndless(new List<TileElement.ElementType>
 		{
 			TileElement.ElementType.Cat,

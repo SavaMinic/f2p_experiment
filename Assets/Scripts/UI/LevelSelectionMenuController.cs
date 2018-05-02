@@ -95,7 +95,6 @@ public class LevelSelectionMenuController : MonoBehaviour
 
 	private void OnLevelButtonClick(int level)
 	{
-		HeaderController.I.HideHeader();
 		GameController.I.NewGame(level, new List<TileElement.ElementType>
 		{
 			TileElement.ElementType.Cat,
