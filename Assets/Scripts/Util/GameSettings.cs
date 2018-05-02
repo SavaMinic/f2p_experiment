@@ -20,4 +20,12 @@ public class GameSettings : SingletonScriptableObject<GameSettings>
 	public int DefaultTurnsLimit = 30;
 	public int DefaultTimeLimit = 300;
 
+	public List<int> SoftCurrencyForAnimalUpgrade;
+
+	public int GetSoftCurrencyForUpgrade(int currLevel)
+	{
+		currLevel = Mathf.Clamp(currLevel, 0, SoftCurrencyForAnimalUpgrade.Count - 1);
+		return SoftCurrencyForAnimalUpgrade[currLevel];
+	}
+
 }

@@ -37,6 +37,10 @@ public class EndlessMenuController : MonoBehaviour
 	[SerializeField]
 	private float fadeDuration = 0.3f;
 
+	[Header("Animal info")]
+	[SerializeField]
+	private List<AnimalInfoPanel> animalInfoPanels;
+
 	[Header("Rankings")]
 	[SerializeField]
 	private List<Button> rankingsButtons;
@@ -88,6 +92,11 @@ public class EndlessMenuController : MonoBehaviour
 		HeaderController.I.ShowHeader();
 		ShowRankingsTab(0);
 		highscoreText.text = PlayerData.HighScore.ToString();
+
+		for (int i = 0; i < animalInfoPanels.Count; i++)
+		{
+			animalInfoPanels[i].Refresh((TileElement.ElementType)(i + 1));
+		}
 		
 		mainCanvasGroup.interactable = mainCanvasGroup.blocksRaycasts = true;
 		if (instant)
