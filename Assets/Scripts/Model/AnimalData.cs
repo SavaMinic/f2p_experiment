@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +21,14 @@ public class AnimalData
 	{
 		var level = AnimalLevel(type);
 		PlayerPrefs.SetInt(AnimalLevelData + type, level + 1);
+	}
+
+	public static void ResetAnimalLevels()
+	{
+		foreach (var type in Enum.GetValues(typeof(TileElement.ElementType)))
+		{
+			PlayerPrefs.SetInt(AnimalLevelData + type, 0);
+		}
 	}
 	
 }

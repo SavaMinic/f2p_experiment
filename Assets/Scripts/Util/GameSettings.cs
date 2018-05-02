@@ -28,4 +28,11 @@ public class GameSettings : SingletonScriptableObject<GameSettings>
 		return SoftCurrencyForAnimalUpgrade[currLevel];
 	}
 
+	public List<int> BasePointsPerElementOfLevel;
+	public int GetBasePointsForElementOfLevel(int currLevel)
+	{
+		currLevel = Mathf.Clamp(currLevel, 0, BasePointsPerElementOfLevel.Count - 1);
+		return BasePointsPerElementOfLevel[currLevel];
+	}
+
 }

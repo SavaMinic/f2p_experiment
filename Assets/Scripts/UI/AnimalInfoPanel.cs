@@ -39,7 +39,7 @@ public class AnimalInfoPanel : MonoBehaviour
 	{
 		myButton.onClick.AddListener(OnMyButtonClick);
 
-		GameController.I.OnSoftCurrencyChanged += RefreshUpgradableState;
+		GameController.I.OnSoftCurrencyChanged += RefreshState;
 	}
 
 	#endregion
@@ -49,10 +49,7 @@ public class AnimalInfoPanel : MonoBehaviour
 	public void Refresh(TileElement.ElementType type)
 	{
 		animalType = type;
-		animalImage.sprite = GameSettings.I.GetSpriteForElement(type);
-		animalNameText.text = type.ToString().ToUpper();
-		levelText.text = "Lvl. " + (AnimalData.AnimalLevel(type) + 1);
-		RefreshUpgradableState(GameController.I.SoftCurrency);
+		RefreshState(GameController.I.SoftCurrency);
 	}
 
 	#endregion
@@ -61,11 +58,15 @@ public class AnimalInfoPanel : MonoBehaviour
 
 	private void OnMyButtonClick()
 	{
-		
+		AnimalInfoMenuController.I.ShowAnimalInfo(false, animalType);
 	}
 
-	private void RefreshUpgradableState(int newVal)
+	private void RefreshState(int newVal)
 	{
+		animalImage.sprite = GameSettings.I.GetSpriteForElement(animalType);
+		animalNameText.text = animalType.ToString().ToUpper();
+		levelText.text = "Lvl " + (AnimalData.AnimalLevel(animalType) + 1);
+		
 		var level = AnimalData.AnimalLevel(animalType);
 		var cost = GameSettings.I.GetSoftCurrencyForUpgrade(level);
 		backImage.color = newVal >= cost ? upgradeableColor : normalColor;

@@ -158,8 +158,9 @@ public class TileElement : MonoBehaviour
         isExploding = true;
         StartCoroutine(DoExplodeAnimation(index));
         
-        // TODO: return score depending on level of element
-        return 10;
+        // return score depending on level of element
+        var level = AnimalData.AnimalLevel(Type);
+        return GameSettings.I.GetBasePointsForElementOfLevel(level);
     }
 
     #endregion

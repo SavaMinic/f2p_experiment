@@ -35,4 +35,14 @@ public class EditorUtil : MonoBehaviour {
 		}
 	}
 	
+	[MenuItem("Farm Lines/Reset animal levels")]
+	static void ResetAnimalLevels()
+	{
+		if (EditorUtility.DisplayDialog("Reset animal levels?",
+			"Are you sure you want to reset player's animal levels?", "Yes", "No"))
+		{
+			AnimalData.ResetAnimalLevels();
+		}
+	}
+	
 }
