@@ -35,4 +35,7 @@ public class GameSettings : SingletonScriptableObject<GameSettings>
 		return BasePointsPerElementOfLevel[currLevel];
 	}
 
+	public List<int> MilestonePoints;
+	public List<int> MilestoneRewards;
+
 }

@@ -66,6 +66,15 @@ public class GoalsView : MonoBehaviour
 
 	[SerializeField]
 	private float newHishscoreScaleIncrease = 2f;
+
+	[SerializeField]
+	private Text milestoneScoreText;
+
+	[SerializeField]
+	private Text milestoneRewardText;
+
+	[SerializeField]
+	private Slider milestoneScoreSlider;
 	
 	[Header("Collections")]
 	[SerializeField]
@@ -83,6 +92,7 @@ public class GoalsView : MonoBehaviour
 	
 
 	private GoTween scoreChangeTween;
+	private GoTween milestoneChangeTween;
 	
 	private int highScoreFontSize;
 
@@ -92,9 +102,10 @@ public class GoalsView : MonoBehaviour
 
 	private void Start()
 	{
-		highScoreFontSize = endlessHighScoreText.fontSize;
+		//highScoreFontSize = endlessHighScoreText.fontSize;
 		GameController.I.OnScoreChanged += OnScoreChanged;
 		GameController.I.OnNewTurn += OnNewTurn;
+		GameController.I.OnMilestoneChanged += OnMilestoneChanged;
 	}
 
 	private void Update()
@@ -122,14 +133,21 @@ public class GoalsView : MonoBehaviour
 		limitsPanel.gameObject.SetActive(GameController.I.IsTimeLimitMode || GameController.I.IsTurnsMode);
 		limitTitleText.text = GameController.I.IsTimeLimitMode ? "TIME" : "TURNS";
 
-		endlessHighScoreText.text = PlayerData.HighScore.ToString();
-		endlessHighScoreText.color = defaultEndlessTextColor;
+		//endlessHighScoreText.text = PlayerData.HighScore.ToString();
+		//endlessHighScoreText.color = defaultEndlessTextColor;
+
+		milestoneRewardText.text = GameController.I.MilestoneReward.ToString();
+		milestoneScoreText.text = "SCORE " + GameController.I.MilestonePoint + " FOR REWARD";
 
 		// INITIAL STATE
 		if (mode == GameController.GameModeType.TargetScore)
 		{
 			targetScoreText.text = "TARGET: " + GameController.I.TargetScore;
 			targetScoreSlider.value = (float)GameController.I.Score / GameController.I.TargetScore;;
+		}
+		else if (mode == GameController.GameModeType.Endless)
+		{
+			milestoneScoreSlider.value = 0f;
 		}
 		
 		if (GameController.I.IsTurnsMode)
@@ -145,6 +163,23 @@ public class GoalsView : MonoBehaviour
 	#endregion
 
 	#region Events
+
+	private void OnMilestoneChanged()
+	{
+		var milestoneProgress = GameController.I.MilestoneProgress(GameController.I.Score);
+		if (milestoneChangeTween != null && milestoneChangeTween.state == GoTweenState.Running)
+		{
+			milestoneChangeTween.destroy();
+		}
+		milestoneChangeTween = Go.to(milestoneScoreSlider, scoreChangeDuration,
+			new GoTweenConfig().floatProp("value", milestoneProgress)
+				.setEaseType(scoreChangeEaseType)
+				.setDelay(scoreChangeDelay)
+		);
+		
+		milestoneRewardText.text = GameController.I.MilestoneReward.ToString();
+		milestoneScoreText.text = "SCORE " + GameController.I.MilestonePoint + " FOR REWARD";
+	}
 	
 	private void OnScoreChanged(int newScore)
 	{
@@ -153,8 +188,26 @@ public class GoalsView : MonoBehaviour
 			if (newScore > PlayerData.HighScore)
 			{
 				PlayerData.HighScore = newScore;
-				StartCoroutine(ChangeNewHighScore(newScore));
+				//StartCoroutine(ChangeNewHighScore(newScore));
 			}
+			
+			var milestoneProgress = GameController.I.MilestoneProgress(newScore);
+			if (milestoneChangeTween != null && milestoneChangeTween.state == GoTweenState.Running)
+			{
+				milestoneChangeTween.destroy();
+			}
+			milestoneChangeTween = Go.to(milestoneScoreSlider, scoreChangeDuration,
+				new GoTweenConfig().floatProp("value", milestoneProgress)
+				.setEaseType(scoreChangeEaseType)
+				.setDelay(scoreChangeDelay)
+			);
+			milestoneChangeTween.setOnCompleteHandler(t =>
+			{
+				if (newScore >= GameController.I.MilestonePoint)
+				{
+					GameController.I.NextMilestone();
+				}
+			});
 		}
 		
 		if (!GameController.I.HasTargetScore)

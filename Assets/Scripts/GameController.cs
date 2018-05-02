@@ -58,6 +58,8 @@ public class GameController : MonoBehaviour
 	public Action<int> OnSoftCurrencyChanged;
 	public Action<int> OnHardCurrencyChanged;
 
+	public Action OnMilestoneChanged;
+
 	#endregion
 
 	#region Fields/Properties
@@ -83,6 +85,24 @@ public class GameController : MonoBehaviour
 	public bool IsTimeLimitMode { get { return !TimeLimit.Approximately(-1f); } }
 	
 	public int CurrentLevel { get; private set; }
+	
+	public int CurrentMilestone { get; private set; }
+	public int MilestonePoint
+	{
+		get
+		{
+			var i = Mathf.Clamp(CurrentMilestone, 0, GameSettings.I.MilestonePoints.Count - 1);
+			return GameSettings.I.MilestonePoints[i];
+		}
+	}
+	public int MilestoneReward
+	{
+		get
+		{
+			var i = Mathf.Clamp(CurrentMilestone, 0, GameSettings.I.MilestoneRewards.Count - 1);
+			return GameSettings.I.MilestoneRewards[i];
+		}
+	}
 
 	private int score = -1;
 	public int Score
@@ -284,6 +304,21 @@ public class GameController : MonoBehaviour
 		}
 	}
 
+	public void NextMilestone()
+	{
+		SoftCurrency += MilestoneReward;
+		CurrentMilestone++;
+		OnMilestoneChanged.CallIfNotNull();
+	}
+	
+	public float MilestoneProgress(int score)
+	{
+		var i = Mathf.Clamp(CurrentMilestone, 0, GameSettings.I.MilestonePoints.Count - 1);
+		var previous = CurrentMilestone > 0 ? GameSettings.I.MilestonePoints[i - 1] : 0;
+		var current = GameSettings.I.MilestonePoints[i];
+		return (float) (score - previous) / (current - previous);
+	}
+
 	#endregion
 
 	#region Private
@@ -292,6 +327,7 @@ public class GameController : MonoBehaviour
 	{
 		GameTurn = 0;
 		GameTime = 0f;
+		CurrentMilestone = 0;
 		
 		TileController.I.GenerateNewMap(numOfElements, possibleElements);
 		ElementGenerator.I.SetPossibleTypes(possibleElements);
