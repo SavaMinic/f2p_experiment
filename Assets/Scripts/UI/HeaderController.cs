@@ -48,12 +48,19 @@ public class HeaderController : MonoBehaviour
 		hardCurrencyButton.onClick.AddListener(OnHardCurrencyButtonClick);
 	}
 
+	private void Start()
+	{
+		GameController.I.OnSoftCurrencyChanged += OnSoftCurrencyChanged;
+		GameController.I.OnHardCurrencyChanged += OnHardCurrencyChanged;
+	}
+
 	#endregion
 	
 	#region Public
 
 	public void ShowHeader()
 	{
+		RefreshCurrencies();
 		mainCanvasGroup.interactable = mainCanvasGroup.blocksRaycasts = true;
 		mainCanvasGroup.alpha = 1f;
 	}
@@ -76,6 +83,26 @@ public class HeaderController : MonoBehaviour
 	private void OnHardCurrencyButtonClick()
 	{
 		
+	}
+
+	private void OnSoftCurrencyChanged(int newVal)
+	{
+		RefreshCurrencies();
+	}
+
+	private void OnHardCurrencyChanged(int newVal)
+	{
+		RefreshCurrencies();
+	}
+
+	#endregion
+
+	#region Private
+
+	private void RefreshCurrencies()
+	{
+		softCurrencyText.text = GameController.I.SoftCurrency.ToString();
+		hardCurrencyText.text = GameController.I.HardCurrency.ToString();
 	}
 
 	#endregion

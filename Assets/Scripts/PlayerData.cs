@@ -6,12 +6,39 @@ public class PlayerData
 {
 
 	private const string HighScoreKey = "HighScoreKey";
-	private const string LevelFinishedKey = "LevelFinished";
+	private const string LevelFinishedKey = "LevelFinished_";
+
+	private const string SoftCurrencyKey = "SoftCurrencyKey";
+	private const string HardCurrencyKey = "HardCurrencyKey";
 	
 	public static int HighScore
 	{
 		get { return PlayerPrefs.GetInt(HighScoreKey); }
 		set { PlayerPrefs.SetInt(HighScoreKey, value);}
+	}
+	
+	public static int SoftCurrency
+	{
+		get {
+			if (!PlayerPrefs.HasKey(SoftCurrencyKey))
+			{
+				PlayerPrefs.SetInt(SoftCurrencyKey, GameSettings.I.StartingSoftCurrency);
+			}
+			return PlayerPrefs.GetInt(SoftCurrencyKey);
+		}
+		set { PlayerPrefs.SetInt(SoftCurrencyKey, value);}
+	}
+	
+	public static int HardCurrency
+	{
+		get {
+			if (!PlayerPrefs.HasKey(HardCurrencyKey))
+			{
+				PlayerPrefs.SetInt(HardCurrencyKey, GameSettings.I.StartingHardCurrency);
+			}
+			return PlayerPrefs.GetInt(HardCurrencyKey);
+		}
+		set { PlayerPrefs.SetInt(HardCurrencyKey, value);}
 	}
 	
 	public static void FinishLevel(int level)

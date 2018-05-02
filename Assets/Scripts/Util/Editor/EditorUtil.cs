@@ -24,4 +24,15 @@ public class EditorUtil : MonoBehaviour {
 		}
 	}
 	
+	[MenuItem("Farm Lines/Reset currencies")]
+	static void ResetCurrencies()
+	{
+		if (EditorUtility.DisplayDialog("Reset currencies?",
+			"Are you sure you want to reset player's currencies?", "Yes", "No"))
+		{
+			PlayerData.SoftCurrency = GameSettings.I.StartingSoftCurrency;
+			PlayerData.HardCurrency = GameSettings.I.StartingHardCurrency;
+		}
+	}
+	
 }

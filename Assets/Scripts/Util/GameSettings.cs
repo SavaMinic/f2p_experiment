@@ -11,6 +11,9 @@ public class GameSettings : SingletonScriptableObject<GameSettings>
 		return elementSprites[(int) type - 1];
 	}
 
+	public int StartingSoftCurrency = 100;
+	public int StartingHardCurrency = 50;
+
 	public int DefaultStartingCount = 10;
 
 	public int DefaultTargetScore = 100;

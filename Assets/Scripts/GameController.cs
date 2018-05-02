@@ -55,6 +55,9 @@ public class GameController : MonoBehaviour
 	public Action OnNewTurn;
 	public Action<int> OnScoreChanged;
 
+	public Action<int> OnSoftCurrencyChanged;
+	public Action<int> OnHardCurrencyChanged;
+
 	#endregion
 
 	#region Fields/Properties
@@ -97,6 +100,32 @@ public class GameController : MonoBehaviour
 			
 			OnScoreChanged.CallIfNotNull(value);
 			score = value;
+		}
+	}
+
+	public int SoftCurrency
+	{
+		get { return PlayerData.SoftCurrency; }
+		set
+		{
+			if (PlayerData.SoftCurrency == value)
+				return;
+			
+			OnSoftCurrencyChanged.CallIfNotNull(value);
+			PlayerData.SoftCurrency = value;
+		}
+	}
+
+	public int HardCurrency
+	{
+		get { return PlayerData.HardCurrency; }
+		set
+		{
+			if (PlayerData.HardCurrency == value)
+				return;
+			
+			OnHardCurrencyChanged.CallIfNotNull(value);
+			PlayerData.HardCurrency = value;
 		}
 	}
 
