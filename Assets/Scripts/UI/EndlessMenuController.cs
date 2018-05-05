@@ -23,9 +23,6 @@ public class EndlessMenuController : MonoBehaviour
 	#region Fields
 
 	[SerializeField]
-	private Button backButton;
-
-	[SerializeField]
 	private Button playButton;
 
 	[SerializeField]
@@ -55,7 +52,7 @@ public class EndlessMenuController : MonoBehaviour
 	private ScrollRect rankingScrollRect;
 
 	[SerializeField]
-	private HorizontalLayoutGroup rankingViewsLayoutGroup;
+	private VerticalLayoutGroup rankingViewsLayoutGroup;
 
 	[SerializeField]
 	private RectTransform rankingViewsContainer;
@@ -70,7 +67,6 @@ public class EndlessMenuController : MonoBehaviour
 	private void Awake()
 	{
 		HideEndlessMenu(true);
-		backButton.onClick.AddListener(OnBackButtonClick);
 		playButton.onClick.AddListener(OnPlayButtonClick);
 
 		for (int i = 0; i < rankingsButtons.Count; i++)
@@ -141,12 +137,6 @@ public class EndlessMenuController : MonoBehaviour
 		HideEndlessMenu();
 	}
 
-	private void OnBackButtonClick()
-	{
-		HideEndlessMenu();
-		MainMenuController.I.ShowMainMenu();
-	}
-
 	#endregion
 
 	#region Private
@@ -185,13 +175,13 @@ public class EndlessMenuController : MonoBehaviour
 			}
 		}
 
-		var w = 0f;
+		var h = 0f;
 		if (rankings != null && rankings.Count > 0)
 		{
-			w = playerRankingViews[0].Width * rankings.Count + rankingViewsLayoutGroup.spacing * (rankings.Count - 1);
+			h = playerRankingViews[0].Height * rankings.Count + rankingViewsLayoutGroup.spacing * (rankings.Count - 1);
 		}
-		rankingViewsContainer.sizeDelta = new Vector2(w, rankingViewsContainer.sizeDelta.y);
-		rankingScrollRect.horizontalNormalizedPosition = 0;
+		rankingViewsContainer.sizeDelta = new Vector2(rankingViewsContainer.sizeDelta.x, h);
+		rankingScrollRect.verticalNormalizedPosition = 0;
 	}
 
 	#endregion

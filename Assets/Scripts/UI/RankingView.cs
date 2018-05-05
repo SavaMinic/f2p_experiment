@@ -26,7 +26,7 @@ public class RankingView : MonoBehaviour
 	[SerializeField]
 	private Color localPlayerColor;
 	
-	public float Width { get; private set; }
+	public float Height { get; private set; }
 
 	#endregion
 
@@ -35,7 +35,7 @@ public class RankingView : MonoBehaviour
 	private void Awake()
 	{
 		GetComponent<Button>().onClick.AddListener(OnButtonClick);
-		Width = GetComponent<RectTransform>().sizeDelta.x;
+		Height = GetComponent<RectTransform>().sizeDelta.y;
 	}
 
 	#endregion
