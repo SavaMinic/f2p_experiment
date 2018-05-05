@@ -24,9 +24,6 @@ public class MainMenuController : MonoBehaviour
 	#region Fields
 
 	[SerializeField]
-	private Button playButton;
-
-	[SerializeField]
 	private CanvasGroup mainCanvasGroup;
 
 	[SerializeField]
@@ -35,13 +32,16 @@ public class MainMenuController : MonoBehaviour
 	[SerializeField]
 	private Button endlessButton;
 
+	[SerializeField]
+	private Button settingsButton;
+
 	#endregion
 
 	#region Mono
 
 	private void Awake()
 	{
-		playButton.onClick.AddListener(OnPlayButtonClick);
+		settingsButton.onClick.AddListener(OnSetttingsButtonClick);
 		endlessButton.onClick.AddListener(OnEndlessButtonClick);
 	}
 
@@ -77,10 +77,9 @@ public class MainMenuController : MonoBehaviour
 
 	#region Events
 
-	private void OnPlayButtonClick()
+	private void OnSetttingsButtonClick()
 	{
-		LevelSelectionMenuController.I.ShowLevelSelectionMenu();
-		HideMainMenu();
+		
 	}
 
 	private void OnEndlessButtonClick()

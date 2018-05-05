@@ -294,14 +294,7 @@ public class GameController : MonoBehaviour
 	public void ExitToMainMenu()
 	{
 		CurrentState = GameState.MainMenu;
-		if (GameMode != GameModeType.Endless)
-		{
-			LevelSelectionMenuController.I.ShowLevelSelectionMenu(true);
-		}
-		else
-		{
-			EndlessMenuController.I.ShowEndlessMenu(true);
-		}
+		EndlessMenuController.I.ShowEndlessMenu(true);
 	}
 
 	public void NextMilestone()
