@@ -32,16 +32,12 @@ public class MainMenuController : MonoBehaviour
 	[SerializeField]
 	private Button endlessButton;
 
-	[SerializeField]
-	private Button settingsButton;
-
 	#endregion
 
 	#region Mono
 
 	private void Awake()
 	{
-		settingsButton.onClick.AddListener(OnSetttingsButtonClick);
 		endlessButton.onClick.AddListener(OnEndlessButtonClick);
 	}
 
@@ -76,11 +72,6 @@ public class MainMenuController : MonoBehaviour
 	#endregion
 
 	#region Events
-
-	private void OnSetttingsButtonClick()
-	{
-		
-	}
 
 	private void OnEndlessButtonClick()
 	{

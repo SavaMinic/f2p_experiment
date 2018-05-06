@@ -86,7 +86,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   normalColor: {r: 0.6107059, g: 1, b: 0.4575472, a: 0.6431373}
-  selectedColor: {r: 0.21832874, g: 0.764151, b: 0, a: 0.7764706}
+  normalEvenColor: {r: 0.23832084, g: 0.8396226, b: 0, a: 0.6431373}
+  selectedColor: {r: 0.11649734, g: 0.4056604, b: 0, a: 0.7764706}
   backgroundImage: {fileID: 114649132394512028}
   elementImage: {fileID: 114240032900405290}
   jumpAnimationTime: 0.1

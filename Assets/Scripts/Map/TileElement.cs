@@ -27,6 +27,9 @@ public class TileElement : MonoBehaviour
     private Color normalColor;
 
     [SerializeField]
+    private Color normalEvenColor;
+
+    [SerializeField]
     private Color selectedColor;
 
     [SerializeField]
@@ -57,6 +60,7 @@ public class TileElement : MonoBehaviour
     private IEnumerator crossFadeCoroutine;
 
     private bool isExploding;
+    private bool isEven;
 
     #endregion
 
@@ -98,7 +102,8 @@ public class TileElement : MonoBehaviour
 
     public void Initialize(int x, int y)
     {
-        backgroundImage.color = normalColor;
+        isEven = (x % 2 == 0) == (y % 2 == 0);
+        backgroundImage.color = isEven ? normalEvenColor : normalColor;
         Location = new Location(x, y);
         SetType(ElementType.None);
     }
@@ -132,7 +137,7 @@ public class TileElement : MonoBehaviour
 
     public void Unselect()
     {
-        backgroundImage.color = normalColor;
+        backgroundImage.color = isEven ? normalEvenColor : normalColor;
     }
 
     public void CantBeSelected()
@@ -182,7 +187,7 @@ public class TileElement : MonoBehaviour
         
         yield return new WaitForSecondsRealtime(duration / 5f * 3f);
         
-        Go.to(backgroundImage, duration / 5f * 2f, new GoTweenConfig().colorProp("color", normalColor));
+        Go.to(backgroundImage, duration / 5f * 2f, new GoTweenConfig().colorProp("color", isEven ? normalEvenColor : normalColor));
     }
 
     #endregion
