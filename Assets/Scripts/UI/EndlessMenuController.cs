@@ -22,11 +22,15 @@ public class EndlessMenuController : MonoBehaviour
 	
 	#region Fields
 
+	[Header("Navigation")]
 	[SerializeField]
-	private Button playButton;
+	private List<Button> navigationButtons;
+	
+	[SerializeField]
+	private List<Image> navigationButtonImages;
 
 	[SerializeField]
-	private Text highscoreText;
+	private List<CanvasGroup> tabCanvasGroups;
 
 	[SerializeField]
 	private CanvasGroup mainCanvasGroup;
@@ -34,11 +38,30 @@ public class EndlessMenuController : MonoBehaviour
 	[SerializeField]
 	private float fadeDuration = 0.3f;
 
+	[SerializeField]
+	private Color defaultTabColor;
+
+	[SerializeField]
+	private Color activeTabColor;
+
+	[Header("Main panel")]
+	[SerializeField]
+	private RectTransform mainPanel;
+	
+	[SerializeField]
+	private Button playButton;
+
+	[SerializeField]
+	private Text highscoreText;
+
 	[Header("Animal info")]
 	[SerializeField]
 	private List<AnimalInfoPanel> animalInfoPanels;
 
 	[Header("Rankings")]
+	[SerializeField]
+	private RectTransform rankingsPanel;
+	
 	[SerializeField]
 	private List<Button> rankingsButtons;
 	
@@ -59,6 +82,21 @@ public class EndlessMenuController : MonoBehaviour
 
 	[SerializeField]
 	private List<RankingView> playerRankingViews;
+
+	[SerializeField]
+	private RankingView myPlayerRankingView;
+
+	[Header("Shop")]
+	[SerializeField]
+	private RectTransform shopPanel;
+
+	public enum MenuTabs
+	{
+		Ranking,
+		Home,
+		Shop
+	}
+	private int currentlyShownTab = -1;
 	
 	#endregion
 
@@ -77,6 +115,15 @@ public class EndlessMenuController : MonoBehaviour
 				OnRankingButtonClick(ii);
 			});
 		}
+
+		for (int i = 0; i < navigationButtons.Count; i++)
+		{
+			var ii = i;
+			navigationButtons[i].onClick.AddListener(() =>
+			{
+				OnNavigationButtonClick(ii);
+			});
+		}
 	}
 
 	#endregion
@@ -93,30 +140,54 @@ public class EndlessMenuController : MonoBehaviour
 		{
 			animalInfoPanels[i].Refresh((TileElement.ElementType)(i + 1));
 		}
-		
-		mainCanvasGroup.interactable = mainCanvasGroup.blocksRaycasts = true;
-		if (instant)
-		{
-			mainCanvasGroup.alpha = 1f;
-			return;
-		}
-		Go.to(mainCanvasGroup, fadeDuration, new GoTweenConfig().floatProp("alpha", 1f));
+
+		ShowCanvasGroup(mainCanvasGroup);
+		ShowTab(MenuTabs.Home);
 	}
 
 	public void HideEndlessMenu(bool instant = false)
 	{
-		mainCanvasGroup.interactable = mainCanvasGroup.blocksRaycasts = false;
-		if (instant)
-		{
-			mainCanvasGroup.alpha = 0f;
+		currentlyShownTab = -1;
+		HideCanvasGroup(mainCanvasGroup, instant);
+	}
+
+	public void ShowTab(MenuTabs tab)
+	{
+		if (currentlyShownTab == (int)tab)
 			return;
+
+		if (currentlyShownTab != -1)
+		{
+			HideCanvasGroup(tabCanvasGroups[currentlyShownTab]);
 		}
-		Go.to(mainCanvasGroup, fadeDuration, new GoTweenConfig().floatProp("alpha", 0f));
+		else
+		{
+			for (int i = 0; i < tabCanvasGroups.Count; i++)
+			{
+				if (i != (int) tab)
+				{
+					HideCanvasGroup(tabCanvasGroups[i], true);
+				}
+			}
+		}
+		
+		currentlyShownTab = (int)tab;
+		ShowCanvasGroup(tabCanvasGroups[currentlyShownTab]);
+
+		for (int i = 0; i < navigationButtonImages.Count; i++)
+		{
+			navigationButtonImages[i].color = i == currentlyShownTab ? activeTabColor : defaultTabColor;
+		}
 	}
 	
 	#endregion
 
 	#region Events
+
+	private void OnNavigationButtonClick(int index)
+	{
+		ShowTab((MenuTabs)index);
+	}
 
 	private void OnRankingButtonClick(int index)
 	{
@@ -140,6 +211,28 @@ public class EndlessMenuController : MonoBehaviour
 	#endregion
 
 	#region Private
+
+	private void ShowCanvasGroup(CanvasGroup group, bool instant = false)
+	{
+		group.interactable = group.blocksRaycasts = true;
+		if (instant)
+		{
+			group.alpha = 1f;
+			return;
+		}
+		Go.to(group, fadeDuration, new GoTweenConfig().floatProp("alpha", 1f));
+	}
+
+	private void HideCanvasGroup(CanvasGroup group, bool instant = false)
+	{
+		group.interactable = group.blocksRaycasts = false;
+		if (instant)
+		{
+			group.alpha = 0f;
+			return;
+		}
+		Go.to(group, fadeDuration, new GoTweenConfig().floatProp("alpha", 0f));
+	}
 
 	private void ShowRankingsTab(int index)
 	{
@@ -167,12 +260,18 @@ public class EndlessMenuController : MonoBehaviour
 			if (rankings != null && i < rankings.Count)
 			{
 				playerRankingViews[i].gameObject.SetActive(true);
-				playerRankingViews[i].Refresh(i + 1, rankings[i]);
+				playerRankingViews[i].Refresh(rankings[i]);
 			}
 			else
 			{
 				playerRankingViews[i].gameObject.SetActive(false);
 			}
+		}
+
+		var myPlayerRanking = rankings.Find(r => r.Id == PlayerData.PlayerId);
+		if (myPlayerRanking != null)
+		{
+			myPlayerRankingView.Refresh(myPlayerRanking);
 		}
 
 		var h = 0f;
@@ -181,7 +280,7 @@ public class EndlessMenuController : MonoBehaviour
 			h = playerRankingViews[0].Height * rankings.Count + rankingViewsLayoutGroup.spacing * (rankings.Count - 1);
 		}
 		rankingViewsContainer.sizeDelta = new Vector2(rankingViewsContainer.sizeDelta.x, h);
-		rankingScrollRect.verticalNormalizedPosition = 0;
+		rankingScrollRect.verticalNormalizedPosition = 1;
 	}
 
 	#endregion

@@ -42,9 +42,9 @@ public class RankingView : MonoBehaviour
 
 	#region Public
 
-	public void Refresh(int index, RankingsData.PlayerRanking playerRanking)
+	public void Refresh(RankingsData.PlayerRanking playerRanking)
 	{
-		playerNameText.text = index + ". " + playerRanking.Name;
+		playerNameText.text = (playerRanking.Index + 1) + ". " + playerRanking.Name;
 		playerScoreText.text = playerRanking.Score.ToString();
 
 		backImage.color = playerRanking.Id == PlayerData.PlayerId ? localPlayerColor : normalColor;

@@ -10,6 +10,7 @@ public class RankingsData
 		public int Id;
 		public string Name;
 		public int Score;
+		public int Index = -1;
 		public int ImageId;
 	}
 
@@ -27,6 +28,11 @@ public class RankingsData
 			new PlayerRanking { Id = PlayerData.PlayerId, Name = "YOU", Score = PlayerData.HighScore, ImageId = 1 }
 		};
 		list.Sort((u1, u2) => { return u2.Score - u1.Score; });
+		for (int i = 0; i < list.Count; i++)
+		{
+			if (list[i].Index == -1)
+				list[i].Index = i;
+		}
 		return list;
 	}
 
@@ -48,6 +54,11 @@ public class RankingsData
 			new PlayerRanking { Id = PlayerData.PlayerId, Name = "YOU", Score = PlayerData.HighScore, ImageId = 1 }
 		};
 		list.Sort((u1, u2) => { return u2.Score - u1.Score; });
+		for (int i = 0; i < list.Count; i++)
+		{
+			if (list[i].Index == -1)
+				list[i].Index = i;
+		}
 		return list;
 	}
 	
@@ -69,6 +80,11 @@ public class RankingsData
 			new PlayerRanking { Id = PlayerData.PlayerId, Name = "YOU", Score = PlayerData.HighScore, ImageId = 1 }
 		};
 		list.Sort((u1, u2) => { return u2.Score - u1.Score; });
+		for (int i = 0; i < list.Count; i++)
+		{
+			if (list[i].Index == -1)
+				list[i].Index = i;
+		}
 		return list;
 	}
 	

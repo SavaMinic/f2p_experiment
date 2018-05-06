@@ -77,12 +77,10 @@ public class HeaderController : MonoBehaviour
 
 	private void OnSoftCurrencyButtonClick()
 	{
-		
 	}
 
 	private void OnHardCurrencyButtonClick()
 	{
-		
 	}
 
 	private void OnSoftCurrencyChanged(int newVal)
