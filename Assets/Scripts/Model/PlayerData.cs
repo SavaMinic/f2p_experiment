@@ -1,5 +1,6 @@
 ﻿
 
+using System;
 using UnityEngine;
 
 public class PlayerData
@@ -12,6 +13,8 @@ public class PlayerData
 
 	private const string SoftCurrencyKey = "SoftCurrencyKey";
 	private const string HardCurrencyKey = "HardCurrencyKey";
+
+	private const string FreeGiftTimeKey = "FreeGiftTimeKey";
 	
 	public static int HighScore
 	{
@@ -76,6 +79,41 @@ public class PlayerData
 				PlayerPrefs.DeleteKey(LevelFinishedKey + level);
 			}
 		}
+	}
+
+	public static TimeSpan FreeGiftClaimTimeRemaining
+	{
+		get
+		{
+			if (!PlayerPrefs.HasKey(FreeGiftTimeKey))
+			{
+				SetupFreeGiftClaimTime();
+			}
+			var diff = DateTime.FromBinary(Convert.ToInt64(PlayerPrefs.GetString(FreeGiftTimeKey)));
+			return diff.Subtract(DateTime.Now);
+		}
+	}
+
+	public static void SetupFreeGiftClaimTime()
+	{
+		var time = DateTime.Now.AddMinutes(GameSettings.I.FreeGiftTimeInMinutes);
+		PlayerPrefs.SetString(FreeGiftTimeKey, time.ToBinary().ToString());
+	}
+
+	public static bool CanClaimFreeGift
+	{
+		get
+		{
+			if (!PlayerPrefs.HasKey(FreeGiftTimeKey))
+				return true;
+
+			return FreeGiftClaimTimeRemaining.TotalSeconds <= 0;
+		}
+	}
+
+	public static void ResetFreeGiftTimer()
+	{
+		PlayerPrefs.SetString(FreeGiftTimeKey, DateTime.Now.ToBinary().ToString());
 	}
 	
 }

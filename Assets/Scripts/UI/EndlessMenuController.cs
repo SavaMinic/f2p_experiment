@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Nordeus.Util.CSharpLib;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -53,6 +54,15 @@ public class EndlessMenuController : MonoBehaviour
 
 	[SerializeField]
 	private Text highscoreText;
+	
+	[SerializeField]
+	private Button freeGiftButton;
+
+	[SerializeField]
+	private Text freeGiftText;
+
+	[SerializeField]
+	private Text freeGiftRewardText;
 
 	[Header("Animal info")]
 	[SerializeField]
@@ -106,6 +116,7 @@ public class EndlessMenuController : MonoBehaviour
 	{
 		HideEndlessMenu(true);
 		playButton.onClick.AddListener(OnPlayButtonClick);
+		freeGiftButton.onClick.AddListener(OnFreeGiftButtonClick);
 
 		for (int i = 0; i < rankingsButtons.Count; i++)
 		{
@@ -123,6 +134,25 @@ public class EndlessMenuController : MonoBehaviour
 			{
 				OnNavigationButtonClick(ii);
 			});
+		}
+	}
+
+	private void Update()
+	{
+		if (!Application.isPlaying)
+			return;
+
+		var canClaim = PlayerData.CanClaimFreeGift;
+		freeGiftButton.interactable = canClaim;
+		freeGiftRewardText.text = GameSettings.I.FreeGiftTotalAmount.ToString();
+		if (canClaim)
+		{
+			freeGiftText.text = "CLAIM";
+		}
+		else
+		{
+			var remaining = (float) PlayerData.FreeGiftClaimTimeRemaining.TotalSeconds;
+			freeGiftText.text = "Ready in\n" + remaining.FormatToTime();
 		}
 	}
 
@@ -206,6 +236,12 @@ public class EndlessMenuController : MonoBehaviour
 			TileElement.ElementType.Sheep,
 		});
 		HideEndlessMenu();
+	}
+
+	private void OnFreeGiftButtonClick()
+	{
+		GameController.I.SoftCurrency += GameSettings.I.FreeGiftTotalAmount;
+		PlayerData.SetupFreeGiftClaimTime();
 	}
 
 	#endregion

@@ -30,5 +30,19 @@ public class AnimalData
 			PlayerPrefs.SetInt(AnimalLevelData + type, 0);
 		}
 	}
+
+	public static float AverageAnimalLevel
+	{
+		get
+		{
+			var sum = 0f;
+			var types = (TileElement.ElementType[])Enum.GetValues(typeof(TileElement.ElementType));
+			for (int i = 0; i < types.Length; i++)
+			{
+				sum += AnimalLevel(types[i]) + 1;
+			}
+			return sum / types.Length;
+		}
+	}
 	
 }

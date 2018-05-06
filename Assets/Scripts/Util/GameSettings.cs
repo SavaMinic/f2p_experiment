@@ -38,4 +38,12 @@ public class GameSettings : SingletonScriptableObject<GameSettings>
 	public List<int> MilestonePoints;
 	public List<int> MilestoneRewards;
 
+	public int FreeGiftTimeInMinutes;
+	public int FreeGiftBaseAmount;
+
+	public int FreeGiftTotalAmount
+	{
+		get { return Mathf.RoundToInt(FreeGiftBaseAmount * AnimalData.AverageAnimalLevel); }
+	}
+
 }

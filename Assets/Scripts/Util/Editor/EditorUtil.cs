@@ -45,4 +45,14 @@ public class EditorUtil : MonoBehaviour {
 		}
 	}
 	
+	[MenuItem("Farm Lines/Reset free gift")]
+	static void ResetFreeGift()
+	{
+		if (EditorUtility.DisplayDialog("Reset free gift?",
+			"Are you sure you want to reset free gift timer?", "Yes", "No"))
+		{
+			PlayerData.ResetFreeGiftTimer();
+		}
+	}
+	
 }
