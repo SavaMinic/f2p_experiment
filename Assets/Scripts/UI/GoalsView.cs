@@ -102,7 +102,7 @@ public class GoalsView : MonoBehaviour
 
 	private void Start()
 	{
-		//highScoreFontSize = endlessHighScoreText.fontSize;
+		highScoreFontSize = endlessHighScoreText.fontSize;
 		GameController.I.OnScoreChanged += OnScoreChanged;
 		GameController.I.OnNewTurn += OnNewTurn;
 		GameController.I.OnMilestoneChanged += OnMilestoneChanged;
@@ -133,8 +133,8 @@ public class GoalsView : MonoBehaviour
 		limitsPanel.gameObject.SetActive(GameController.I.IsTimeLimitMode || GameController.I.IsTurnsMode);
 		limitTitleText.text = GameController.I.IsTimeLimitMode ? "TIME" : "TURNS";
 
-		//endlessHighScoreText.text = PlayerData.HighScore.ToString();
-		//endlessHighScoreText.color = defaultEndlessTextColor;
+		endlessHighScoreText.text = "HIGHSCORE: " + PlayerData.HighScore;
+		endlessHighScoreText.color = defaultEndlessTextColor;
 
 		milestoneRewardText.text = GameController.I.MilestoneReward.ToString();
 		milestoneScoreText.text = "SCORE " + GameController.I.MilestonePoint + " FOR REWARD";
@@ -188,7 +188,7 @@ public class GoalsView : MonoBehaviour
 			if (newScore > PlayerData.HighScore)
 			{
 				PlayerData.HighScore = newScore;
-				//StartCoroutine(ChangeNewHighScore(newScore));
+				StartCoroutine(ChangeNewHighScore(newScore));
 			}
 			
 			var milestoneProgress = GameController.I.MilestoneProgress(newScore);
@@ -255,7 +255,7 @@ public class GoalsView : MonoBehaviour
 		
 		yield return new WaitForSecondsRealtime(newHishscoreDuration / 3f);
 		
-		endlessHighScoreText.text = newScore.ToString();
+		endlessHighScoreText.text = "HIGHSCORE: " + newScore;
 		endlessHighScoreText.color = newEndlessTextColor;
 		
 		yield return new WaitForSecondsRealtime(newHishscoreDuration / 3f);
