@@ -148,11 +148,15 @@ public class EndlessMenuController : MonoBehaviour
 		if (canClaim)
 		{
 			freeGiftText.text = "CLAIM";
+			freeGiftText.color = freeGiftText.color.GetWithAlpha(1f);
+			freeGiftRewardText.color = freeGiftRewardText.color.GetWithAlpha(1f);
 		}
 		else
 		{
 			var remaining = (float) PlayerData.FreeGiftClaimTimeRemaining.TotalSeconds;
 			freeGiftText.text = "Ready in\n" + remaining.FormatToTime();
+			freeGiftText.color = freeGiftText.color.GetWithAlpha(0.4f);
+			freeGiftRewardText.color = freeGiftRewardText.color.GetWithAlpha(0.4f);
 		}
 	}
 
