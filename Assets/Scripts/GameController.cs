@@ -92,7 +92,7 @@ public class GameController : MonoBehaviour
 		get
 		{
 			var i = Mathf.Clamp(CurrentMilestone, 0, GameSettings.I.MilestonePoints.Count - 1);
-			return GameSettings.I.MilestonePoints[i];
+			return Mathf.RoundToInt(GameSettings.I.MilestonePoints[i] * AnimalData.AverageAnimalLevel);
 		}
 	}
 	public int MilestoneReward
@@ -307,9 +307,9 @@ public class GameController : MonoBehaviour
 	public float MilestoneProgress(int score)
 	{
 		var i = Mathf.Clamp(CurrentMilestone, 0, GameSettings.I.MilestonePoints.Count - 1);
-		var previous = CurrentMilestone > 0 ? GameSettings.I.MilestonePoints[i - 1] : 0;
-		var current = GameSettings.I.MilestonePoints[i];
-		return (float) (score - previous) / (current - previous);
+		var previous = CurrentMilestone > 0 ? GameSettings.I.MilestonePoints[i - 1] * AnimalData.AverageAnimalLevel : 0f;
+		var current = GameSettings.I.MilestonePoints[i] * AnimalData.AverageAnimalLevel;
+		return (score - previous) / (current - previous);
 	}
 
 	#endregion
