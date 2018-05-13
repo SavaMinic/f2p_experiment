@@ -36,13 +36,31 @@ public class HeaderController : MonoBehaviour
 
 	[SerializeField]
 	private CanvasGroup mainCanvasGroup;
+
+	[SerializeField]
+	private Color endColor;
+
+	[SerializeField]
+	private float colorChangeDuration;
+
+	private Color initialColor;
 	
+	#endregion
+
+	#region Properties
+
+	public Vector3 SoftCurrencyPosition
+	{
+		get { return softCurrencyText.rectTransform.position; }
+	}
+
 	#endregion
 
 	#region Mono
 
 	private void Awake()
 	{
+		initialColor = softCurrencyText.color;
 		HideHeader();
 		softCurrencyButton.onClick.AddListener(OnSoftCurrencyButtonClick);
 		hardCurrencyButton.onClick.AddListener(OnHardCurrencyButtonClick);
@@ -85,12 +103,12 @@ public class HeaderController : MonoBehaviour
 
 	private void OnSoftCurrencyChanged(int newVal)
 	{
-		RefreshCurrencies(newVal, GameController.I.HardCurrency);
+		StartCoroutine(DoCurrencyColorAnimation(softCurrencyText, newVal));
 	}
 
 	private void OnHardCurrencyChanged(int newVal)
 	{
-		RefreshCurrencies(GameController.I.SoftCurrency, newVal);
+		StartCoroutine(DoCurrencyColorAnimation(hardCurrencyText, newVal));
 	}
 
 	#endregion
@@ -101,6 +119,23 @@ public class HeaderController : MonoBehaviour
 	{
 		softCurrencyText.text = softCurrency.ToString();
 		hardCurrencyText.text = hardCurrency.ToString();
+	}
+
+	#endregion
+
+	#region Animations
+
+	private IEnumerator DoCurrencyColorAnimation(Text currencyText, float newVal)
+	{
+		Go.to(currencyText, colorChangeDuration, new GoTweenConfig().colorProp("color", endColor));
+		
+		yield return new WaitForSecondsRealtime(colorChangeDuration * 0.5f);
+
+		currencyText.text = newVal.ToString();
+		
+		yield return new WaitForSecondsRealtime(colorChangeDuration * 0.5f);
+		
+		Go.to(currencyText, colorChangeDuration, new GoTweenConfig().colorProp("color", initialColor));
 	}
 
 	#endregion

@@ -68,6 +68,9 @@ public class GoalsView : MonoBehaviour
 	private float newHishscoreScaleIncrease = 2f;
 
 	[SerializeField]
+	private RectTransform milestoneRewardPanel;
+
+	[SerializeField]
 	private Text milestoneScoreText;
 
 	[SerializeField]
@@ -98,6 +101,15 @@ public class GoalsView : MonoBehaviour
 
 	#endregion
 
+	#region Properties
+
+	public Vector3 MilestoneRewardPosition
+	{
+		get { return milestoneRewardPanel.position; }
+	}
+
+	#endregion
+
 	#region Mono
 
 	private void Start()
@@ -116,6 +128,11 @@ public class GoalsView : MonoBehaviour
 		if (GameController.I.IsTimeLimitMode)
 		{
 			RefreshTimeLeft();
+		}
+
+		if (Input.GetKeyUp(KeyCode.Space))
+		{
+			GameController.I.NextMilestone();
 		}
 	}
 
