@@ -21,15 +21,32 @@ public class HeaderController : MonoBehaviour
 	#endregion
 	
 	#region Fields
+	
+	[Header("Highscore")]
+	[SerializeField]
+	private Text endlessHighScoreText;
+	
+	[SerializeField]
+	private Color defaultEndlessTextColor;
 
 	[SerializeField]
-	private Button hardCurrencyButton;
+	private Color newEndlessTextColor;
 
+	[SerializeField]
+	private float newHighscoreDelay = 0.4f;
+
+	[SerializeField]
+	private float newHishscoreDuration = 0.4f;
+
+	[SerializeField]
+	private GoEaseType newHishscoreEaseType;
+
+	[SerializeField]
+	private float newHishscoreScaleIncrease = 2f;
+
+	[Header("Currency")]
 	[SerializeField]
 	private Button softCurrencyButton;
-
-	[SerializeField]
-	private Text hardCurrencyText;
 
 	[SerializeField]
 	private Text softCurrencyText;
@@ -44,6 +61,7 @@ public class HeaderController : MonoBehaviour
 	private float colorChangeDuration;
 
 	private Color initialColor;
+	private int highScoreFontSize;
 	
 	#endregion
 
@@ -60,16 +78,15 @@ public class HeaderController : MonoBehaviour
 
 	private void Awake()
 	{
+		highScoreFontSize = endlessHighScoreText.fontSize;
 		initialColor = softCurrencyText.color;
 		HideHeader();
 		softCurrencyButton.onClick.AddListener(OnSoftCurrencyButtonClick);
-		hardCurrencyButton.onClick.AddListener(OnHardCurrencyButtonClick);
 	}
 
 	private void Start()
 	{
 		GameController.I.OnSoftCurrencyChanged += OnSoftCurrencyChanged;
-		GameController.I.OnHardCurrencyChanged += OnHardCurrencyChanged;
 	}
 
 	#endregion
@@ -78,7 +95,11 @@ public class HeaderController : MonoBehaviour
 
 	public void ShowHeader()
 	{
-		RefreshCurrencies(GameController.I.SoftCurrency, GameController.I.HardCurrency);
+		softCurrencyText.text = GameController.I.SoftCurrency.ToString();
+		
+		endlessHighScoreText.text = "HIGHSCORE: " + PlayerData.HighScore;
+		endlessHighScoreText.color = defaultEndlessTextColor;
+		
 		mainCanvasGroup.interactable = mainCanvasGroup.blocksRaycasts = true;
 		mainCanvasGroup.alpha = 1f;
 	}
@@ -87,6 +108,11 @@ public class HeaderController : MonoBehaviour
 	{
 		mainCanvasGroup.interactable = mainCanvasGroup.blocksRaycasts = false;
 		mainCanvasGroup.alpha = 0f;
+	}
+
+	public void UpdateHighScore(int newScore)
+	{
+		StartCoroutine(ChangeNewHighScore(newScore));
 	}
 	
 	#endregion
@@ -97,28 +123,9 @@ public class HeaderController : MonoBehaviour
 	{
 	}
 
-	private void OnHardCurrencyButtonClick()
-	{
-	}
-
 	private void OnSoftCurrencyChanged(int newVal)
 	{
 		StartCoroutine(DoCurrencyColorAnimation(softCurrencyText, newVal));
-	}
-
-	private void OnHardCurrencyChanged(int newVal)
-	{
-		StartCoroutine(DoCurrencyColorAnimation(hardCurrencyText, newVal));
-	}
-
-	#endregion
-
-	#region Private
-
-	private void RefreshCurrencies(int softCurrency, int hardCurrency)
-	{
-		softCurrencyText.text = softCurrency.ToString();
-		hardCurrencyText.text = hardCurrency.ToString();
 	}
 
 	#endregion
@@ -136,6 +143,26 @@ public class HeaderController : MonoBehaviour
 		yield return new WaitForSecondsRealtime(colorChangeDuration * 0.5f);
 		
 		Go.to(currencyText, colorChangeDuration, new GoTweenConfig().colorProp("color", initialColor));
+	}
+
+	private IEnumerator ChangeNewHighScore(int newScore)
+	{
+		yield return new WaitForSecondsRealtime(newHighscoreDelay);
+		
+		Go.to(endlessHighScoreText, newHishscoreDuration / 3f, new GoTweenConfig()
+			.intProp("fontSize", Mathf.RoundToInt(newHishscoreScaleIncrease * highScoreFontSize)).setEaseType(newHishscoreEaseType)
+		);
+		
+		yield return new WaitForSecondsRealtime(newHishscoreDuration / 3f);
+		
+		endlessHighScoreText.text = "HIGHSCORE: " + newScore;
+		endlessHighScoreText.color = newEndlessTextColor;
+		
+		yield return new WaitForSecondsRealtime(newHishscoreDuration / 3f);
+		
+		Go.to(endlessHighScoreText, newHishscoreDuration / 3f, new GoTweenConfig()
+			.intProp("fontSize", highScoreFontSize).setEaseType(newHishscoreEaseType)
+		);
 	}
 
 	#endregion

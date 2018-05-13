@@ -14,16 +14,6 @@ public class EditorUtil : MonoBehaviour {
 		}
 	}
 	
-	[MenuItem("Farm Lines/Reset level progress")]
-	static void ResetPlayerLevelsFinished()
-	{
-		if (EditorUtility.DisplayDialog("Reset levels progress?",
-			"Are you sure you want to reset player's level progress?", "Yes", "No"))
-		{
-			PlayerData.ResetPlayerLevelsFinished();
-		}
-	}
-	
 	[MenuItem("Farm Lines/Reset currencies")]
 	static void ResetCurrencies()
 	{
@@ -31,7 +21,6 @@ public class EditorUtil : MonoBehaviour {
 			"Are you sure you want to reset player's currencies?", "Yes", "No"))
 		{
 			PlayerData.SoftCurrency = GameSettings.I.StartingSoftCurrency;
-			PlayerData.HardCurrency = GameSettings.I.StartingHardCurrency;
 		}
 	}
 	

@@ -136,19 +136,6 @@ public class GameController : MonoBehaviour
 		}
 	}
 
-	public int HardCurrency
-	{
-		get { return PlayerData.HardCurrency; }
-		set
-		{
-			if (PlayerData.HardCurrency == value)
-				return;
-			
-			OnHardCurrencyChanged.CallIfNotNull(value);
-			PlayerData.HardCurrency = value;
-		}
-	}
-
 	#endregion
 
 	#region Mono methods
@@ -284,7 +271,7 @@ public class GameController : MonoBehaviour
 		{
 			if (GameMode != GameModeType.Endless)
 			{
-				PlayerData.FinishLevel(CurrentLevel);
+				// FINISH LEVEL?
 			}
 		}
 		CurrentState = GameState.EndScreen;
