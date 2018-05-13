@@ -1,0 +1,37 @@
+{
+  "client": [
+    {
+      "services": {
+        "appinvite_service": {
+          "status": 0
+        }, 
+        "analytics_service": {
+          "status": 0
+        }
+      }, 
+      "oauth_client": [
+        {
+          "client_id": "229763741461-8374vnshdp8j11lmt8edhh6qqu7flvnm.apps.googleusercontent.com"
+        }
+      ], 
+      "api_key": [
+        {
+          "current_key": "AIzaSyAO48rPlhgZsg0JCxppvlBD4HujB71-ABY"
+        }
+      ], 
+      "client_info": {
+        "mobilesdk_app_id": "1:229763741461:ios:a5bf8b48b24344ad", 
+        "android_client_info": {
+          "package_name": "ninja.sava.lines"
+        }
+      }
+    }
+  ], 
+  "configuration_version": "1", 
+  "project_info": {
+    "storage_bucket": "animal-lines.appspot.com", 
+    "project_id": "animal-lines", 
+    "firebase_url": "https://animal-lines.firebaseio.com", 
+    "project_number": "229763741461"
+  }
+}

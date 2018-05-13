@@ -96,6 +96,12 @@ public class EndlessMenuController : MonoBehaviour
 	[SerializeField]
 	private RankingView myPlayerRankingView;
 
+	[SerializeField]
+	private RectTransform loadingRankingsPanel;
+	
+	[SerializeField]
+	private RectTransform noRankingsPanel;
+
 	[Header("Shop")]
 	[SerializeField]
 	private RectTransform shopPanel;
@@ -280,24 +286,43 @@ public class EndlessMenuController : MonoBehaviour
 		{
 			rankingsButtons[i].GetComponent<Image>().color = index == i ? rankingButtonActiveColor : rankingButtonDefaultColor;
 		}
+
+		loadingRankingsPanel.gameObject.SetActive(true);
+		noRankingsPanel.gameObject.SetActive(false);
 		
-		List<RankingsData.PlayerRanking> rankings = null;
+		for (int i = 0; i < playerRankingViews.Count; i++)
+		{
+			playerRankingViews[i].gameObject.SetActive(false);
+		}
+
 		if (index == 0)
 		{
-			rankings = RankingsData.GetFriendsRankings();
+			// FRIENDS
+			var rankings = RankingsData.GetFriendsRankings();
+			RefreshRankings(rankings);
 		}
 		else if (index == 1)
 		{
-			rankings = RankingsData.GetWorldRankings();
+			// GLOBAL
+			RankingsData.GetRankings(RefreshRankings);
 		}
 		else
 		{
-			rankings = RankingsData.GetLocalRankings();
+			// LOCAL
+			RankingsData.GetRankings(RefreshRankings, "rs");
 		}
 
+		
+	}
+
+	private void RefreshRankings(List<RankingsData.PlayerRanking> rankings)
+	{
+		loadingRankingsPanel.gameObject.SetActive(false);
+		noRankingsPanel.gameObject.SetActive(rankings.Count == 0);
+		
 		for (int i = 0; i < playerRankingViews.Count; i++)
 		{
-			if (rankings != null && i < rankings.Count)
+			if (i < rankings.Count)
 			{
 				playerRankingViews[i].gameObject.SetActive(true);
 				playerRankingViews[i].Refresh(rankings[i]);
@@ -315,7 +340,7 @@ public class EndlessMenuController : MonoBehaviour
 		}
 
 		var h = 0f;
-		if (rankings != null && rankings.Count > 0)
+		if (rankings.Count > 0)
 		{
 			h = playerRankingViews[0].Height * rankings.Count + rankingViewsLayoutGroup.spacing * (rankings.Count - 1);
 		}
