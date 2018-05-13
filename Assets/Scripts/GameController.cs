@@ -286,10 +286,11 @@ public class GameController : MonoBehaviour
 
 	public void NextMilestone()
 	{
+		var reward = MilestoneReward;
 		FlyingCurrencyController.I.AnimateFlyingCurrency(GoalsView.I.MilestoneRewardPosition, HeaderController.I.SoftCurrencyPosition,
 		() =>
 		{
-			SoftCurrency += MilestoneReward;
+			SoftCurrency += reward;
 		});
 		CurrentMilestone++;
 		OnMilestoneChanged.CallIfNotNull();
