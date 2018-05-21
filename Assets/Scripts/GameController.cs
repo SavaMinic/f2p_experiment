@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using Nordeus.Util.CSharpLib;
+using PlayFab;
+using PlayFab.ClientModels;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -149,6 +151,7 @@ public class GameController : MonoBehaviour
 	{
 		CurrentState = GameState.MainMenu;
 		MainMenuController.I.ShowMainMenu(true);
+		DoLogin();
 	}
 
 	private void Update()
@@ -338,5 +341,59 @@ public class GameController : MonoBehaviour
 		return false;
 	}
 
+	#endregion
+	
+	#region Login
+	
+	private void DoLogin()
+	{
+		PlayFabSettings.TitleId = GameSettings.I.PlayFabGameId;
+		
+#if UNITY_IOS
+		var requestIos = new LoginWithIOSDeviceIDRequest
+		{
+			TitleId = GameSettings.I.PlayFabGameId, 
+			DeviceId  = SystemInfo.deviceUniqueIdentifier,
+			DeviceModel = UnityEngine.iOS.Device.generation.ToString(),
+			OS = UnityEngine.iOS.Device.systemVersion,
+			CreateAccount = true
+		};
+		PlayFabClientAPI.LoginWithIOSDeviceID(requestIos, OnLoginSuccess, OnLoginFailure);
+#elif UNITY_ANDROID
+		var requestAndroid = new LoginWithAndroidDeviceIDRequest
+		{
+			TitleId = GameSettings.I.PlayFabGameId,
+			AndroidDevice = SystemInfo.operatingSystem,
+			OS = SystemInfo.operatingSystem,
+			AndroidDeviceId =  SystemInfo.deviceUniqueIdentifier,
+			CreateAccount = true
+		};
+		PlayFabClientAPI.LoginWithAndroidDeviceID(requestAndroid, OnLoginSuccess, OnLoginFailure);
+#else
+		var request = new LoginWithCustomIDRequest
+		{
+			CustomId = PlayerData.PlayerId,
+			CreateAccount = true
+		};
+		PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnLoginFailure);
+#endif
+		
+	}
+	
+	private void OnLoginSuccess(LoginResult result)
+	{
+		Debug.Log("Congratulations, you made your first successful API call!");
+		PlayerData.RefreshUserStatistics(() =>
+		{
+			MainMenuController.I.ShowPlayButton();
+		});
+	}
+
+	private void OnLoginFailure(PlayFabError error)
+	{
+		Debug.LogWarning("Something went wrong with your login :(");
+		Debug.LogError(error.GenerateErrorReport());
+	}
+	
 	#endregion
 }

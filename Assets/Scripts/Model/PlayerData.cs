@@ -1,6 +1,9 @@
 ﻿
 
 using System;
+using System.Collections.Generic;
+using PlayFab;
+using PlayFab.ClientModels;
 using UnityEngine;
 
 public class PlayerData
@@ -13,29 +16,81 @@ public class PlayerData
 	private const string SoftCurrencyKey = "SoftCurrencyKey";
 
 	private const string FreeGiftTimeKey = "FreeGiftTimeKey";
-	
-	public static int HighScore
+
+	public static void RefreshUserStatistics(Action onSuccess)
 	{
-		get { return PlayerPrefs.GetInt(HighScoreKey); }
-		set { PlayerPrefs.SetInt(HighScoreKey, value);}
+		var request = new GetPlayerStatisticsRequest();
+		PlayFabClientAPI.GetPlayerStatistics(request,
+			playerStats =>
+			{
+				var highScore = HighScore;
+				var score = playerStats.Statistics.Find(s => s.StatisticName == HighScoreKey);
+				if (score != null)
+				{
+					highScore = score.Value;
+				}
+				PlayerPrefs.SetInt(HighScoreKey, highScore);
+				onSuccess();
+			}, error =>
+			{
+				Debug.LogWarning("Something went wrong with RefreshUserStatistics :(");
+				Debug.LogError(error.GenerateErrorReport());
+			}
+		);
 	}
 
-	public static int PlayerId
+	public static void RefreshUserData(Action onSuccess)
+	{
+		
+	}
+	
+	#region Highscore
+
+	public static int HighScore
+	{
+		get { return PlayerPrefs.GetInt(HighScoreKey, 0); }
+	}
+
+	public static void SetHighscore(int value)
+	{
+		PlayerPrefs.SetInt(HighScoreKey, value);
+		var request = new UpdatePlayerStatisticsRequest()
+		{
+			Statistics = new List<StatisticUpdate>
+			{
+				new StatisticUpdate { StatisticName = HighScoreKey, Value = value }
+			}
+		};
+		PlayFabClientAPI.UpdatePlayerStatistics(request, null, error =>
+		{
+			Debug.LogWarning("Something went wrong with SetHighscore :(");
+			Debug.LogError(error.GenerateErrorReport());
+		});
+	}
+	
+	#endregion
+
+	public static string PlayerId
 	{
 		get
 		{
-			// TODO: should get it somehow unique
 			if (!PlayerPrefs.HasKey(PlayerIdKey))
 			{
-				PlayerPrefs.SetInt(PlayerIdKey, 666);
+				PlayerPrefs.SetString(PlayerIdKey, Guid.NewGuid().ToString());
 			}
-			return PlayerPrefs.GetInt(PlayerIdKey);
+			return PlayerPrefs.GetString(PlayerIdKey);
 		}
+	}
+
+	public static void ResetPlayerId()
+	{
+		PlayerPrefs.DeleteKey(PlayerIdKey);
 	}
 	
 	public static int SoftCurrency
 	{
-		get {
+		get
+		{
 			if (!PlayerPrefs.HasKey(SoftCurrencyKey))
 			{
 				PlayerPrefs.SetInt(SoftCurrencyKey, GameSettings.I.StartingSoftCurrency);

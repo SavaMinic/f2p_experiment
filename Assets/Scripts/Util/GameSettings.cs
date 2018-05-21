@@ -46,4 +46,7 @@ public class GameSettings : SingletonScriptableObject<GameSettings>
 		get { return Mathf.RoundToInt(FreeGiftBaseAmount * AnimalData.AverageAnimalLevel); }
 	}
 
+	[Header("PLAYFAB")]
+	public string PlayFabGameId = "7A4C";
+
 }

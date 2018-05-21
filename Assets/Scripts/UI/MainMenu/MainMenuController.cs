@@ -32,6 +32,9 @@ public class MainMenuController : MonoBehaviour
 	[SerializeField]
 	private Button endlessButton;
 
+	[SerializeField]
+	private Text loadingText;
+
 	#endregion
 
 	#region Mono
@@ -49,6 +52,8 @@ public class MainMenuController : MonoBehaviour
 	{
 		HeaderController.I.HideHeader();
 		mainCanvasGroup.interactable = mainCanvasGroup.blocksRaycasts = true;
+		endlessButton.gameObject.SetActive(false);
+		loadingText.gameObject.SetActive(true);
 		if (instant)
 		{
 			AudioController.I.InitializeBackgroundMusic();
@@ -56,6 +61,12 @@ public class MainMenuController : MonoBehaviour
 			return;
 		}
 		Go.to(mainCanvasGroup, fadeDuration, new GoTweenConfig().floatProp("alpha", 1f));
+	}
+
+	public void ShowPlayButton()
+	{
+		endlessButton.gameObject.SetActive(true);
+		loadingText.gameObject.SetActive(false);
 	}
 
 	public void HideMainMenu(bool instant = false)

@@ -2,15 +2,16 @@
 using UnityEditor;
 using UnityEngine;
 
-public class EditorUtil : MonoBehaviour {
-
-	[MenuItem("Farm Lines/Reset highscore")]
-	static void ResetPlayerHighScore()
+public class EditorUtil : MonoBehaviour
+{
+	
+	[MenuItem("Farm Lines/Reset player id")]
+	static void ReserPlayerid()
 	{
-		if (EditorUtility.DisplayDialog("Reset High score?",
-			"Are you sure you want to reset player high score?", "Yes", "No"))
+		if (EditorUtility.DisplayDialog("Reset Player Id?",
+			"Are you sure you want to reset player id?", "Yes", "No"))
 		{
-			PlayerData.HighScore = 0;
+			PlayerData.ResetPlayerId();
 		}
 	}
 	

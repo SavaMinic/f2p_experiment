@@ -172,7 +172,7 @@ public class GoalsView : MonoBehaviour
 		{
 			if (newScore > PlayerData.HighScore)
 			{
-				PlayerData.HighScore = newScore;
+				PlayerData.SetHighscore(newScore);
 				HeaderController.I.UpdateHighScore(newScore);
 			}
 			
