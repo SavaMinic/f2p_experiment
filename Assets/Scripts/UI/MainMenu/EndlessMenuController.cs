@@ -246,6 +246,7 @@ public class EndlessMenuController : MonoBehaviour
 	{
 		GameController.I.SoftCurrency += GameSettings.I.FreeGiftTotalAmount;
 		PlayerData.SetupFreeGiftClaimTime();
+		AnalyticsData.TrackFreeGiftClaimed();
 	}
 
 	#endregion

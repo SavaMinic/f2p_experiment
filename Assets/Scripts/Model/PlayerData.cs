@@ -1,14 +1,14 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
 
-public class PlayerData
+public static class PlayerData
 {
 
+	#region Keys
+	
 	private const string PlayerIdKey = "PlayerId";
 	
 	private const string HighScoreKey = "HighScoreKey";
@@ -16,6 +16,8 @@ public class PlayerData
 	private const string SoftCurrencyKey = "SoftCurrencyKey";
 
 	private const string FreeGiftTimeKey = "FreeGiftTimeKey";
+	
+	#endregion
 	
 	#region Refresh data
 

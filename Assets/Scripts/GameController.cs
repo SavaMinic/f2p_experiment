@@ -273,6 +273,7 @@ public class GameController : MonoBehaviour
 
 	public void EndGame(EndGameType endType)
 	{
+		AnalyticsData.TrackEndGame(endType, GameTurn, GameController.I.GameTime, score);
 		if (endType == EndGameType.Win)
 		{
 			if (GameMode != GameModeType.Endless)
@@ -292,6 +293,8 @@ public class GameController : MonoBehaviour
 
 	public void NextMilestone()
 	{
+		AnalyticsData.TrackMilestoneReached(CurrentMilestone);
+		
 		var reward = MilestoneReward;
 		FlyingCurrencyController.I.AnimateFlyingCurrency(GoalsView.I.MilestoneRewardPosition, HeaderController.I.SoftCurrencyPosition,
 		() =>
@@ -316,6 +319,8 @@ public class GameController : MonoBehaviour
 
 	private void StartGame(int numOfElements, List<TileElement.ElementType> possibleElements)
 	{
+		AnalyticsData.TrackNewGame(GameMode);
+		
 		GameTurn = 0;
 		GameTime = 0f;
 		CurrentMilestone = 0;

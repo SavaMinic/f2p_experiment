@@ -5,10 +5,14 @@ using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
 
-public class AnimalData
+public static class AnimalData
 {
 
+	#region Keys
+	
 	private const string AnimalLevelData = "AnimalLevel_";
+	
+	#endregion
 
 	#region Properties
 
@@ -82,6 +86,8 @@ public class AnimalData
 			Debug.LogWarning("Something went wrong with IncreaseAnimalLevel :(");
 			Debug.LogError(error.GenerateErrorReport());
 		});
+		
+		AnalyticsData.TrackAnimalUpgrade(type, level);
 	}
 	
 	#endregion

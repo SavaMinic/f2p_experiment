@@ -367,6 +367,8 @@ public class TileController : MonoBehaviour
 							}
 							DoBonusAnimation(multiplier, pos / selectedElements.Count);
 						}
+
+						AnalyticsData.TrackLineExploded(selectedElements.Count, pointsPerExplosion);
 					}
 				}
 			}
