@@ -134,9 +134,12 @@ public class GameController : MonoBehaviour
 				return;
 			
 			OnSoftCurrencyChanged.CallIfNotNull(value);
-			PlayerData.SoftCurrency = value;
+			PlayerData.SetSoftCurrency(value);
 		}
 	}
+	
+	// workaround for waiting multiple async calls
+	private bool loadedUserData, loadedUserStats, loadedAnimalData;
 
 	#endregion
 
@@ -382,11 +385,22 @@ public class GameController : MonoBehaviour
 	
 	private void OnLoginSuccess(LoginResult result)
 	{
-		Debug.Log("Congratulations, you made your first successful API call!");
-		PlayerData.RefreshUserStatistics(() =>
+		Debug.Log("Login success");
+		PlayerData.RefreshUserStatistics(() => CheckIfEverythingIsLoaded(userStats: true));
+		PlayerData.RefreshUserData(() => CheckIfEverythingIsLoaded(userData: true));
+		AnimalData.RefreshAnimalData(() => CheckIfEverythingIsLoaded(animalData: true));
+	}
+
+	private void CheckIfEverythingIsLoaded(bool userData = false, bool userStats = false, bool animalData = false)
+	{
+		if (userData) loadedUserData = true;
+		if (userStats) loadedUserStats = true;
+		if (animalData) loadedAnimalData = true;
+
+		if (loadedUserData && loadedUserStats && loadedAnimalData)
 		{
 			MainMenuController.I.ShowPlayButton();
-		});
+		}
 	}
 
 	private void OnLoginFailure(PlayFabError error)

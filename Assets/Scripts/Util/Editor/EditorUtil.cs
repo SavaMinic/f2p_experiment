@@ -15,13 +15,23 @@ public class EditorUtil : MonoBehaviour
 		}
 	}
 	
+	[MenuItem("Farm Lines/Reset highscore")]
+	static void ResetHighscore()
+	{
+		if (EditorUtility.DisplayDialog("Reset high score?",
+			"Are you sure you want to reset player's highscore?", "Yes", "No"))
+		{
+			PlayerData.SetHighscore(0);
+		}
+	}
+	
 	[MenuItem("Farm Lines/Reset currencies")]
 	static void ResetCurrencies()
 	{
 		if (EditorUtility.DisplayDialog("Reset currencies?",
 			"Are you sure you want to reset player's currencies?", "Yes", "No"))
 		{
-			PlayerData.SoftCurrency = GameSettings.I.StartingSoftCurrency;
+			PlayerData.SetSoftCurrency(GameSettings.I.StartingSoftCurrency);
 		}
 	}
 	

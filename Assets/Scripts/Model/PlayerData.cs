@@ -16,6 +16,8 @@ public class PlayerData
 	private const string SoftCurrencyKey = "SoftCurrencyKey";
 
 	private const string FreeGiftTimeKey = "FreeGiftTimeKey";
+	
+	#region Refresh data
 
 	public static void RefreshUserStatistics(Action onSuccess)
 	{
@@ -41,8 +43,28 @@ public class PlayerData
 
 	public static void RefreshUserData(Action onSuccess)
 	{
-		
+		var request = new GetUserDataRequest();
+		PlayFabClientAPI.GetUserData(request,
+			userData =>
+			{
+				if (userData.Data.ContainsKey(SoftCurrencyKey))
+				{
+					PlayerPrefs.SetInt(SoftCurrencyKey, int.Parse(userData.Data[SoftCurrencyKey].Value));
+				}
+				if (userData.Data.ContainsKey(FreeGiftTimeKey))
+				{
+					PlayerPrefs.SetString(FreeGiftTimeKey, userData.Data[FreeGiftTimeKey].Value);
+				}
+				onSuccess();
+			}, error =>
+			{
+				Debug.LogWarning("Something went wrong with RefreshUserData :(");
+				Debug.LogError(error.GenerateErrorReport());
+			}
+		);
 	}
+	
+	#endregion
 	
 	#region Highscore
 
@@ -70,10 +92,39 @@ public class PlayerData
 	
 	#endregion
 
+	#region Soft currency
+	
+	public static int SoftCurrency
+	{
+		get { return PlayerPrefs.GetInt(SoftCurrencyKey, GameSettings.I.StartingSoftCurrency); }
+	}
+	
+	public static void SetSoftCurrency(int value)
+	{
+		PlayerPrefs.SetInt(SoftCurrencyKey, value);
+		var request = new UpdateUserDataRequest()
+		{
+			Data = new Dictionary<string, string>
+			{
+				{ SoftCurrencyKey, value.ToString() }
+			}
+		};
+		PlayFabClientAPI.UpdateUserData(request, null, error =>
+		{
+			Debug.LogWarning("Something went wrong with SetSoftCurrency :(");
+			Debug.LogError(error.GenerateErrorReport());
+		});
+	}
+
+	#endregion
+
+	#region Player ID
+
 	public static string PlayerId
 	{
 		get
 		{
+			// don't call Guid.NewGuid() if it's not needed
 			if (!PlayerPrefs.HasKey(PlayerIdKey))
 			{
 				PlayerPrefs.SetString(PlayerIdKey, Guid.NewGuid().ToString());
@@ -82,23 +133,9 @@ public class PlayerData
 		}
 	}
 
-	public static void ResetPlayerId()
-	{
-		PlayerPrefs.DeleteKey(PlayerIdKey);
-	}
-	
-	public static int SoftCurrency
-	{
-		get
-		{
-			if (!PlayerPrefs.HasKey(SoftCurrencyKey))
-			{
-				PlayerPrefs.SetInt(SoftCurrencyKey, GameSettings.I.StartingSoftCurrency);
-			}
-			return PlayerPrefs.GetInt(SoftCurrencyKey);
-		}
-		set { PlayerPrefs.SetInt(SoftCurrencyKey, value);}
-	}
+	#endregion
+
+	#region Free Gift timer
 
 	public static TimeSpan FreeGiftClaimTimeRemaining
 	{
@@ -116,7 +153,21 @@ public class PlayerData
 	public static void SetupFreeGiftClaimTime()
 	{
 		var time = DateTime.Now.AddMinutes(GameSettings.I.FreeGiftTimeInMinutes);
-		PlayerPrefs.SetString(FreeGiftTimeKey, time.ToBinary().ToString());
+		var timeString = time.ToBinary().ToString();
+		PlayerPrefs.SetString(FreeGiftTimeKey, timeString);
+		
+		var request = new UpdateUserDataRequest()
+		{
+			Data = new Dictionary<string, string>
+			{
+				{ FreeGiftTimeKey, timeString }
+			}
+		};
+		PlayFabClientAPI.UpdateUserData(request, null, error =>
+		{
+			Debug.LogWarning("Something went wrong with SetupFreeGiftClaimTime :(");
+			Debug.LogError(error.GenerateErrorReport());
+		});
 	}
 
 	public static bool CanClaimFreeGift
@@ -130,9 +181,33 @@ public class PlayerData
 		}
 	}
 
+	#endregion
+
+	#region Reset keys
+	
 	public static void ResetFreeGiftTimer()
 	{
-		PlayerPrefs.SetString(FreeGiftTimeKey, DateTime.Now.ToBinary().ToString());
+		var timeString = DateTime.Now.ToBinary().ToString();
+		PlayerPrefs.SetString(FreeGiftTimeKey, timeString);
+		var request = new UpdateUserDataRequest()
+		{
+			Data = new Dictionary<string, string>
+			{
+				{ FreeGiftTimeKey, timeString }
+			}
+		};
+		PlayFabClientAPI.UpdateUserData(request, null, error =>
+		{
+			Debug.LogWarning("Something went wrong with ResetFreeGiftTimer :(");
+			Debug.LogError(error.GenerateErrorReport());
+		});
 	}
+
+	public static void ResetPlayerId()
+	{
+		PlayerPrefs.DeleteKey(PlayerIdKey);
+	}
+	
+	#endregion
 	
 }
