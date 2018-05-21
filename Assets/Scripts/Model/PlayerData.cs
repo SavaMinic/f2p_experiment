@@ -10,8 +10,9 @@ public static class PlayerData
 	#region Keys
 	
 	private const string PlayerIdKey = "PlayerId";
+	private const string PlayFabIdKey = "PlayFabKey";
 	
-	private const string HighScoreKey = "HighScoreKey";
+	public const string HighScoreKey = "HighScoreKey";
 
 	private const string SoftCurrencyKey = "SoftCurrencyKey";
 
@@ -27,6 +28,7 @@ public static class PlayerData
 		PlayFabClientAPI.GetPlayerStatistics(request,
 			playerStats =>
 			{
+				Debug.Log("RefreshUserStatistics success");
 				var highScore = HighScore;
 				var score = playerStats.Statistics.Find(s => s.StatisticName == HighScoreKey);
 				if (score != null)
@@ -35,7 +37,8 @@ public static class PlayerData
 				}
 				PlayerPrefs.SetInt(HighScoreKey, highScore);
 				onSuccess();
-			}, error =>
+			},
+			error =>
 			{
 				Debug.LogWarning("Something went wrong with RefreshUserStatistics :(");
 				Debug.LogError(error.GenerateErrorReport());
@@ -49,6 +52,7 @@ public static class PlayerData
 		PlayFabClientAPI.GetUserData(request,
 			userData =>
 			{
+				Debug.Log("RefreshUserData success");
 				if (userData.Data.ContainsKey(SoftCurrencyKey))
 				{
 					PlayerPrefs.SetInt(SoftCurrencyKey, int.Parse(userData.Data[SoftCurrencyKey].Value));
@@ -58,9 +62,28 @@ public static class PlayerData
 					PlayerPrefs.SetString(FreeGiftTimeKey, userData.Data[FreeGiftTimeKey].Value);
 				}
 				onSuccess();
-			}, error =>
+			},
+			error =>
 			{
 				Debug.LogWarning("Something went wrong with RefreshUserData :(");
+				Debug.LogError(error.GenerateErrorReport());
+			}
+		);
+	}
+
+	public static void RefreshAccountData(Action onSuccess)
+	{
+		var request = new GetAccountInfoRequest();
+		PlayFabClientAPI.GetAccountInfo(request,
+			accountInfo =>
+			{
+				Debug.Log("RefreshAccountData success");
+				PlayerPrefs.SetString(PlayFabIdKey, accountInfo.AccountInfo.PlayFabId);
+				onSuccess();
+			},
+			error =>
+			{
+				Debug.LogWarning("Something went wrong with RefreshAccountData :(");
 				Debug.LogError(error.GenerateErrorReport());
 			}
 		);
@@ -72,7 +95,14 @@ public static class PlayerData
 
 	public static int HighScore
 	{
-		get { return PlayerPrefs.GetInt(HighScoreKey, 0); }
+		get
+		{
+			if (!PlayerPrefs.HasKey(HighScoreKey))
+			{
+				SetHighscore(0);
+			}
+			return PlayerPrefs.GetInt(HighScoreKey);
+		}
 	}
 
 	public static void SetHighscore(int value)
@@ -121,6 +151,8 @@ public static class PlayerData
 	#endregion
 
 	#region Player ID
+
+	public static string PlayFabId { get { return PlayerPrefs.GetString(PlayFabIdKey, "-1"); } }
 
 	public static string PlayerId
 	{

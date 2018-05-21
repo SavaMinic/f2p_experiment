@@ -139,7 +139,8 @@ public class GameController : MonoBehaviour
 	}
 	
 	// workaround for waiting multiple async calls
-	private bool loadedUserData, loadedUserStats, loadedAnimalData;
+	private bool loadedUserData, loadedUserStats,
+		loadedAnimalData, loadedAccountData;
 
 	#endregion
 
@@ -394,15 +395,17 @@ public class GameController : MonoBehaviour
 		PlayerData.RefreshUserStatistics(() => CheckIfEverythingIsLoaded(userStats: true));
 		PlayerData.RefreshUserData(() => CheckIfEverythingIsLoaded(userData: true));
 		AnimalData.RefreshAnimalData(() => CheckIfEverythingIsLoaded(animalData: true));
+		PlayerData.RefreshAccountData(() => CheckIfEverythingIsLoaded(accountData: true));
 	}
 
-	private void CheckIfEverythingIsLoaded(bool userData = false, bool userStats = false, bool animalData = false)
+	private void CheckIfEverythingIsLoaded(bool userData = false, bool userStats = false, bool animalData = false, bool accountData = false)
 	{
 		if (userData) loadedUserData = true;
 		if (userStats) loadedUserStats = true;
 		if (animalData) loadedAnimalData = true;
+		if (accountData) loadedAccountData = true;
 
-		if (loadedUserData && loadedUserStats && loadedAnimalData)
+		if (loadedUserData && loadedUserStats && loadedAnimalData && loadedAccountData)
 		{
 			MainMenuController.I.ShowPlayButton();
 		}

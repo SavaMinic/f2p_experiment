@@ -40,7 +40,7 @@ public static class AnimalData
 		PlayFabClientAPI.GetUserData(request,
 			userData =>
 			{
-				
+				Debug.Log("RefreshAnimalData success");
 				var types = (TileElement.ElementType[])Enum.GetValues(typeof(TileElement.ElementType));
 				for (int i = 0; i < types.Length; i++)
 				{

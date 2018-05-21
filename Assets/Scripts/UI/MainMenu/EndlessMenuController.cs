@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Nordeus.Util.CSharpLib;
+using PlayFab.ClientModels;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -96,6 +97,12 @@ public class EndlessMenuController : MonoBehaviour
 	[SerializeField]
 	private RankingView myPlayerRankingView;
 
+	[SerializeField]
+	private Text loadingRankingsText;
+
+	[SerializeField]
+	private CanvasGroup rankingContentCanvasGroup;
+
 	[Header("Shop")]
 	[SerializeField]
 	private RectTransform shopPanel;
@@ -107,6 +114,7 @@ public class EndlessMenuController : MonoBehaviour
 		Shop
 	}
 	private int currentlyShownTab = -1;
+	private GoTween rankingsShowTween;
 	
 	#endregion
 
@@ -167,7 +175,6 @@ public class EndlessMenuController : MonoBehaviour
 	public void ShowEndlessMenu(bool instant = false)
 	{
 		HeaderController.I.ShowHeader();
-		ShowRankingsTab(0);
 		highscoreText.text = PlayerData.HighScore.ToString();
 
 		for (int i = 0; i < animalInfoPanels.Count; i++)
@@ -202,6 +209,16 @@ public class EndlessMenuController : MonoBehaviour
 				{
 					HideCanvasGroup(tabCanvasGroups[i], true);
 				}
+			}
+		}
+
+		if (currentlyShownTab != (int) tab)
+		{
+			switch (tab)
+			{
+				case MenuTabs.Ranking:
+					ShowRankingsTab(0);
+					break;
 			}
 		}
 		
@@ -282,23 +299,26 @@ public class EndlessMenuController : MonoBehaviour
 			rankingsButtons[i].GetComponent<Image>().color = index == i ? rankingButtonActiveColor : rankingButtonDefaultColor;
 		}
 		
-		List<RankingsData.PlayerRanking> rankings = null;
-		if (index == 0)
+		loadingRankingsText.gameObject.SetActive(true);
+		if (rankingsShowTween != null && rankingsShowTween.state == GoTweenState.Running)
 		{
-			rankings = RankingsData.GetFriendsRankings();
+			rankingsShowTween.destroy();
 		}
-		else if (index == 1)
-		{
-			rankings = RankingsData.GetWorldRankings();
-		}
-		else
-		{
-			rankings = RankingsData.GetLocalRankings();
-		}
+		rankingContentCanvasGroup.alpha = 0f;
+		RankingsData.GetRankings(index, ShowRankingContent);
+	}
 
+	private void ShowRankingContent(List<PlayerLeaderboardEntry> rankings, PlayerLeaderboardEntry myPlayerRanking)
+	{
+		if (rankings == null)
+			return;
+		
+		loadingRankingsText.gameObject.SetActive(false);
+		rankingsShowTween = Go.to(rankingContentCanvasGroup, 0.4f, new GoTweenConfig().floatProp("alpha", 1f));
+		
 		for (int i = 0; i < playerRankingViews.Count; i++)
 		{
-			if (rankings != null && i < rankings.Count)
+			if (i < rankings.Count)
 			{
 				playerRankingViews[i].gameObject.SetActive(true);
 				playerRankingViews[i].Refresh(rankings[i]);
@@ -309,14 +329,10 @@ public class EndlessMenuController : MonoBehaviour
 			}
 		}
 
-		var myPlayerRanking = rankings.Find(r => r.Id == PlayerData.PlayerId);
-		if (myPlayerRanking != null)
-		{
-			myPlayerRankingView.Refresh(myPlayerRanking);
-		}
+		myPlayerRankingView.Refresh(myPlayerRanking);
 
 		var h = 0f;
-		if (rankings != null && rankings.Count > 0)
+		if (rankings.Count > 0)
 		{
 			h = playerRankingViews[0].Height * rankings.Count + rankingViewsLayoutGroup.spacing * (rankings.Count - 1);
 		}

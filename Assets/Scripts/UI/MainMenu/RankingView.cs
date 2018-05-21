@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using PlayFab.ClientModels;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -42,12 +43,21 @@ public class RankingView : MonoBehaviour
 
 	#region Public
 
-	public void Refresh(RankingsData.PlayerRanking playerRanking)
+	public void Refresh(PlayerLeaderboardEntry playerRanking)
 	{
-		playerNameText.text = (playerRanking.Index + 1) + ". " + playerRanking.Name;
-		playerScoreText.text = playerRanking.Score.ToString();
+		if (playerRanking == null)
+		{
+			playerNameText.text = "?. Unknown";
+			playerScoreText.text = "?";
+			backImage.color = normalColor;
+			return;
+		}
 
-		backImage.color = playerRanking.Id == PlayerData.PlayerId ? localPlayerColor : normalColor;
+		var name = playerRanking.DisplayName ?? playerRanking.PlayFabId;
+		playerNameText.text = (playerRanking.Position + 1) + ". " + name;
+		playerScoreText.text = playerRanking.StatValue.ToString();
+
+		backImage.color = playerRanking.PlayFabId == PlayerData.PlayFabId ? localPlayerColor : normalColor;
 	}
 
 	#endregion
