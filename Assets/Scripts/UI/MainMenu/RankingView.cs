@@ -26,6 +26,9 @@ public class RankingView : MonoBehaviour
 
 	[SerializeField]
 	private Color localPlayerColor;
+
+	[SerializeField]
+	private Button editPlayerButton;
 	
 	public float Height { get; private set; }
 
@@ -35,15 +38,20 @@ public class RankingView : MonoBehaviour
 
 	private void Awake()
 	{
-		GetComponent<Button>().onClick.AddListener(OnButtonClick);
+		var button = GetComponent<Button>();
+		button.onClick.AddListener(OnButtonClick);
+		// for now, it's disabled
+		button.interactable = false;
+		
 		Height = GetComponent<RectTransform>().sizeDelta.y;
+		editPlayerButton.onClick.AddListener(OnEditPlayerButtonClick);
 	}
 
 	#endregion
 
 	#region Public
 
-	public void Refresh(PlayerLeaderboardEntry playerRanking)
+	public void Refresh(PlayerLeaderboardEntry playerRanking, bool isHeader = false)
 	{
 		if (playerRanking == null)
 		{
@@ -56,7 +64,10 @@ public class RankingView : MonoBehaviour
 		var name = playerRanking.DisplayName ?? playerRanking.PlayFabId;
 		playerNameText.text = (playerRanking.Position + 1) + ". " + name;
 		playerScoreText.text = playerRanking.StatValue.ToString();
-
+		
+		playerScoreText.gameObject.SetActive(!isHeader);
+		editPlayerButton.gameObject.SetActive(isHeader);
+		
 		backImage.color = playerRanking.PlayFabId == PlayerData.PlayFabId ? localPlayerColor : normalColor;
 	}
 
@@ -67,6 +78,11 @@ public class RankingView : MonoBehaviour
 	private void OnButtonClick()
 	{
 		
+	}
+
+	private void OnEditPlayerButtonClick()
+	{
+		EditNamePopup.I.ShowEditNamePopup(onSuccess: EndlessMenuController.I.RefreshRankings);
 	}
 
 	#endregion

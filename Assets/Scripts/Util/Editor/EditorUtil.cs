@@ -5,13 +5,13 @@ using UnityEngine;
 public class EditorUtil : MonoBehaviour
 {
 	
-	[MenuItem("Farm Lines/Reset player id")]
-	static void ReserPlayerid()
+	[MenuItem("Farm Lines/Reset player")]
+	static void ReserPlayer()
 	{
-		if (EditorUtility.DisplayDialog("Reset Player Id?",
-			"Are you sure you want to reset player id?", "Yes", "No"))
+		if (EditorUtility.DisplayDialog("Reset Player?",
+			"Are you sure you want to reset player?", "Yes", "No"))
 		{
-			PlayerData.ResetPlayerId();
+			PlayerData.ResetPlayer();
 		}
 	}
 	

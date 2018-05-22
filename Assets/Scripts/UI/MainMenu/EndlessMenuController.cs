@@ -115,6 +115,8 @@ public class EndlessMenuController : MonoBehaviour
 	}
 	private int currentlyShownTab = -1;
 	private GoTween rankingsShowTween;
+
+	private int currentlyShownRankingTab;
 	
 	#endregion
 
@@ -184,6 +186,11 @@ public class EndlessMenuController : MonoBehaviour
 
 		ShowCanvasGroup(mainCanvasGroup);
 		ShowTab(MenuTabs.Home);
+
+		if (!PlayerData.PlayerHasSetDisplayName)
+		{
+			EditNamePopup.I.ShowEditNamePopup(canClosePopup: false);
+		}
 	}
 
 	public void HideEndlessMenu(bool instant = false)
@@ -229,6 +236,11 @@ public class EndlessMenuController : MonoBehaviour
 		{
 			navigationButtonImages[i].color = i == currentlyShownTab ? activeTabColor : defaultTabColor;
 		}
+	}
+
+	public void RefreshRankings()
+	{
+		ShowRankingsTab(currentlyShownRankingTab);
 	}
 	
 	#endregion
@@ -294,6 +306,7 @@ public class EndlessMenuController : MonoBehaviour
 
 	private void ShowRankingsTab(int index)
 	{
+		currentlyShownRankingTab = index;
 		for (int i = 0; i < rankingsButtons.Count; i++)
 		{
 			rankingsButtons[i].GetComponent<Image>().color = index == i ? rankingButtonActiveColor : rankingButtonDefaultColor;
@@ -329,7 +342,7 @@ public class EndlessMenuController : MonoBehaviour
 			}
 		}
 
-		myPlayerRankingView.Refresh(myPlayerRanking);
+		myPlayerRankingView.Refresh(myPlayerRanking, true);
 
 		var h = 0f;
 		if (rankings.Count > 0)

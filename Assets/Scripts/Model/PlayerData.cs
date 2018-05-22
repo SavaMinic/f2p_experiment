@@ -10,13 +10,17 @@ public static class PlayerData
 	#region Keys
 	
 	private const string PlayerIdKey = "PlayerId";
+	
 	private const string PlayFabIdKey = "PlayFabKey";
+	private const string PlayFabDisplayNameKey = "PlayFabDisplayName";
 	
 	public const string HighScoreKey = "HighScoreKey";
 
 	private const string SoftCurrencyKey = "SoftCurrencyKey";
 
 	private const string FreeGiftTimeKey = "FreeGiftTimeKey";
+
+	private const string PlayerHasSetDisplayNameKey = "PlayerHasSetDisplayName";
 	
 	#endregion
 	
@@ -79,6 +83,10 @@ public static class PlayerData
 			{
 				Debug.Log("RefreshAccountData success");
 				PlayerPrefs.SetString(PlayFabIdKey, accountInfo.AccountInfo.PlayFabId);
+				if (!string.IsNullOrEmpty(accountInfo.AccountInfo.TitleInfo.DisplayName))
+				{
+					PlayerPrefs.SetString(PlayFabDisplayNameKey, accountInfo.AccountInfo.TitleInfo.DisplayName);
+				}
 				onSuccess();
 			},
 			error =>
@@ -169,6 +177,36 @@ public static class PlayerData
 
 	#endregion
 
+	#region Player display name
+	
+	public static bool PlayerHasSetDisplayName { get { return PlayerPrefs.GetInt(PlayerHasSetDisplayNameKey, 0) == 1; } }
+
+	public static string PlayerDisplayName
+	{
+		get { return PlayerPrefs.GetString(PlayFabDisplayNameKey, "Player_" + PlayFabId.Substring(0, 8)); }
+	}
+	
+	public static void UpdatePlayerDisplayName(string name, Action onSuccess)
+	{
+		PlayerPrefs.SetInt(PlayerHasSetDisplayNameKey, 1);
+		PlayerPrefs.SetString(PlayFabDisplayNameKey, name);
+		
+		var request = new UpdateUserTitleDisplayNameRequest
+		{
+			DisplayName = name
+		};
+		PlayFabClientAPI.UpdateUserTitleDisplayName(request,
+			result => { onSuccess(); },
+			error =>
+			{
+				Debug.LogWarning("Something went wrong with UpdatePlayerDisplayName :(");
+				Debug.LogError(error.GenerateErrorReport());	
+			}
+		);
+	}
+
+	#endregion
+
 	#region Free Gift timer
 
 	public static TimeSpan FreeGiftClaimTimeRemaining
@@ -237,9 +275,15 @@ public static class PlayerData
 		});
 	}
 
-	public static void ResetPlayerId()
+	public static void ResetPlayer()
 	{
 		PlayerPrefs.DeleteKey(PlayerIdKey);
+		PlayerPrefs.DeleteKey(PlayFabIdKey);
+		PlayerPrefs.DeleteKey(PlayFabDisplayNameKey);
+		PlayerPrefs.DeleteKey(FreeGiftTimeKey);
+		PlayerPrefs.DeleteKey(HighScoreKey);
+		PlayerPrefs.DeleteKey(SoftCurrencyKey);
+		PlayerPrefs.DeleteKey(PlayerHasSetDisplayNameKey);
 	}
 	
 	#endregion
