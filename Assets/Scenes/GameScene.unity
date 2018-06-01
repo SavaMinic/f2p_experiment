@@ -8051,6 +8051,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7c43770629e444e268c2d72a9000b5b6, type: 3}
   - {fileID: 8300000, guid: ad66832452a0f414e9625b569935679b, type: 3}
   positiveAudioClip: {fileID: 8300000, guid: 81c27501a785c461cac072506835fee2, type: 3}
+  longPositiveAudioClip: {fileID: 8300000, guid: 6edaaaea58b5049678daa26d17e3c4e6,
+    type: 3}
   neutralAudioClip: {fileID: 8300000, guid: 0018181be232a433ab1c2ef1725956d5, type: 3}
   negativeAudioClip: {fileID: 8300000, guid: 7a30034891c5a462eb14d22dae2180de, type: 3}
   backgroundMusicAudioSource: {fileID: 519420030}

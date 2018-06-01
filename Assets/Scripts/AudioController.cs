@@ -30,6 +30,9 @@ public class AudioController : MonoBehaviour
 	private AudioClip positiveAudioClip;
 
 	[SerializeField]
+	private AudioClip longPositiveAudioClip;
+
+	[SerializeField]
 	private AudioClip neutralAudioClip;
 
 	[SerializeField]
@@ -94,9 +97,9 @@ public class AudioController : MonoBehaviour
 		}
 	}
 
-	public void PlayPositiveSFX()
+	public void PlayPositiveSFX(bool longClip = false)
 	{
-		sfxAudioSource.PlayOneShot(positiveAudioClip);
+		sfxAudioSource.PlayOneShot(longClip ? longPositiveAudioClip : positiveAudioClip);
 	}
 
 	public void PlayNeutralSFX()

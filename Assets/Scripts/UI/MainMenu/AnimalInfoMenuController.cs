@@ -139,6 +139,7 @@ public class AnimalInfoMenuController : MonoBehaviour
 		var cost = GameSettings.I.GetSoftCurrencyForUpgrade(currLevel);
 		if (GameController.I.SoftCurrency >= cost)
 		{
+			AudioController.I.PlayPositiveSFX(true);
 			AnimalData.IncreaseAnimalLevel(animalType);
 			GameController.I.SoftCurrency -= cost;
 		}
