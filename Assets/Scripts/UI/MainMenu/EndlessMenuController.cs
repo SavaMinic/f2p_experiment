@@ -65,6 +65,9 @@ public class EndlessMenuController : MonoBehaviour
 	[SerializeField]
 	private Text freeGiftRewardText;
 
+	[SerializeField]
+	private Image freeGiftRewardImage;
+
 	[Header("Animal info")]
 	[SerializeField]
 	private List<AnimalInfoPanel> animalInfoPanels;
@@ -273,7 +276,12 @@ public class EndlessMenuController : MonoBehaviour
 
 	private void OnFreeGiftButtonClick()
 	{
-		GameController.I.SoftCurrency += GameSettings.I.FreeGiftTotalAmount;
+		var reward = GameSettings.I.FreeGiftTotalAmount;
+		FlyingCurrencyController.I.AnimateFlyingCurrency(freeGiftRewardImage.rectTransform.position, HeaderController.I.SoftCurrencyPosition,
+		() =>
+		{
+			GameController.I.SoftCurrency += reward;
+		});
 		PlayerData.SetupFreeGiftClaimTime();
 		AnalyticsData.TrackFreeGiftClaimed();
 	}

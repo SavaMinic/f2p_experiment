@@ -4808,7 +4808,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -19.7}
+  m_AnchoredPosition: {x: 0, y: -19.699951}
   m_SizeDelta: {x: -185.2, y: -863.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &362296655
@@ -8191,12 +8191,12 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 525371739}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1907431235}
-  m_RootOrder: 5
+  m_Father: {fileID: 2030126481}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -18294,6 +18294,7 @@ MonoBehaviour:
   freeGiftButton: {fileID: 1171485831}
   freeGiftText: {fileID: 1793526266}
   freeGiftRewardText: {fileID: 113585116}
+  freeGiftRewardImage: {fileID: 1500497176}
   animalInfoPanels:
   - {fileID: 2025233673}
   - {fileID: 1031745172}
@@ -24201,7 +24202,7 @@ CanvasGroup:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1398101991}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -33293,7 +33294,6 @@ RectTransform:
   - {fileID: 856116064}
   - {fileID: 1265220069}
   - {fileID: 1962648832}
-  - {fileID: 525371740}
   m_Father: {fileID: 2030126481}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -36327,6 +36327,7 @@ RectTransform:
   - {fileID: 1065784618}
   - {fileID: 303036704}
   - {fileID: 1407778648}
+  - {fileID: 525371740}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

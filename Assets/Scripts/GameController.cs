@@ -58,7 +58,6 @@ public class GameController : MonoBehaviour
 	public Action<int> OnScoreChanged;
 
 	public Action<int> OnSoftCurrencyChanged;
-	public Action<int> OnHardCurrencyChanged;
 
 	public Action OnMilestoneChanged;
 
