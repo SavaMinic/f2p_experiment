@@ -374,6 +374,10 @@ public class TileController : MonoBehaviour
 			}
 		}
 
+		if (haveExplosions)
+		{
+			AudioController.I.PlayPositiveAlternateSFX();
+		}
 		GameController.I.Score += points;
 
 		yield return new WaitForSecondsRealtime(haveExplosions ? waitAfterExplosions : waitNoExplosions);
