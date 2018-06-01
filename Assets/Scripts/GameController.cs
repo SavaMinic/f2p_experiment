@@ -294,6 +294,7 @@ public class GameController : MonoBehaviour
 	public void NextMilestone()
 	{
 		AnalyticsData.TrackMilestoneReached(CurrentMilestone);
+		AudioController.I.PlayPositiveSFX(true);
 		
 		var reward = MilestoneReward;
 		FlyingCurrencyController.I.AnimateFlyingCurrency(GoalsView.I.MilestoneRewardPosition, HeaderController.I.SoftCurrencyPosition,

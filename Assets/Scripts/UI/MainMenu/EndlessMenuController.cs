@@ -282,7 +282,7 @@ public class EndlessMenuController : MonoBehaviour
 		{
 			GameController.I.SoftCurrency += reward;
 		});
-		AudioController.I.PlayPositiveSFX(true);
+		AudioController.I.PlayPositiveSFX();
 		PlayerData.SetupFreeGiftClaimTime();
 		AnalyticsData.TrackFreeGiftClaimed();
 	}
