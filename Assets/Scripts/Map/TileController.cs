@@ -100,6 +100,8 @@ public class TileController : MonoBehaviour
 
 	public TileElement ElementAt(int x, int y)
 	{
+		if (x < 0 || x >= elementCountX || y < 0 || y >= elementCountY)
+			return null;
 		var i = y * elementCountX + x;
 		if (i < 0 || i >= tileElements.Count)
 			return null;
