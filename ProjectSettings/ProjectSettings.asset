@@ -153,6 +153,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: ninja.sava.farmlines
     Standalone: com.Company.ProductName
+    iOS: ninja.sava.farmlines
   buildNumber: {}
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 16

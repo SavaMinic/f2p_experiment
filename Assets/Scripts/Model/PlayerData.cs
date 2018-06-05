@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Nordeus.Util.CSharpLib;
 using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
@@ -186,7 +187,7 @@ public static class PlayerData
 		get { return PlayerPrefs.GetString(PlayFabDisplayNameKey, "Player_" + PlayFabId.Substring(0, 8)); }
 	}
 	
-	public static void UpdatePlayerDisplayName(string name, Action onSuccess)
+	public static void UpdatePlayerDisplayName(string name, Action onSuccess, Action onNameNotAvailable = null)
 	{
 		PlayerPrefs.SetInt(PlayerHasSetDisplayNameKey, 1);
 		PlayerPrefs.SetString(PlayFabDisplayNameKey, name);
@@ -199,6 +200,10 @@ public static class PlayerData
 			result => { onSuccess(); },
 			error =>
 			{
+				if (error.Error == PlayFabErrorCode.NameNotAvailable)
+				{
+					onNameNotAvailable.CallIfNotNull();
+				}
 				Debug.LogWarning("Something went wrong with UpdatePlayerDisplayName :(");
 				Debug.LogError(error.GenerateErrorReport());	
 			}

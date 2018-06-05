@@ -44,6 +44,9 @@ public class EditNamePopup : MonoBehaviour
 	[SerializeField]
 	private Button updateButton;
 
+	[SerializeField]
+	private Text errorText;
+
 	private Action onSuccessCallback;
 	
 	#endregion
@@ -72,6 +75,7 @@ public class EditNamePopup : MonoBehaviour
 		updateButton.interactable = true;
 		usernameInput.interactable = true;
 		usernameInput.text = PlayerData.PlayerDisplayName;
+		errorText.gameObject.SetActive(false);
 		
 		mainCanvasGroup.interactable = mainCanvasGroup.blocksRaycasts = true;
 		if (instant)
@@ -105,6 +109,7 @@ public class EditNamePopup : MonoBehaviour
 	private void OnUpdateButtonClick()
 	{
 		var username = usernameInput.text.Trim();
+		errorText.gameObject.SetActive(false);
 
 		// change name
 		if (username.Length > 0 && username.Length < usernameInput.characterLimit)
@@ -116,6 +121,12 @@ public class EditNamePopup : MonoBehaviour
 			{
 				onSuccessCallback.CallIfNotNull();
 				HideEditNamePopup();
+			}, () =>
+			{
+				errorText.text = "Name not available!";
+				errorText.gameObject.SetActive(true);
+				updateButton.interactable = true;
+				usernameInput.interactable = true;
 			});
 			
 		}
