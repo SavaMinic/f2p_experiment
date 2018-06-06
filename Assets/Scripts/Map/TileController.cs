@@ -64,9 +64,6 @@ public class TileController : MonoBehaviour
 	private Vector2 tileSize;
 
 	[SerializeField]
-	private Vector2 startOffset;
-
-	[SerializeField]
 	private Vector2 tileSpacing;
 
 	[SerializeField]
@@ -92,6 +89,7 @@ public class TileController : MonoBehaviour
 	private bool isMovingElement;
 
 	private RectTransform myRect;
+	private Vector2 startOffset;
 	
 	#endregion
 
@@ -106,14 +104,12 @@ public class TileController : MonoBehaviour
 	private void Awake()
 	{
 		myRect = GetComponent<RectTransform>();
-		
-		#if UNITY_IOS
-		if (UnityEngine.iOS.Device.generation == UnityEngine.iOS.DeviceGeneration.iPhoneX
-		    || UnityEngine.iOS.Device.generation == UnityEngine.iOS.DeviceGeneration.iPhone8Plus)
-		{
-			myRect.offsetMax = new Vector2(myRect.offsetMax.x, topOffsetXIphone);
-		}
-		#endif
+	}
+
+	private void Start()
+	{
+		movingImage.rectTransform.position = tileElements[0].RectTransform.position;
+		startOffset = movingImage.rectTransform.anchoredPosition;
 	}
 
 	#endregion
@@ -280,8 +276,8 @@ public class TileController : MonoBehaviour
 	private Vector2 CalculateAnchoredPosition(Location loc)
 	{
 		return new Vector2(
-			startOffset.x + loc.x * tileSize.x + (loc.x - 1) * tileSpacing.x,
-			startOffset.y - loc.y * tileSize.y - (loc.y - 1) * tileSpacing.y + myRect.offsetMax.y
+			startOffset.x + loc.x * tileSize.x + loc.x * tileSpacing.x,
+			startOffset.y - loc.y * tileSize.y - loc.y * tileSpacing.y
 		);
 	}
 
