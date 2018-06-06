@@ -45,3 +45,5 @@ build_info.txt
 build_info.txt.meta
 *.keystore
 *.der
+Assets/ViewportMask
+ViewportMask.meta
