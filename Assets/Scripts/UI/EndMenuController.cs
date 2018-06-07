@@ -73,9 +73,6 @@ public class EndMenuController : MonoBehaviour
 
 	public void ShowEndMenu(GameController.EndGameType endType)
 	{
-		AudioController.I.SetBackgroundMusicVolume(0.25f);
-
-
 		if (GameController.I.GameMode == GameController.GameModeType.Endless)
 		{
 			starsPanel.gameObject.SetActive(false);
@@ -146,7 +143,6 @@ public class EndMenuController : MonoBehaviour
 			mainCanvasGroup.alpha = 0f;
 			return;
 		}
-		AudioController.I.SetBackgroundMusicVolume(1f, 1.5f);
 		Go.to(mainCanvasGroup, fadeDuration, new GoTweenConfig().floatProp("alpha", 0f));
 	}
 	

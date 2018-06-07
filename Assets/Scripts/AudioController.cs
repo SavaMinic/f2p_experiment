@@ -84,24 +84,6 @@ public class AudioController : MonoBehaviour
 		backgroundMusicIndex = 0;
 	}
 
-	public void SetBackgroundMusicVolume(float volume, float incrementalDuration = -1, float delay = 0f)
-	{
-		if (backgroundMusicTween != null && backgroundMusicTween.state == GoTweenState.Running)
-		{
-			backgroundMusicTween.destroy();
-		}
-		if (incrementalDuration <= 0)
-		{
-			backgroundMusicAudioSource.volume = volume;
-		}
-		else
-		{
-			backgroundMusicTween = Go.to(backgroundMusicAudioSource, incrementalDuration,
-				new GoTweenConfig().floatProp("volume", volume).setDelay(delay)
-			);
-		}
-	}
-
 	public void PlayPositiveSFX(bool longClip = false)
 	{
 		sfxAudioSource.PlayOneShot(longClip ? longPositiveAudioClip : positiveAudioClip);
