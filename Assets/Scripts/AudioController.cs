@@ -104,11 +104,6 @@ public class AudioController : MonoBehaviour
 
 	public void PlayPositiveSFX(bool longClip = false)
 	{
-		if (longClip)
-		{
-			SetBackgroundMusicVolume(0.1f, 0.1f);
-			SetBackgroundMusicVolume(1f, 0.1f, 3f);
-		}
 		sfxAudioSource.PlayOneShot(longClip ? longPositiveAudioClip : positiveAudioClip);
 	}
 

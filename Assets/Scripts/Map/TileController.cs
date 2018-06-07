@@ -168,7 +168,13 @@ public class TileController : MonoBehaviour
 		}
 		else if (!newTile.IsEmpty)
 		{
-			newTile.CantBeSelected();
+			if (SelectedTile != null)
+			{
+				SelectedTile.CantBeSelected();
+				SelectedTile.Unselect();
+			}
+			SelectedTile = newTile;
+			newTile.Select();
 		}
 		else if (SelectedTile != null)
 		{
