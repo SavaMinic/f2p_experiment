@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
 using Nordeus.Util.CSharpLib;
 using PlayFab;
 using PlayFab.ClientModels;
@@ -154,6 +156,17 @@ public class GameController : MonoBehaviour
 	{
 		CurrentState = GameState.MainMenu;
 		MainMenuController.I.ShowMainMenu(true);
+		
+		// Create client configuration
+		PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder().Build();
+
+		// Enable debugging output (recommended)
+		PlayGamesPlatform.DebugLogEnabled = true;
+        
+		// Initialize and activate the platform
+		PlayGamesPlatform.InitializeInstance(config);
+		PlayGamesPlatform.Activate();
+		
 		DoLogin();
 	}
 
@@ -354,8 +367,24 @@ public class GameController : MonoBehaviour
 	
 	#region Login
 	
+	public void SignInCallback(bool success) {
+		if (success) {
+			Debug.LogError("Signed in as: " + Social.localUser.userName);
+		} else {
+			Debug.LogError("Sign-in failed");
+		}
+	}
+
+	private IEnumerator DelayLogin()
+	{
+		Debug.LogError("DelayLogin");
+		yield return new WaitForSecondsRealtime(1f);
+		PlayGamesPlatform.Instance.Authenticate(SignInCallback, false);
+	}
+	
 	private void DoLogin()
 	{
+		StartCoroutine(DelayLogin());
 		PlayFabSettings.TitleId = GameSettings.I.PlayFabGameId;
 		
 #if UNITY_IOS
